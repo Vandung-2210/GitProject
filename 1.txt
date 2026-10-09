@@ -3,104 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành Tạo Menu Dọc Dropdown</title>
+    <title>Trang Chủ Giản Lược</title>
     <style>
-        /* 1. Reset thuộc tính mặc định giữa các trình duyệt */
+        /* 1. Reset & Thiết lập cơ bản */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
         }
 
-        body {
-            background-color: #f4f6f8;
-            padding: 40px;
-        }
-
-        /* 2. Định dạng khung chứa menu */
-        #menu {
-            width: 140px; /* Khớp với tổng width: 100px + padding 2 bên 20px * 2 */
-        }
-
-        /* Xóa padding/margin mặc định của thẻ ul */
-        #menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        /* 3. Định dạng cho các phần tử li */
-        #menu li {
-            list-style: none;
-            position: relative; /* Làm mốc tọa độ định vị cho menu con */
-            width: 100px;
-            height: 30px;
-            padding: 0 20px;
-            background-color: #000000;
-            line-height: 30px;
-            cursor: pointer;
-            border-bottom: 1px solid #333333;
-            white-space: nowrap;
-        }
-
-        /* 4. Định dạng thẻ liên kết a bên trong menu */
-        #menu a {
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 14px;
-            display: block;
-            width: 100%;
+        html {
             height: 100%;
         }
 
-        /* 5. Đổi màu nền khi hover chuột qua các mục li */
-        #menu li:hover {
-            background-color: #444444;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            min-height: 1500px; /* Chiều cao giả lập để kiểm tra hiệu ứng cuộn */
+            padding-top: 70px;  /* Đẩy nội dung xuống bằng đúng chiều cao của header cố định */
         }
 
-        /* 6. Định dạng và ẩn danh sách con cấp 2 */
-        #menu li ul {
-            position: absolute;
+        /* 2. Header cố định (Fixed Header) */
+        .main-header {
+            position: fixed;     /* Cố định header trên khung nhìn */
             top: 0;
-            left: 140px; /* Bắt đầu ngay cạnh mép phải của li cha (100px + 20px*2 = 140px) */
-            visibility: hidden;
-            display: none;
+            left: 0;
+            width: 100%;        /* Chiếm toàn bộ bề ngang */
+            background-color: #333333;
+            color: #ffffff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;       /* Căn chỉnh nội dung 2 bên bằng Flexbox */
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;       /* Đảm bảo luôn nổi trên các phần tử khác khi cuộn */
         }
 
-        /* 7. Hiển thị menu con tương ứng khi hover chuột vào mục li cha */
-        #menu li:hover > ul {
-            visibility: visible;
-            display: block;
+        .main-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .main-header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .main-header nav ul li {
+            margin-left: 20px;
+        }
+
+        .main-header nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .main-header nav ul li a:hover {
+            color: #38bdf8;
+        }
+
+        /* 3. Khung chứa bố cục 3 cột (Flexbox Container) */
+        .page-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            gap: 20px;           /* Khoảng cách giữa các cột */
+        }
+
+        /* 4. Định dạng Sidebar */
+        .sidebar {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;      /* Cố định chiều rộng, không bị co lại */
+        }
+
+        .left-sidebar {
+            width: 200px;
+        }
+
+        .right-sidebar {
+            width: 200px;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            color: #333333;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 8px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            padding: 8px 0;
+            color: #555555;
+            border-bottom: 1px solid #fafafa;
+        }
+
+        /* 5. Định dạng Nội dung chính */
+        .main-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;        /* Mở rộng chiếm trọn không gian trống còn lại */
+        }
+
+        .main-content h2 {
+            margin-top: 0;
+            color: #222222;
+        }
+
+        .main-content p {
+            line-height: 1.6;
+            color: #444444;
+            margin-bottom: 16px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Cấu trúc vùng menu dọc -->
-    <div id="menu">
-        <ul>
-            <li><a href="#home">Trang chủ</a></li>
-            <li>
-                <a href="#services">Dịch vụ &raquo;</a>
-                <!-- Menu con thả xuống sang bên phải -->
-                <ul>
-                    <li><a href="#web">Thiết kế Web</a></li>
-                    <li><a href="#seo">Dịch vụ SEO</a></li>
-                    <li><a href="#hosting">Hosting/VPS</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#products">Sản phẩm &raquo;</a>
-                <!-- Menu con cấp 2 -->
-                <ul>
-                    <li><a href="#software">Phần mềm</a></li>
-                    <li><a href="#apps">Ứng dụng Mobile</a></li>
-                </ul>
-            </li>
-            <li><a href="#about">Giới thiệu</a></li>
-            <li><a href="#contact">Liên hệ</a></li>
-        </ul>
+    <!-- Header cố định -->
+    <header class="main-header">
+        <h1>Tiêu đề Trang Web</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Dịch vụ</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Khung hiển thị nội dung dạng 3 cột -->
+    <div class="page-container">
+        <!-- Sidebar Trái -->
+        <aside class="sidebar left-sidebar">
+            <h3>Sidebar Trái</h3>
+            <ul>
+                <li>Mục 1</li>
+                <li>Mục 2</li>
+                <li>Mục 3</li>
+            </ul>
+        </aside>
+
+        <!-- Nội dung chính -->
+        <main class="main-content">
+            <h2>Nội dung chính của trang</h2>
+            <p>Đây là khu vực chứa nội dung quan trọng nhất của trang web. Chúng ta sẽ đặt các bài viết, sản phẩm, hoặc thông tin chi tiết tại đây.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, amet. Magnam, cumque. Repellendus, ea! Reprehenderit, quod. Ullam, quas. Dolorum, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, amet. Magnam, cumque. Repellendus, ea! Reprehenderit, quod. Ullam, quas. Dolorum, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, amet. Magnam, cumque. Repellendus, ea! Reprehenderit, quod. Ullam, quas. Dolorum, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, amet. Magnam, cumque. Repellendus, ea! Reprehenderit, quod. Ullam, quas. Dolorum, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo. Dolore, quod. Quos, nemo.</p>
+        </main>
+
+        <!-- Sidebar Phải -->
+        <aside class="sidebar right-sidebar">
+            <h3>Sidebar Phải</h3>
+            <p>Đây là một sidebar khác, có thể chứa quảng cáo, bài viết liên quan hoặc các widget khác.</p>
+        </aside>
     </div>
 
 </body>
