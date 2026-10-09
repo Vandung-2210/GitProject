@@ -1,51 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Form</title>
-    <style>
-        .wufoo {
-            font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;
-        }
-    </style>
+    <title>Form Tìm kiếm Google</title>
 </head>
 <body>
 
-    <form method="get" action="simpleform.html" class="wufoo">
-        <h2>Order Form</h2>
-
-        <!-- Tùy chọn select / option -->
-        <p>What would you like to buy?</p>
-        <select name="product">
-            <option value="A">A</option>
-            <option value="B">B (+ 0.5$)</option>
-            <option value="C">C (+ 0.5$)</option>
-        </select>
-
-        <!-- Lựa chọn Radio button -->
-        <p>How many would you like to order?</p>
-        <label><input type="radio" name="rd" value="1"/> 1 - $10</label><br/>
-        <label><input type="radio" name="rd" value="2"/> 2 - $20</label><br/>
-        <label><input type="radio" name="rd" value="3"/> 3 - $25</label><br/>
-
-        <!-- Các ô nhập Text field -->
-        <p>Name <span style="color: red">*</span></p>
-        <input type="text" name="firstname" placeholder="FirstName" size="15"/>
-        <input type="text" name="lastname" placeholder="LastName" size="15"/>
-
-        <p>Email</p>
-        <input type="text" name="email" size="35"/>
-
-        <p>Phone Number</p>
-        <input type="text" name="phone1" size="5"/> -
-        <input type="text" name="phone2" size="5"/> -
-        <input type="text" name="phone3" size="5"/>
-
-        <!-- Nút bấm gửi form -->
-        <p>
-            <input type="submit" name="btSubmit" value="Submit"/>
-        </p>
+    <h2>Tìm kiếm với Google</h2>
+    
+    <!-- Form gửi dữ liệu sang Google Search bằng phương thức GET -->
+    <form action="https://www.google.com.vn/search" method="GET" target="_blank">
+        <input type="text" name="q" placeholder="Nhập từ khóa tìm kiếm..." size="40" required />
+        <input type="submit" value="Tìm kiếm" />
     </form>
 
 </body>
