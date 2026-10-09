@@ -3,122 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký người dùng</title>
+    <title>Market Research Survey</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f9fa;
-            margin: 0;
-            padding: 40px 20px;
+        * {
+            box-sizing: border-box;
         }
-        .form-container {
-            max-width: 450px;
+        body {
+            font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+            font-size: 13px;
+            background-color: #f0f3f5;
+            color: #333333;
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .container {
+            max-width: 650px;
             margin: 0 auto;
             background: #ffffff;
-            padding: 24px 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #0055a5;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            padding: 25px 30px;
         }
-        h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #333333;
+        .header {
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px dotted #ccc;
+        }
+        .header h2 {
+            margin: 0 0 6px 0;
+            font-size: 22px;
+            color: #222;
+        }
+        .header p {
+            margin: 0;
+            color: #666;
+            font-size: 13px;
         }
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 22px;
         }
-        .form-group label {
+        .field-label {
             display: block;
-            margin-bottom: 6px;
             font-weight: bold;
-            color: #444444;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #333;
         }
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"] {
-            width: 100%;
-            padding: 9px 12px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
+        .req {
+            color: #d93025;
+            margin-left: 2px;
         }
-        .form-group input:focus {
-            border-color: #007bff;
-            outline: none;
+        select {
+            width: 50%;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            font-size: 13px;
+            font-family: inherit;
         }
-        .gender-options {
+        .radio-list, .check-list {
             display: flex;
-            gap: 20px;
-            align-items: center;
-            margin-top: 4px;
+            flex-direction: column;
+            gap: 7px;
         }
-        .gender-options label {
-            font-weight: normal;
-            cursor: pointer;
-            display: inline-flex;
+        .radio-list label, .check-list label {
+            display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        /* Matrix Table */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+        .matrix-table th, .matrix-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 12px;
+        }
+        .matrix-table th:first-child, .matrix-table td:first-child {
+            text-align: left;
+            font-size: 13px;
+            width: 35%;
+        }
+        .matrix-table th {
+            background-color: #fafafa;
+            color: #555;
+            font-weight: 600;
+        }
+        .matrix-table tr:nth-child(even) td {
+            background-color: #fcfcfc;
         }
         .btn-submit {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            background-color: #0055a5;
             color: #ffffff;
             border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 9px 24px;
+            font-size: 14px;
             font-weight: bold;
+            border-radius: 3px;
             cursor: pointer;
-            margin-top: 10px;
         }
         .btn-submit:hover {
-            background-color: #0056b3;
+            background-color: #003f7a;
         }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>Đăng Ký Người Dùng</h2>
+    <div class="container">
+        <div class="header">
+            <h2>Market Research Survey</h2>
+            <p>Please take a few moments to complete this satisfaction survey.</p>
+        </div>
 
-        <!-- Form gửi dữ liệu sang máy chủ CodeGym theo phương thức POST -->
-        <form action="http://demo.codegym.vn/6/registration_form/register.php" method="POST">
-            
-            <!-- Họ và tên -->
+        <form action="#" method="POST">
+
+            <!-- Câu 1: Độ tuổi (Dropdown) -->
             <div class="form-group">
-                <label for="name">Họ và tên:</label>
-                <input type="text" id="name" name="name" placeholder="Nhập họ và tên..." required />
+                <label class="field-label" for="age">What is your age range?<span class="req">*</span></label>
+                <select id="age" name="age" required>
+                    <option value="">-- Choose one --</option>
+                    <option value="18-24">18-24</option>
+                    <option value="25-34">25-34</option>
+                    <option value="35-50">35-50</option>
+                    <option value="50+">50+</option>
+                </select>
             </div>
 
-            <!-- Email -->
+            <!-- Câu 2: Thu nhập (Dropdown) -->
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Nhập địa chỉ email..." required />
+                <label class="field-label" for="income">What is your yearly income range?</label>
+                <select id="income" name="income">
+                    <option value="">-- Choose one --</option>
+                    <option value="under_25k">$0 - $25,000</option>
+                    <option value="25k_50k">$25,001 - $50,000</option>
+                    <option value="50k_100k">$50,001 - $100,000</option>
+                    <option value="over_100k">$100,000+</option>
+                </select>
             </div>
 
-            <!-- Số điện thoại -->
+            <!-- Câu 3: Giới tính (Radio) -->
             <div class="form-group">
-                <label for="phone">Số điện thoại:</label>
-                <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại..." required />
-            </div>
-
-            <!-- Giới tính -->
-            <div class="form-group">
-                <label>Giới tính:</label>
-                <div class="gender-options">
-                    <label>
-                        <input type="radio" name="gender" value="Nam" checked /> Nam
-                    </label>
-                    <label>
-                        <input type="radio" name="gender" value="Nữ" /> Nữ
-                    </label>
+                <span class="field-label">Gender</span>
+                <div class="radio-list">
+                    <label><input type="radio" name="gender" value="male"> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="other"> Other</label>
                 </div>
             </div>
 
-            <!-- Nút gửi form -->
-            <button type="submit" class="btn-submit">Đăng ký</button>
+            <!-- Câu 4: Tần suất sử dụng (Radio) -->
+            <div class="form-group">
+                <span class="field-label">Which of the following best describes your usage?</span>
+                <div class="radio-list">
+                    <label><input type="radio" name="usage" value="daily"> Daily</label>
+                    <label><input type="radio" name="usage" value="weekly"> Once a week</label>
+                    <label><input type="radio" name="usage" value="monthly"> Once a month</label>
+                    <label><input type="radio" name="usage" value="rarely"> Rarely</label>
+                </div>
+            </div>
+
+            <!-- Câu 5: Ma trận đánh giá (Matrix Likert scale) -->
+            <div class="form-group">
+                <span class="field-label">How satisfied are you with our service?</span>
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Very Unsatisfied</th>
+                            <th>Unsatisfied</th>
+                            <th>Neutral</th>
+                            <th>Satisfied</th>
+                            <th>Very Satisfied</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Quality</td>
+                            <td><input type="radio" name="quality" value="1"></td>
+                            <td><input type="radio" name="quality" value="2"></td>
+                            <td><input type="radio" name="quality" value="3"></td>
+                            <td><input type="radio" name="quality" value="4"></td>
+                            <td><input type="radio" name="quality" value="5"></td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td><input type="radio" name="price" value="1"></td>
+                            <td><input type="radio" name="price" value="2"></td>
+                            <td><input type="radio" name="price" value="3"></td>
+                            <td><input type="radio" name="price" value="4"></td>
+                            <td><input type="radio" name="price" value="5"></td>
+                        </tr>
+                        <tr>
+                            <td>Customer Support</td>
+                            <td><input type="radio" name="support" value="1"></td>
+                            <td><input type="radio" name="support" value="2"></td>
+                            <td><input type="radio" name="support" value="3"></td>
+                            <td><input type="radio" name="support" value="4"></td>
+                            <td><input type="radio" name="support" value="5"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Nút gửi khảo sát -->
+            <div class="form-group" style="margin-top: 25px;">
+                <input type="submit" class="btn-submit" value="Submit">
+            </div>
 
         </form>
     </div>
