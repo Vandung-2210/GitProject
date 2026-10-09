@@ -3,44 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhúng CSS vào HTML</title>
-
-    <!-- PHẦN 3: EXTERNAL STYLE (Nhúng file CSS ngoài bằng Data URI tích hợp) -->
-    <link rel="stylesheet" href="data:text/css;base64,LmV4dGVybmFsLXRpdGxlIHsgY29sb3I6ICMyN2FlNjA7IH0gLmV4dGVybmFsLWRlc2MgeyBjb2xvcjogI2QzNTQwMDsgfQ==">
-
-    <!-- PHẦN 2: INTERNAL STYLE (Nhúng qua thẻ <style> bên trong HTML) -->
+    <title>Trang web của tôi</title>
     <style>
-        .internal-title {
-            color: #2980b9; /* Xanh dương */
+        /* 1. Element Selector: Đổi màu nền trang và cấu hình font chữ chung */
+        body {
+            background-color: #f0f4f8;
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 600px;
+            padding: 24px;
+            line-height: 1.6;
         }
-        .internal-desc {
-            color: #8e44ad; /* Tím */
+
+        /* 2. Grouping Selector: Định dạng khoảng cách chữ cho nhiều phần tử cùng lúc */
+        h1, p, button {
+            letter-spacing: 0.3px;
+        }
+
+        /* 3. ID Selector: Căn giữa tiêu đề h1 */
+        #main-title {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 32px;
+        }
+
+        /* 4. Class Selector: Định dạng đoạn văn mô tả bản thân */
+        .intro-text {
+            font-size: 16px;
+            color: #4b5563;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        /* 5. Class & Element Selector: Bỏ dấu chấm mặc định của danh sách */
+        .hobby-list {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 28px;
+        }
+
+        .hobby-list li {
+            padding: 10px 16px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        /* 6. Pseudo-class Selector (:nth-child): Định dạng màu sắc khác nhau cho từng mục sở thích */
+        .hobby-list li:nth-child(1) {
+            background-color: #e0f2fe;
+            color: #0369a1; /* Xanh da trời */
+        }
+
+        .hobby-list li:nth-child(2) {
+            background-color: #fef3c7;
+            color: #b45309; /* Vàng hổ phách */
+        }
+
+        .hobby-list li:nth-child(3) {
+            background-color: #dcfce7;
+            color: #15803d; /* Xanh lá */
+        }
+
+        /* Căn giữa nút bấm */
+        .action-box {
+            text-align: center;
+        }
+
+        /* 7. ID Selector: Định dạng nút bấm */
+        #btn-click {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #2563eb;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* 8. Pseudo-class Selector (:hover): Hiệu ứng khi rê chuột vào nút bấm */
+        #btn-click:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- PHẦN 1: INLINE STYLE (Khai báo trực tiếp trên thuộc tính style của thẻ) -->
-    <section>
-        <h1 style="color: #c0392b;">Tiêu đề 1 (Inline Style)</h1>
-        <p style="color: #16a085;">Văn bản áp dụng thuộc tính inline-style.</p>
-    </section>
+    <!-- Tiêu đề h1 -->
+    <h1 id="main-title">Trang web của tôi</h1>
 
-    <hr>
+    <!-- Đoạn văn mô tả bản thân -->
+    <p class="intro-text">
+        Xin chào! Tôi là một lập trình viên đam mê công nghệ và xây dựng các ứng dụng web hiện đại.
+    </p>
 
-    <!-- PHẦN 2: INTERNAL STYLE -->
-    <section>
-        <h1 class="internal-title">Tiêu đề 2 (Internal Style)</h1>
-        <p class="internal-desc">Văn bản áp dụng kiểu dáng từ thẻ &lt;style&gt;.</p>
-    </section>
+    <!-- Danh sách 3 sở thích -->
+    <ul class="hobby-list">
+        <li class="hobby-item">Lập trình và tìm hiểu công nghệ mới</li>
+        <li class="hobby-item">Đọc sách và học ngoại ngữ</li>
+        <li class="hobby-item">Nghe nhạc và chơi thể thao</li>
+    </ul>
 
-    <hr>
-
-    <!-- PHẦN 3: EXTERNAL STYLE -->
-    <section>
-        <h1 class="external-title">Tiêu đề 3 (External Style)</h1>
-        <p class="external-desc">Văn bản áp dụng kiểu dáng được liên kết qua thẻ &lt;link rel="stylesheet"&gt;.</p>
-    </section>
+    <!-- Nút bấm -->
+    <div class="action-box">
+        <button id="btn-click" type="button">Nhấn vào đây</button>
+    </div>
 
 </body>
 </html>
