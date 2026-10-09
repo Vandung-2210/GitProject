@@ -1,317 +1,55 @@
-[Thực hành] Bảng trong CSS
-Giao diện của bảng trong HTML có thể được cải thiện đáng kể với CSS.
-
-Đường viền của bảng
-Để định kiểu cho đường viền (border) của bảng trong CSS, sử dụng thuộc tính border.
-
-Ví dụ dưới đây chỉ định đường viền màu đen cho các phần tử <table>, <th>, và <td>:
-
-Ví dụ
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-border: 1px solid black; tạo đường viền có độ dày 1px, kiểu liền (solid) và màu đen.
-
-table, th, td áp dụng đường viền cho cả bảng, ô tiêu đề và ô dữ liệu.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Bảng có đường viền màu đen.
-✔ Mỗi ô cũng có đường viền riêng.
-
-⚠️ Lưu ý: Bảng ở ví dụ trên có thể xuất hiện đường viền kép vì <table>, <th> và <td> đều có đường viền riêng biệt.
-
-Bỏ các đường viền của bảng
-Thuộc tính border-collapse thiết lập cách các đường viền của bảng được hiển thị. Với giá trị collapse, các đường viền liền kề được gộp thành một đường viền duy nhất.
-
-Ví dụ
-<style>
-table {
-  border-collapse: collapse;
-}
-
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-border-collapse: collapse;
-→ Gộp các đường viền liền kề của bảng thành một đường viền.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Bảng chỉ còn một đường viền giữa các ô, thay vì đường viền kép.
-
-Chiều rộng và chiều cao của bảng
-Chiều rộng và chiều cao của bảng có thể được thiết lập bằng các thuộc tính width và height.
-
-Ví dụ dưới đây đặt chiều rộng của bảng là 100% và chiều cao của các phần tử <th> là 50px.
-
-Ví dụ
-<style>
-table {
-  width: 100%;
-}
-
-th {
-  height: 50px;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-width: 100% → Bảng chiếm toàn bộ chiều rộng của phần tử chứa nó.
-
-height: 50px → Đặt chiều cao tối thiểu theo kiểu bố cục của ô <th> là 50px.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Bảng mở rộng theo chiều rộng của phần tử chứa.
-✔ Hàng tiêu đề có chiều cao khoảng 50px nếu nội dung không yêu cầu cao hơn.
-
-Căn chỉnh theo chiều ngang
-Thuộc tính text-align thiết lập căn chỉnh theo chiều ngang như trái, phải hoặc giữa cho nội dung bên trong <th> hoặc <td>.
-
-Mặc định, nội dung của <th> thường được trình duyệt căn giữa và nội dung của <td> thường được căn trái.
-
-Ví dụ sau căn văn bản trong <th> về bên trái:
-
-Ví dụ
-<style>
-th {
-  text-align: left;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-th {
-  text-align: left;
-}
-→ Căn nội dung trong các ô <th> về phía bên trái.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Các tiêu đề Họ tên, Tuổi, Lớp được căn trái.
-
-Căn chỉnh theo chiều dọc
-Thuộc tính vertical-align dùng để thiết lập căn chỉnh theo chiều dọc như trên, giữa hoặc dưới cho nội dung bên trong <th> hoặc <td>.
-
-📌 Các giá trị thường dùng:
-
-top → Căn lên trên.
-
-middle → Căn giữa theo chiều dọc.
-
-bottom → Căn xuống dưới.
-
-Mặc định, nội dung trong ô bảng thường được căn giữa theo chiều dọc.
-
-Ví dụ sau thiết lập căn chỉnh văn bản xuống dưới (bottom) cho các phần tử <td>:
-
-Ví dụ
-<style>
-td {
-  height: 80px;
-  vertical-align: bottom;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-vertical-align: bottom;
-→ Đưa nội dung trong ô xuống phía dưới theo chiều dọc.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Nội dung trong các ô <td> được căn xuống dưới.
-
-Padding trong bảng
-Để điều khiển khoảng cách giữa đường viền và nội dung bên trong một ô bảng, sử dụng thuộc tính padding cho các phần tử <td> và <th>.
-
-Ví dụ
-<style>
-th, td {
-  padding: 15px;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-padding: 15px;
-→ Tạo khoảng cách 15px giữa nội dung và đường viền của mỗi ô.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Các ô trở nên rộng và thoáng hơn.
-✔ Nội dung không bị sát đường viền.
-
-Màu sắc trong bảng
-CSS có thể được sử dụng để thiết lập màu đường viền, màu nền và màu chữ cho các phần tử trong bảng.
-
-Ví dụ
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-th {
-  background-color: #333;
-  color: white;
-}
-
-td {
-  background-color: #f2f2f2;
-  color: #333;
-}
-</style>
-
-<table>
-  <tr>
-    <th>Họ tên</th>
-    <th>Tuổi</th>
-    <th>Lớp</th>
-  </tr>
-  <tr>
-    <td>Nguyễn Văn A</td>
-    <td>20</td>
-    <td>Web</td>
-  </tr>
-  <tr>
-    <td>Trần Thị B</td>
-    <td>21</td>
-    <td>Web</td>
-  </tr>
-</table>
-📌 Giải thích:
-
-border: 1px solid black; → Tạo đường viền màu đen.
-
-background-color: #333; → Đặt màu nền tối cho hàng tiêu đề.
-
-color: white; → Đặt màu chữ trắng cho tiêu đề.
-
-background-color: #f2f2f2; → Đặt màu nền xám nhạt cho các ô dữ liệu.
-
-color: #333; → Đặt màu chữ xám đậm cho dữ liệu.
-
-📌 Kết quả trên trình duyệt:
-
-✔ Hàng tiêu đề có nền tối và chữ trắng.
-✔ Các ô dữ liệu có nền xám nhạt và chữ tối.
-✔ Toàn bộ bảng có đường viền rõ ràng và gọn gàng.
-
-Yêu cầu nộp bài:
-Đưa mã nguồn lên GitHub.
-
-Dán link repository vào phần nộp bài dưới đây.
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Cá Nhân</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. Tiêu đề chính -->
+    <header>
+        <h1>Chào mừng đến với trang web cá nhân của tôi</h1>
+    </header>
+
+    <!-- 2 & 3. Ảnh đại diện và Giới thiệu bản thân -->
+    <section class="profile">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80" alt="Ảnh đại diện" class="avatar">
+        <p>Xin chào! Tôi là <strong>Nguyễn Văn A</strong>, một lập trình viên yêu thích công nghệ.</p>
+    </section>
+
+    <!-- 4. Danh sách sở thích -->
+    <section class="hobbies">
+        <h2>Sở thích</h2>
+        <ul>
+            <li>Đọc sách</li>
+            <li>Chơi thể thao</li>
+            <li>Lập trình</li>
+            <li>Du lịch</li>
+        </ul>
+    </section>
+
+    <!-- 5. Mục tiêu học tập -->
+    <section class="goals">
+        <h2>Mục tiêu học tập</h2>
+        <p>Tôi muốn trở thành một lập trình viên chuyên nghiệp, xây dựng các sản phẩm hữu ích.</p>
+    </section>
+
+    <!-- 6. Bảng thông tin liên hệ -->
+    <footer>
+        <h2>Thông tin liên hệ</h2>
+        <table>
+            <tr>
+                <th>Email</th>
+                <td>nguyenvana@example.com</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td><a href="#" target="_blank">facebook.com/nguyenvana</a></td>
+            </tr>
+        </table>
+    </footer>
+
+</body>
+</html>
