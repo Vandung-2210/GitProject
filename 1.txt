@@ -3,53 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Web Cá Nhân</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Nhúng CSS vào HTML</title>
+
+    <!-- PHẦN 3: EXTERNAL STYLE (Nhúng file CSS ngoài bằng Data URI tích hợp) -->
+    <link rel="stylesheet" href="data:text/css;base64,LmV4dGVybmFsLXRpdGxlIHsgY29sb3I6ICMyN2FlNjA7IH0gLmV4dGVybmFsLWRlc2MgeyBjb2xvcjogI2QzNTQwMDsgfQ==">
+
+    <!-- PHẦN 2: INTERNAL STYLE (Nhúng qua thẻ <style> bên trong HTML) -->
+    <style>
+        .internal-title {
+            color: #2980b9; /* Xanh dương */
+        }
+        .internal-desc {
+            color: #8e44ad; /* Tím */
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 1. Tiêu đề chính -->
-    <header>
-        <h1>Chào mừng đến với trang web cá nhân của tôi</h1>
-    </header>
-
-    <!-- 2 & 3. Ảnh đại diện và Giới thiệu bản thân -->
-    <section class="profile">
-        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80" alt="Ảnh đại diện" class="avatar">
-        <p>Xin chào! Tôi là <strong>Nguyễn Văn A</strong>, một lập trình viên yêu thích công nghệ.</p>
+    <!-- PHẦN 1: INLINE STYLE (Khai báo trực tiếp trên thuộc tính style của thẻ) -->
+    <section>
+        <h1 style="color: #c0392b;">Tiêu đề 1 (Inline Style)</h1>
+        <p style="color: #16a085;">Văn bản áp dụng thuộc tính inline-style.</p>
     </section>
 
-    <!-- 4. Danh sách sở thích -->
-    <section class="hobbies">
-        <h2>Sở thích</h2>
-        <ul>
-            <li>Đọc sách</li>
-            <li>Chơi thể thao</li>
-            <li>Lập trình</li>
-            <li>Du lịch</li>
-        </ul>
+    <hr>
+
+    <!-- PHẦN 2: INTERNAL STYLE -->
+    <section>
+        <h1 class="internal-title">Tiêu đề 2 (Internal Style)</h1>
+        <p class="internal-desc">Văn bản áp dụng kiểu dáng từ thẻ &lt;style&gt;.</p>
     </section>
 
-    <!-- 5. Mục tiêu học tập -->
-    <section class="goals">
-        <h2>Mục tiêu học tập</h2>
-        <p>Tôi muốn trở thành một lập trình viên chuyên nghiệp, xây dựng các sản phẩm hữu ích.</p>
-    </section>
+    <hr>
 
-    <!-- 6. Bảng thông tin liên hệ -->
-    <footer>
-        <h2>Thông tin liên hệ</h2>
-        <table>
-            <tr>
-                <th>Email</th>
-                <td>nguyenvana@example.com</td>
-            </tr>
-            <tr>
-                <th>Facebook</th>
-                <td><a href="#" target="_blank">facebook.com/nguyenvana</a></td>
-            </tr>
-        </table>
-    </footer>
+    <!-- PHẦN 3: EXTERNAL STYLE -->
+    <section>
+        <h1 class="external-title">Tiêu đề 3 (External Style)</h1>
+        <p class="external-desc">Văn bản áp dụng kiểu dáng được liên kết qua thẻ &lt;link rel="stylesheet"&gt;.</p>
+    </section>
 
 </body>
 </html>
