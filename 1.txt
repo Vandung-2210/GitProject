@@ -3,222 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Research Survey</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-            font-size: 13px;
-            background-color: #f0f3f5;
-            color: #333333;
-            margin: 0;
-            padding: 30px 15px;
-        }
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-top: 4px solid #0055a5;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-            padding: 25px 30px;
-        }
-        .header {
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 1px dotted #ccc;
-        }
-        .header h2 {
-            margin: 0 0 6px 0;
-            font-size: 22px;
-            color: #222;
-        }
-        .header p {
-            margin: 0;
-            color: #666;
-            font-size: 13px;
-        }
-        .form-group {
-            margin-bottom: 22px;
-        }
-        .field-label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 13px;
-            color: #333;
-        }
-        .req {
-            color: #d93025;
-            margin-left: 2px;
-        }
-        select {
-            width: 50%;
-            padding: 6px 8px;
-            border: 1px solid #ccc;
-            border-radius: 2px;
-            font-size: 13px;
-            font-family: inherit;
-        }
-        .radio-list, .check-list {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-        .radio-list label, .check-list label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        /* Matrix Table */
-        .matrix-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 8px;
-        }
-        .matrix-table th, .matrix-table td {
-            padding: 10px 8px;
-            text-align: center;
-            border-bottom: 1px solid #e5e5e5;
-            font-size: 12px;
-        }
-        .matrix-table th:first-child, .matrix-table td:first-child {
-            text-align: left;
-            font-size: 13px;
-            width: 35%;
-        }
-        .matrix-table th {
-            background-color: #fafafa;
-            color: #555;
-            font-weight: 600;
-        }
-        .matrix-table tr:nth-child(even) td {
-            background-color: #fcfcfc;
-        }
-        .btn-submit {
-            background-color: #0055a5;
-            color: #ffffff;
-            border: none;
-            padding: 9px 24px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .btn-submit:hover {
-            background-color: #003f7a;
-        }
-    </style>
+    <title>Danh sách sản phẩm</title>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h2>Market Research Survey</h2>
-            <p>Please take a few moments to complete this satisfaction survey.</p>
-        </div>
+    <!-- Tiêu đề chính -->
+    <h1>Danh sách sản phẩm</h1>
 
-        <form action="#" method="POST">
-
-            <!-- Câu 1: Độ tuổi (Dropdown) -->
-            <div class="form-group">
-                <label class="field-label" for="age">What is your age range?<span class="req">*</span></label>
-                <select id="age" name="age" required>
-                    <option value="">-- Choose one --</option>
-                    <option value="18-24">18-24</option>
-                    <option value="25-34">25-34</option>
-                    <option value="35-50">35-50</option>
-                    <option value="50+">50+</option>
-                </select>
-            </div>
-
-            <!-- Câu 2: Thu nhập (Dropdown) -->
-            <div class="form-group">
-                <label class="field-label" for="income">What is your yearly income range?</label>
-                <select id="income" name="income">
-                    <option value="">-- Choose one --</option>
-                    <option value="under_25k">$0 - $25,000</option>
-                    <option value="25k_50k">$25,001 - $50,000</option>
-                    <option value="50k_100k">$50,001 - $100,000</option>
-                    <option value="over_100k">$100,000+</option>
-                </select>
-            </div>
-
-            <!-- Câu 3: Giới tính (Radio) -->
-            <div class="form-group">
-                <span class="field-label">Gender</span>
-                <div class="radio-list">
-                    <label><input type="radio" name="gender" value="male"> Male</label>
-                    <label><input type="radio" name="gender" value="female"> Female</label>
-                    <label><input type="radio" name="gender" value="other"> Other</label>
-                </div>
-            </div>
-
-            <!-- Câu 4: Tần suất sử dụng (Radio) -->
-            <div class="form-group">
-                <span class="field-label">Which of the following best describes your usage?</span>
-                <div class="radio-list">
-                    <label><input type="radio" name="usage" value="daily"> Daily</label>
-                    <label><input type="radio" name="usage" value="weekly"> Once a week</label>
-                    <label><input type="radio" name="usage" value="monthly"> Once a month</label>
-                    <label><input type="radio" name="usage" value="rarely"> Rarely</label>
-                </div>
-            </div>
-
-            <!-- Câu 5: Ma trận đánh giá (Matrix Likert scale) -->
-            <div class="form-group">
-                <span class="field-label">How satisfied are you with our service?</span>
-                <table class="matrix-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Very Unsatisfied</th>
-                            <th>Unsatisfied</th>
-                            <th>Neutral</th>
-                            <th>Satisfied</th>
-                            <th>Very Satisfied</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Quality</td>
-                            <td><input type="radio" name="quality" value="1"></td>
-                            <td><input type="radio" name="quality" value="2"></td>
-                            <td><input type="radio" name="quality" value="3"></td>
-                            <td><input type="radio" name="quality" value="4"></td>
-                            <td><input type="radio" name="quality" value="5"></td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td><input type="radio" name="price" value="1"></td>
-                            <td><input type="radio" name="price" value="2"></td>
-                            <td><input type="radio" name="price" value="3"></td>
-                            <td><input type="radio" name="price" value="4"></td>
-                            <td><input type="radio" name="price" value="5"></td>
-                        </tr>
-                        <tr>
-                            <td>Customer Support</td>
-                            <td><input type="radio" name="support" value="1"></td>
-                            <td><input type="radio" name="support" value="2"></td>
-                            <td><input type="radio" name="support" value="3"></td>
-                            <td><input type="radio" name="support" value="4"></td>
-                            <td><input type="radio" name="support" value="5"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Nút gửi khảo sát -->
-            <div class="form-group" style="margin-top: 25px;">
-                <input type="submit" class="btn-submit" value="Submit">
-            </div>
-
-        </form>
-    </div>
+    <!-- Bảng danh sách sản phẩm với các cột Tên sản phẩm, Giá, Số lượng -->
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Laptop Dell XPS 13</td>
+                <td>25.000.000 VND</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Chuột không dây Logitech</td>
+                <td>450.000 VND</td>
+                <td>35</td>
+            </tr>
+            <tr>
+                <td>Bàn phím cơ Keychron</td>
+                <td>1.850.000 VND</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Màn hình Dell UltraSharp 27 inch</td>
+                <td>8.200.000 VND</td>
+                <td>8</td>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>
