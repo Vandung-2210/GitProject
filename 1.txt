@@ -3,52 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lịch họp công ty</title>
+    <title>Thực hành Danh sách trong CSS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Tiêu đề chính -->
-    <h1>Lịch họp công ty</h1>
+    <h1>Thực Hành Định Kiểu Danh Sách Trong CSS</h1>
 
-    <!-- Bảng lịch họp sử dụng rowspan và colspan -->
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Ngày</th>
-                <th>Giờ</th>
-                <th>Nội dung cuộc họp</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Thứ Hai: Có 2 cuộc họp trong ngày -> dùng rowspan="2" ở cột Ngày -->
-            <tr>
-                <td rowspan="2">Thứ Hai (12/10)</td>
-                <td>08:30 - 09:30</td>
-                <td>Họp giao ban đầu tuần toàn công ty</td>
-            </tr>
-            <tr>
-                <td>14:00 - 15:30</td>
-                <td>Họp rà soát tiến độ dự án Website</td>
-            </tr>
+    <!-- 2. Thay đổi kiểu đánh dấu sang hình vuông (square) -->
+    <h2>2. Kiểu đánh dấu hình vuông (square)</h2>
+    <ul class="list-square">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Git</li>
+    </ul>
 
-            <!-- Thứ Ba: Cuộc họp đào tạo đặc biệt kéo dài cả buổi -> dùng colspan="2" gộp cột Giờ và Nội dung -->
-            <tr>
-                <td>Thứ Ba (13/10)</td>
-                <td colspan="2">Cả ngày: Workshop đào tạo kỹ năng chuyên môn nội bộ</td>
-            </tr>
+    <!-- 3. Thay đổi kiểu đánh số sang số La Mã in hoa (upper-roman) -->
+    <h2>3. Kiểu đánh số La Mã in hoa (upper-roman)</h2>
+    <ol class="list-roman">
+        <li>Học HTML</li>
+        <li>Học CSS</li>
+        <li>Học JavaScript</li>
+        <li>Học Git</li>
+    </ol>
 
-            <!-- Thứ Tư: Có 2 cuộc họp -> tiếp tục minh họa rowspan="2" -->
-            <tr>
-                <td rowspan="2">Thứ Tư (14/10)</td>
-                <td>09:00 - 10:30</td>
-                <td>Họp định hướng sản phẩm mới với ban giám đốc</td>
-            </tr>
-            <tr>
-                <td>15:00 - 16:00</td>
-                <td>Phỏng vấn ứng viên vị trí Frontend Developer</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- 4. Sử dụng hình ảnh/icon làm dấu đánh dấu (list-style-image) -->
+    <h2>4. Dùng icon hình ảnh làm dấu đánh dấu</h2>
+    <ul class="list-image">
+        <li>Visual Studio Code</li>
+        <li>Google Chrome</li>
+        <li>GitHub</li>
+        <li>Git</li>
+    </ul>
+
+    <!-- 5. So sánh list-style-position: outside vs inside -->
+    <h2>5. So sánh vị trí dấu đánh dấu (outside vs inside)</h2>
+    <p><strong>Outside (Mặc định - dấu nằm ngoài khối nội dung):</strong></p>
+    <ul class="list-outside">
+        <li>Mục thứ nhất với vị trí outside</li>
+        <li>Mục thứ hai với vị trí outside</li>
+    </ul>
+
+    <p><strong>Inside (Dấu nằm lùi hẳn vào bên trong khối nội dung):</strong></p>
+    <ul class="list-inside">
+        <li>Mục thứ nhất với vị trí inside</li>
+        <li>Mục thứ hai với vị trí inside</li>
+    </ul>
+
+    <!-- 6. Sử dụng thuộc tính rút gọn list-style -->
+    <h2>6. Sử dụng thuộc tính rút gọn (shorthand list-style)</h2>
+    <ul class="list-shorthand">
+        <li>Mục sử dụng list-style rút gọn 1</li>
+        <li>Mục sử dụng list-style rút gọn 2</li>
+    </ul>
+
+    <!-- 7. Định dạng danh sách với màu sắc và khoảng cách -->
+    <h2>7. Danh sách có màu sắc và khoảng cách (padding/margin)</h2>
+    <ul class="list-styled-box">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+    </ul>
+
+    <!-- 8. Bài tập tổng hợp: Lộ trình học lập trình Web -->
+    <h2>8. Bài tập tổng hợp: Lộ trình học lập trình Web</h2>
+    <ol class="web-roadmap">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Git</li>
+        <li>GitHub</li>
+    </ol>
 
 </body>
 </html>
