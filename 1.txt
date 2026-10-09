@@ -3,113 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang web của tôi</title>
+    <title>Trang web với màu nền và ảnh nền</title>
     <style>
-        /* 1. Element Selector: Đổi màu nền trang và cấu hình font chữ chung */
+        /* 1. Thiết lập màu nền (background-color) cho trang web */
         body {
-            background-color: #f0f4f8;
+            background-color: #f1f5f9;
             font-family: Arial, sans-serif;
-            margin: 40px auto;
+            margin: 0;
+            padding: 40px 20px;
+            color: #334155;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        p.description {
+            font-size: 16px;
             max-width: 600px;
-            padding: 24px;
+            margin: 0 auto 30px auto;
             line-height: 1.6;
         }
 
-        /* 2. Grouping Selector: Định dạng khoảng cách chữ cho nhiều phần tử cùng lúc */
-        h1, p, button {
-            letter-spacing: 0.3px;
-        }
+        /* 2. Thêm ảnh nền (background-image) và căn giữa nội dung trong khối <div> */
+        .important-box {
+            /* Ảnh nền chất lượng cao từ Unsplash kết hợp lớp phủ mờ tối màu để làm nổi chữ */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
+                              url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
 
-        /* 3. ID Selector: Căn giữa tiêu đề h1 */
-        #main-title {
+            /* Kích thước và căn lề cho khối */
+            max-width: 700px;
+            min-height: 260px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+            /* Căn giữa nội dung cả chiều ngang lẫn chiều dọc bằng Flexbox */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            color: #1e3a8a;
-            font-size: 32px;
-        }
 
-        /* 4. Class Selector: Định dạng đoạn văn mô tả bản thân */
-        .intro-text {
-            font-size: 16px;
-            color: #4b5563;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        /* 5. Class & Element Selector: Bỏ dấu chấm mặc định của danh sách */
-        .hobby-list {
-            list-style-type: none;
-            padding: 0;
-            margin-bottom: 28px;
-        }
-
-        .hobby-list li {
-            padding: 10px 16px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-
-        /* 6. Pseudo-class Selector (:nth-child): Định dạng màu sắc khác nhau cho từng mục sở thích */
-        .hobby-list li:nth-child(1) {
-            background-color: #e0f2fe;
-            color: #0369a1; /* Xanh da trời */
-        }
-
-        .hobby-list li:nth-child(2) {
-            background-color: #fef3c7;
-            color: #b45309; /* Vàng hổ phách */
-        }
-
-        .hobby-list li:nth-child(3) {
-            background-color: #dcfce7;
-            color: #15803d; /* Xanh lá */
-        }
-
-        /* Căn giữa nút bấm */
-        .action-box {
-            text-align: center;
-        }
-
-        /* 7. ID Selector: Định dạng nút bấm */
-        #btn-click {
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: bold;
+            /* Màu chữ bên trong khối nổi bật trên nền ảnh */
             color: #ffffff;
-            background-color: #2563eb;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        /* 8. Pseudo-class Selector (:hover): Hiệu ứng khi rê chuột vào nút bấm */
-        #btn-click:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
+        .important-box h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .important-box p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 <body>
 
     <!-- Tiêu đề h1 -->
-    <h1 id="main-title">Trang web của tôi</h1>
+    <h1>Chào mừng đến với trang web của tôi</h1>
 
-    <!-- Đoạn văn mô tả bản thân -->
-    <p class="intro-text">
-        Xin chào! Tôi là một lập trình viên đam mê công nghệ và xây dựng các ứng dụng web hiện đại.
+    <!-- Đoạn văn mô tả -->
+    <p class="description">
+        Trang web được thiết kế nhằm thực hành cách kết hợp màu nền, hình ảnh nền và kỹ thuật bố cục căn giữa nội dung trong CSS.
     </p>
 
-    <!-- Danh sách 3 sở thích -->
-    <ul class="hobby-list">
-        <li class="hobby-item">Lập trình và tìm hiểu công nghệ mới</li>
-        <li class="hobby-item">Đọc sách và học ngoại ngữ</li>
-        <li class="hobby-item">Nghe nhạc và chơi thể thao</li>
-    </ul>
-
-    <!-- Nút bấm -->
-    <div class="action-box">
-        <button id="btn-click" type="button">Nhấn vào đây</button>
+    <!-- Khối div chứa nội dung quan trọng -->
+    <div class="important-box">
+        <h2>Thông Báo Quan Trọng</h2>
+        <p>Nội dung này được đặt bên trong khối div có áp dụng hình nền và được căn chỉnh chính giữa khung hiển thị.</p>
     </div>
 
 </body>
