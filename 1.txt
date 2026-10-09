@@ -3,113 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn tạo Fixed Menu & Footer</title>
+    <title>Thực hành Tạo Menu Dọc Dropdown</title>
     <style>
+        /* 1. Reset thuộc tính mặc định giữa các trình duyệt */
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
+            background-color: #f4f6f8;
+            padding: 40px;
+        }
+
+        /* 2. Định dạng khung chứa menu */
+        #menu {
+            width: 140px; /* Khớp với tổng width: 100px + padding 2 bên 20px * 2 */
+        }
+
+        /* Xóa padding/margin mặc định của thẻ ul */
+        #menu ul {
+            list-style: none;
+            padding: 0;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f8fafc;
         }
 
-        /* 1. FIXED HEADER / TOP MENU */
-        .navbar {
-            overflow: hidden;
-            background-color: #1e293b;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        /* 3. Định dạng cho các phần tử li */
+        #menu li {
+            list-style: none;
+            position: relative; /* Làm mốc tọa độ định vị cho menu con */
+            width: 100px;
+            height: 30px;
+            padding: 0 20px;
+            background-color: #000000;
+            line-height: 30px;
+            cursor: pointer;
+            border-bottom: 1px solid #333333;
+            white-space: nowrap;
         }
 
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f8fafc;
-            text-align: center;
-            padding: 16px 20px;
+        /* 4. Định dạng thẻ liên kết a bên trong menu */
+        #menu a {
             text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-
-        .navbar a:hover {
-            background-color: #334155;
-            color: #38bdf8;
-        }
-
-        /* 2. NỘI DUNG CHÍNH (Có khoảng đệm tránh bị header và footer che khuất) */
-        .main {
-            padding: 24px;
-            margin-top: 60px;    /* Khoảng trống để không bị che bởi fixed header */
-            margin-bottom: 60px; /* Khoảng trống để không bị che bởi fixed footer */
-            height: 1500px;      /* Chiều cao lớn để tạo thanh cuộn kiểm tra hiệu ứng */
-        }
-
-        .main h1 {
-            color: #0f172a;
-            margin-top: 10px;
-        }
-
-        .main h2 {
-            color: #475569;
-            font-weight: normal;
-        }
-
-        .main p {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        /* 3. FIXED FOOTER */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #1e293b;
-            color: #94a3b8;
-            text-align: center;
-            padding: 14px;
+            color: #ffffff;
             font-size: 14px;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
-        .footer span {
-            color: #38bdf8;
-            font-weight: bold;
+        /* 5. Đổi màu nền khi hover chuột qua các mục li */
+        #menu li:hover {
+            background-color: #444444;
+        }
+
+        /* 6. Định dạng và ẩn danh sách con cấp 2 */
+        #menu li ul {
+            position: absolute;
+            top: 0;
+            left: 140px; /* Bắt đầu ngay cạnh mép phải của li cha (100px + 20px*2 = 140px) */
+            visibility: hidden;
+            display: none;
+        }
+
+        /* 7. Hiển thị menu con tương ứng khi hover chuột vào mục li cha */
+        #menu li:hover > ul {
+            visibility: visible;
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <!-- Fixed Header -->
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </div>
-
-    <!-- Nội dung chính kiểm tra cuộn trang -->
-    <div class="main">
-        <h1>Fixed Top Menu & Footer Demo</h1>
-        <h2>Scroll this page to see the effect</h2>
-        <h2>The navigation bar will stay at the top and the footer will stay at the bottom while scrolling</h2>
-        <p>Cuộn chuột xuống phía dưới để kiểm tra menu trên cùng và footer dưới đáy vẫn luôn giữ nguyên vị trí cố định trên màn hình.</p>
-        <p>Some text some text some text some text...</p>
-    </div>
-
-    <!-- Fixed Footer -->
-    <div class="footer">
-        © 2026 Bản quyền thuộc về <span>Website Của Tôi</span>. All rights reserved.
+    <!-- Cấu trúc vùng menu dọc -->
+    <div id="menu">
+        <ul>
+            <li><a href="#home">Trang chủ</a></li>
+            <li>
+                <a href="#services">Dịch vụ &raquo;</a>
+                <!-- Menu con thả xuống sang bên phải -->
+                <ul>
+                    <li><a href="#web">Thiết kế Web</a></li>
+                    <li><a href="#seo">Dịch vụ SEO</a></li>
+                    <li><a href="#hosting">Hosting/VPS</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#products">Sản phẩm &raquo;</a>
+                <!-- Menu con cấp 2 -->
+                <ul>
+                    <li><a href="#software">Phần mềm</a></li>
+                    <li><a href="#apps">Ứng dụng Mobile</a></li>
+                </ul>
+            </li>
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#contact">Liên hệ</a></li>
+        </ul>
     </div>
 
 </body>
