@@ -3,42 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách sản phẩm</title>
+    <title>Lịch họp công ty</title>
 </head>
 <body>
 
     <!-- Tiêu đề chính -->
-    <h1>Danh sách sản phẩm</h1>
+    <h1>Lịch họp công ty</h1>
 
-    <!-- Bảng danh sách sản phẩm với các cột Tên sản phẩm, Giá, Số lượng -->
+    <!-- Bảng lịch họp sử dụng rowspan và colspan -->
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
             <tr>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+                <th>Nội dung cuộc họp</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Thứ Hai: Có 2 cuộc họp trong ngày -> dùng rowspan="2" ở cột Ngày -->
             <tr>
-                <td>Laptop Dell XPS 13</td>
-                <td>25.000.000 VND</td>
-                <td>10</td>
+                <td rowspan="2">Thứ Hai (12/10)</td>
+                <td>08:30 - 09:30</td>
+                <td>Họp giao ban đầu tuần toàn công ty</td>
             </tr>
             <tr>
-                <td>Chuột không dây Logitech</td>
-                <td>450.000 VND</td>
-                <td>35</td>
+                <td>14:00 - 15:30</td>
+                <td>Họp rà soát tiến độ dự án Website</td>
+            </tr>
+
+            <!-- Thứ Ba: Cuộc họp đào tạo đặc biệt kéo dài cả buổi -> dùng colspan="2" gộp cột Giờ và Nội dung -->
+            <tr>
+                <td>Thứ Ba (13/10)</td>
+                <td colspan="2">Cả ngày: Workshop đào tạo kỹ năng chuyên môn nội bộ</td>
+            </tr>
+
+            <!-- Thứ Tư: Có 2 cuộc họp -> tiếp tục minh họa rowspan="2" -->
+            <tr>
+                <td rowspan="2">Thứ Tư (14/10)</td>
+                <td>09:00 - 10:30</td>
+                <td>Họp định hướng sản phẩm mới với ban giám đốc</td>
             </tr>
             <tr>
-                <td>Bàn phím cơ Keychron</td>
-                <td>1.850.000 VND</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <td>Màn hình Dell UltraSharp 27 inch</td>
-                <td>8.200.000 VND</td>
-                <td>8</td>
+                <td>15:00 - 16:00</td>
+                <td>Phỏng vấn ứng viên vị trí Frontend Developer</td>
             </tr>
         </tbody>
     </table>
