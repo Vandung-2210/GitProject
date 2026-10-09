@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài viết của tôi</title>
+    <title>Sử dụng thẻ hình ảnh trong HTML</title>
 </head>
 <body>
 
-    <!-- Tiêu đề h1 có màu xanh dương -->
-    <h1 style="color: blue;">Bài viết của tôi</h1>
+    <h1>Hình ảnh yêu thích của tôi</h1>
 
-    <!-- Đoạn văn có màu đỏ và chữ in đậm -->
-    <p style="color: red; font-weight: bold;">Đây là đoạn văn được định dạng màu sắc</p>
-
-    <!-- Đoạn văn có chữ in nghiêng và căn giữa -->
-    <p style="font-style: italic; text-align: center;">Tôi đang học HTML Styles</p>
-
-    <!-- Đoạn văn có cỡ chữ 20px và gạch chân -->
-    <p style="font-size: 20px; text-decoration: underline;">Định dạng văn bản giúp trang web đẹp hơn</p>
+    <!-- Thẻ img hiển thị hình ảnh với thuộc tính alt mô tả -->
+    <img 
+        src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" 
+        alt="Bức tranh nghệ thuật đầy màu sắc trừu tượng" 
+        width="600"
+    >
 
 </body>
 </html>
