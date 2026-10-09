@@ -3,68 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bài tập Sử dụng Box Model 1</title>
+    <title>Hướng dẫn tạo Fixed Menu & Footer</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            padding: 20px;
             margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            font-family: Arial, sans-serif;
+            background-color: #f8fafc;
         }
 
-        /* Quy tắc chung cho cả 3 thẻ .card */
-        .card {
-            width: 280px;
-            height: 150px;
-            padding: 20px;
-            border: 5px solid #3498db; /* Viền xanh dương */
-            margin: 20px;
-            color: #ffffff;
+        /* 1. FIXED HEADER / TOP MENU */
+        .navbar {
+            overflow: hidden;
+            background-color: #1e293b;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f8fafc;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: #334155;
+            color: #38bdf8;
+        }
+
+        /* 2. NỘI DUNG CHÍNH (Có khoảng đệm tránh bị header và footer che khuất) */
+        .main {
+            padding: 24px;
+            margin-top: 60px;    /* Khoảng trống để không bị che bởi fixed header */
+            margin-bottom: 60px; /* Khoảng trống để không bị che bởi fixed footer */
+            height: 1500px;      /* Chiều cao lớn để tạo thanh cuộn kiểm tra hiệu ứng */
+        }
+
+        .main h1 {
+            color: #0f172a;
+            margin-top: 10px;
+        }
+
+        .main h2 {
+            color: #475569;
+            font-weight: normal;
+        }
+
+        .main p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* 3. FIXED FOOTER */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            padding: 14px;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer span {
+            color: #38bdf8;
             font-weight: bold;
-            line-height: 1.4;
-        }
-
-        /* Thẻ 1: content-box, nền xanh lá */
-        .card:nth-child(1) {
-            box-sizing: content-box;
-            background-color: #2ecc71;
-        }
-
-        /* Thẻ 2: border-box, nền vàng */
-        .card:nth-child(2) {
-            box-sizing: border-box;
-            background-color: #f1c40f;
-            color: #333333; /* Chữ tối màu để dễ đọc trên nền vàng */
-        }
-
-        /* Thẻ 3: border-box, nền đỏ */
-        .card:nth-child(3) {
-            box-sizing: border-box;
-            background-color: #e74c3c;
         }
     </style>
 </head>
 <body>
 
-    <!-- Thẻ thứ nhất -->
-    <div class="card">
-        <h3>Card 1: Content Box</h3>
-        <p>box-sizing: content-box<br>Tổng kích thước bao gồm content + padding + border.</p>
+    <!-- Fixed Header -->
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
     </div>
 
-    <!-- Thẻ thứ hai -->
-    <div class="card">
-        <h3>Card 2: Border Box</h3>
-        <p>box-sizing: border-box<br>Padding và border được tính gói gọn bên trong 280px x 150px.</p>
+    <!-- Nội dung chính kiểm tra cuộn trang -->
+    <div class="main">
+        <h1>Fixed Top Menu & Footer Demo</h1>
+        <h2>Scroll this page to see the effect</h2>
+        <h2>The navigation bar will stay at the top and the footer will stay at the bottom while scrolling</h2>
+        <p>Cuộn chuột xuống phía dưới để kiểm tra menu trên cùng và footer dưới đáy vẫn luôn giữ nguyên vị trí cố định trên màn hình.</p>
+        <p>Some text some text some text some text...</p>
     </div>
 
-    <!-- Thẻ thứ ba -->
-    <div class="card">
-        <h3>Card 3: Border Box</h3>
-        <p>box-sizing: border-box<br>Kích thước tương tự thẻ 2 nhưng mang màu nền đỏ.</p>
+    <!-- Fixed Footer -->
+    <div class="footer">
+        © 2026 Bản quyền thuộc về <span>Website Của Tôi</span>. All rights reserved.
     </div>
 
 </body>
