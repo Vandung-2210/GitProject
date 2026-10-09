@@ -3,86 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang web với màu nền và ảnh nền</title>
+    <title>Thực hành CSS Box Model 1</title>
     <style>
-        /* 1. Thiết lập màu nền (background-color) cho trang web */
-        body {
-            background-color: #f1f5f9;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            color: #334155;
-            text-align: center;
-        }
-
-        h1 {
-            color: #0f172a;
-            margin-bottom: 12px;
-        }
-
-        p.description {
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.6;
-        }
-
-        /* 2. Thêm ảnh nền (background-image) và căn giữa nội dung trong khối <div> */
-        .important-box {
-            /* Ảnh nền chất lượng cao từ Unsplash kết hợp lớp phủ mờ tối màu để làm nổi chữ */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
-                              url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-
-            /* Kích thước và căn lề cho khối */
-            max-width: 700px;
-            min-height: 260px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-
-            /* Căn giữa nội dung cả chiều ngang lẫn chiều dọc bằng Flexbox */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-
-            /* Màu chữ bên trong khối nổi bật trên nền ảnh */
+        div {
+            margin: 25px;
+            padding: 35px;
+            width: 200px;
+            background-color: lightseagreen;
+            border: 20px dashed indianred;
             color: #ffffff;
-        }
-
-        .important-box h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .important-box p {
-            font-size: 16px;
-            line-height: 1.5;
-            margin: 0;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            font-family: Arial, sans-serif;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <!-- Tiêu đề h1 -->
-    <h1>Chào mừng đến với trang web của tôi</h1>
-
-    <!-- Đoạn văn mô tả -->
-    <p class="description">
-        Trang web được thiết kế nhằm thực hành cách kết hợp màu nền, hình ảnh nền và kỹ thuật bố cục căn giữa nội dung trong CSS.
-    </p>
-
-    <!-- Khối div chứa nội dung quan trọng -->
-    <div class="important-box">
-        <h2>Thông Báo Quan Trọng</h2>
-        <p>Nội dung này được đặt bên trong khối div có áp dụng hình nền và được căn chỉnh chính giữa khung hiển thị.</p>
+    <div>
+        Content demo box<br/>
     </div>
 
 </body>
