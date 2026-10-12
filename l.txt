@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flexbox Layout</title>
+    <title>Bố cục Responsive bằng CSS Flexbox</title>
     <style>
         * {
             margin: 0;
@@ -12,86 +12,213 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-        }
-
-        /* 1. Khung container chính xếp theo chiều dọc */
-        .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* 2. Header và Footer */
-        .header, 
-        .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* 3. Thanh điều hướng Navigation */
-        .nav {
-            background-color: #444;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-
-        /* 4. Khung chứa nội dung chính và cột bên (xếp ngang trên Desktop) */
-        .main-container {
-            display: flex;
-            flex: 1; /* Chiếm toàn bộ khoảng trống còn lại giữa header/nav và footer */
-        }
-
-        /* 5. Nội dung chính chiếm 3 phần */
-        .content {
-            flex: 3;
-            padding: 20px;
-            background-color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
             line-height: 1.6;
         }
 
-        /* 6. Sidebar chiếm 1 phần */
-        .sidebar {
-            flex: 1;
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-left: 1px solid #ddd;
+        /* Khung bao bọc toàn bộ trang, căn giữa */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
         }
 
-        /* 7. Responsive cho Mobile (Màn hình <= 768px) */
+        /* 1. Header */
+        .header {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            text-align: center;
+            padding: 24px 20px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #93c5fd;
+        }
+
+        /* 2. Navigation (Menu điều hướng) */
+        .navbar {
+            background-color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            padding: 0 10px;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 15px;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-links li a:hover {
+            background-color: #1d4ed8;
+            color: #fde047;
+        }
+
+        /* 3. Khung chứa Main Content và Sidebar (Flexbox ngang trên Desktop) */
+        .main-wrapper {
+            display: flex;
+            flex: 1; /* Chiếm trọn không gian giữa navbar và footer */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Main Content chiếm phần lớn không gian */
+        .content {
+            flex: 3;
+            background-color: #ffffff;
+            padding: 15px;
+        }
+
+        .content h2 {
+            font-size: 22px;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .content p {
+            margin-bottom: 14px;
+            color: #475569;
+            text-align: justify;
+        }
+
+        /* Sidebar chứa nội dung phụ */
+        .sidebar {
+            flex: 1;
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            padding: 18px;
+        }
+
+        .sidebar h3 {
+            font-size: 17px;
+            color: #1d4ed8;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #bfdbfe;
+            padding-bottom: 6px;
+        }
+
+        .sidebar ul {
+            list-style: disc;
+            padding-left: 20px;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        /* 4. Footer */
+        .footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+        }
+
+        /* =========================================
+           RESPONSIVE CHO THIẾT BỊ DI ĐỘNG (MOBILE)
+           ========================================= */
         @media (max-width: 768px) {
-            .main-container {
-                flex-direction: column; /* Chuyển thành xếp dọc: Sidebar nằm dưới Content */
+            /* Menu chuyển sang dạng cột dọc */
+            .nav-links {
+                flex-direction: column;
+                padding: 0;
             }
 
+            .nav-links li a {
+                padding: 10px 16px;
+                border-top: 1px solid #3b82f6;
+            }
+
+            /* Khung nội dung chính và sidebar xếp chồng lên nhau */
+            .main-wrapper {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .content, 
             .sidebar {
-                border-left: none;
-                border-top: 1px solid #ddd;
+                flex: 1 1 100%;
+                width: 100%;
+            }
+
+            .header h1 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header class="header">Header</header>
-        <nav class="nav">Navigation</nav>
-        
-        <div class="main-container">
+    <div class="page-container">
+        <!-- 1. HEADER -->
+        <header class="header">
+            <h1>HEADER - TIÊU ĐỀ TRANG WEB</h1>
+            <p>Bố cục trang web responsive hoàn chỉnh xây dựng bằng CSS Flexbox</p>
+        </header>
+
+        <!-- 2. NAVIGATION -->
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Tin tức</a></li>
+                <li><a href="#">Khóa học</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+
+        <!-- 3. MAIN CONTENT & SIDEBAR -->
+        <div class="main-wrapper">
+            <!-- Khu vực nội dung chính -->
             <main class="content">
-                <h2>Main Content</h2>
-                <p>Đây là khu vực hiển thị nội dung chính của trang web. Phần này được gán thuộc tính flex: 3 để chiếm 3/4 chiều rộng vùng chứa trên màn hình máy tính.</p>
+                <h2>Nội Dung Chính (Main Content)</h2>
+                <p>
+                    Đây là khu vực hiển thị các bài viết hoặc thông tin trọng tâm của website. Trên máy tính để bàn (Desktop), phần này sử dụng thuộc tính <code>flex: 3</code> để chiếm khoảng 75% chiều rộng của hàng ngang.
+                </p>
+                <p>
+                    Nhờ có Flexbox kết hợp cùng Media Queries, khi người dùng xem trang web trên điện thoại (màn hình dưới 768px), vùng chứa chính sẽ tự động đổi sang <code>flex-direction: column</code> để các phần tử xếp dọc gọn gàng mà không bị vỡ giao diện hay xuất hiện thanh cuộn ngang khó chịu.
+                </p>
             </main>
+
+            <!-- Cột bên chứa nội dung phụ -->
             <aside class="sidebar">
-                <h3>Sidebar</h3>
-                <p>Nội dung phụ (tin tức, liên kết nhanh, quảng cáo). Phần này gán flex: 1 để chiếm 1/4 chiều rộng.</p>
+                <h3>Thanh Phụ (Sidebar)</h3>
+                <ul>
+                    <li>Tin tức công nghệ mới</li>
+                    <li>Sự kiện nổi bật trong tuần</li>
+                    <li>Khóa học lập trình Front-end</li>
+                    <li>Cộng đồng hỗ trợ học viên</li>
+                </ul>
             </aside>
         </div>
 
-        <footer class="footer">Footer &copy; 2026</footer>
+        <!-- 4. FOOTER -->
+        <footer class="footer">
+            <p>&copy; 2026 Bản quyền thuộc về Hệ thống Đào tạo Lập trình. All rights reserved.</p>
+        </footer>
     </div>
 
 </body>
