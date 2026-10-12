@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành CSS Flexbox - Thuộc tính flex-grow</title>
+    <title>Flexbox Layout</title>
     <style>
         * {
             margin: 0;
@@ -12,123 +12,86 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f7f9fa;
-            color: #333;
-            padding: 24px;
+            font-family: Arial, sans-serif;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 24px;
-            color: #1e293b;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .card h2 {
-            font-size: 18px;
-            color: #1e3a8a;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 16px;
-        }
-
-        /* Khung chứa Flex Container */
-        .flex-container {
+        /* 1. Khung container chính xếp theo chiều dọc */
+        .container {
             display: flex;
-            width: 100%;
-            gap: 10px;
-            background-color: #e2e8f0;
-            padding: 12px;
-            border-radius: 6px;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Các Flex Item chung */
-        .flex-item {
-            background-color: #93c5fd;
-            color: #1e3a8a;
-            padding: 20px 10px;
+        /* 2. Header và Footer */
+        .header, 
+        .footer {
+            background-color: #333;
+            color: white;
             text-align: center;
-            font-weight: bold;
-            font-size: 15px;
-            border-radius: 4px;
+            padding: 20px;
         }
 
-        /* =========================================
-           VÍ DỤ 1: Div 2 nhận flex-grow: 1 chiếm trọn không gian còn lại
-           ========================================= */
-        .ex1 .flex-item {
-            width: 100px; /* Chiều rộng cố định ban đầu */
-            flex-grow: 0; /* Mặc định không tăng thêm */
+        /* 3. Thanh điều hướng Navigation */
+        .nav {
+            background-color: #444;
+            color: white;
+            text-align: center;
+            padding: 15px;
         }
 
-        .ex1 .item2 {
-            flex-grow: 1; /* Tự động nở rộng chiếm hết phần trống thừa */
-            background-color: #f97316;
-            color: #ffffff;
+        /* 4. Khung chứa nội dung chính và cột bên (xếp ngang trên Desktop) */
+        .main-container {
+            display: flex;
+            flex: 1; /* Chiếm toàn bộ khoảng trống còn lại giữa header/nav và footer */
         }
 
-        /* =========================================
-           VÍ DỤ 2: Tất cả các div cùng chia sẻ không gian theo tỷ lệ flex-grow
-           ========================================= */
-        .ex2 .flex-item {
-            flex-grow: 1; /* Mỗi phần tử nhận 1 phần không gian */
-            background-color: #86efac;
-            color: #14532d;
+        /* 5. Nội dung chính chiếm 3 phần */
+        .content {
+            flex: 3;
+            padding: 20px;
+            background-color: #ffffff;
+            line-height: 1.6;
         }
 
-        .ex2 .item2 {
-            flex-grow: 3; /* Div 2 nhận phần không gian gấp 3 lần các div khác */
-            background-color: #059669;
-            color: #ffffff;
+        /* 6. Sidebar chiếm 1 phần */
+        .sidebar {
+            flex: 1;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-left: 1px solid #ddd;
+        }
+
+        /* 7. Responsive cho Mobile (Màn hình <= 768px) */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column; /* Chuyển thành xếp dọc: Sidebar nằm dưới Content */
+            }
+
+            .sidebar {
+                border-left: none;
+                border-top: 1px solid #ddd;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Thực Hành Thuộc Tính flex-grow trong CSS Flexbox</h1>
-
-    <!-- VÍ DỤ 1: ĐÚNG THEO ĐỀ BÀI (ÁP DỤNG TRÊN DIV THỨ 2) -->
-    <div class="card">
-        <h2>Ví dụ 1: Áp dụng flex-grow trên Div thứ 2 (Chiếm trọn phần khoảng trống còn lại)</h2>
-        <p>Các div 1, 3, 4, 5 có chiều rộng cố định là 100px (<code>flex-grow: 0</code>). Riêng Div 2 được thiết lập <code>flex-grow: 1</code> nên sẽ tự động kéo giãn nở rộng tối đa để lấp đầy toàn bộ vùng chứa.</p>
+    <div class="container">
+        <header class="header">Header</header>
+        <nav class="nav">Navigation</nav>
         
-        <div class="flex-container ex1">
-            <div class="flex-item item1">Div 1</div>
-            <div class="flex-item item2">Div 2 (flex-grow: 1)</div>
-            <div class="flex-item item3">Div 3</div>
-            <div class="flex-item item4">Div 4</div>
-            <div class="flex-item item5">Div 5</div>
+        <div class="main-container">
+            <main class="content">
+                <h2>Main Content</h2>
+                <p>Đây là khu vực hiển thị nội dung chính của trang web. Phần này được gán thuộc tính flex: 3 để chiếm 3/4 chiều rộng vùng chứa trên màn hình máy tính.</p>
+            </main>
+            <aside class="sidebar">
+                <h3>Sidebar</h3>
+                <p>Nội dung phụ (tin tức, liên kết nhanh, quảng cáo). Phần này gán flex: 1 để chiếm 1/4 chiều rộng.</p>
+            </aside>
         </div>
-    </div>
 
-    <!-- VÍ DỤ 2: SO SÁNH TỶ LỆ TĂNG TRƯỞNG -->
-    <div class="card">
-        <h2>Ví dụ 2: So sánh tỷ lệ tăng trưởng (Div 2 có flex-grow: 3)</h2>
-        <p>Các div 1, 3, 4, 5 đều có <code>flex-grow: 1</code>, còn Div 2 có <code>flex-grow: 3</code> &rarr; Div 2 sẽ nhận phần không gian trống nhiều gấp 3 lần so với các div còn lại.</p>
-        
-        <div class="flex-container ex2">
-            <div class="flex-item item1">Div 1 (grow: 1)</div>
-            <div class="flex-item item2">Div 2 (grow: 3)</div>
-            <div class="flex-item item3">Div 3 (grow: 1)</div>
-            <div class="flex-item item4">Div 4 (grow: 1)</div>
-            <div class="flex-item item5">Div 5 (grow: 1)</div>
-        </div>
+        <footer class="footer">Footer &copy; 2026</footer>
     </div>
 
 </body>
