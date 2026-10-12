@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Grid Layout</title>
+    <title>Thực hành CSS Flexbox - Thuộc tính flex-wrap</title>
     <style>
         * {
             margin: 0;
@@ -12,84 +12,296 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
+            padding: 24px;
         }
 
-        /* Thiết lập lưới Grid chính */
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            grid-template-rows: auto 1fr auto;
-            grid-template-areas: 
-                "header header"
-                "sidebar content"
-                "footer footer";
-            min-height: 100vh;
-        }
-
-        /* 1. Header */
-        .header {
-            grid-area: header;
-            background-color: #333;
-            color: white;
+        h1 {
             text-align: center;
-            padding: 20px;
             font-size: 24px;
-            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1e293b;
         }
 
-        /* 2. Sidebar */
-        .sidebar {
-            grid-area: sidebar;
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-right: 1px solid #ddd;
-        }
-
-        /* 3. Nội dung chính */
-        .content {
-            grid-area: content;
-            padding: 20px;
-            background-color: #ffffff;
-            line-height: 1.6;
-        }
-
-        /* 4. Footer */
-        .footer {
-            grid-area: footer;
-            background-color: #333;
-            color: white;
+        /* Khung điều khiển tương tác */
+        .control-panel {
+            max-width: 650px;
+            margin: 0 auto 20px auto;
             text-align: center;
-            padding: 20px;
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
 
-        /* Responsive cho Mobile (< 768px): chuyển thành 1 cột */
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto 1fr auto;
-                grid-template-areas: 
-                    "header"
-                    "sidebar"
-                    "content"
-                    "footer";
-            }
-
-            .sidebar {
-                border-right: none;
-                border-bottom: 1px solid #ddd;
-            }
+        .control-panel p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #555;
         }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn.active {
+            background-color: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .status-text {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        /* KHU VỰC CONTAINER CHÍNH CỦA BÀI TẬP */
+        .demo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap; /* Giá trị mặc định hiển thị */
+            width: 600px;
+            height: 300px;
+            gap: 10px;
+            border: 3px solid #1e293b;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .item {
+            width: 180px;
+            height: 80px;
+            background-color: lightblue;
+            border: 1px solid #60a5fa;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e3a8a;
+            flex-shrink: 1; /* Cho phép co lại nếu dùng nowrap */
+        }
+
+        /* KHUNG HIỂN THỊ TỔNG HỢP 4 TRƯỜNG HỢP ĐỂ CHỤP ẢNH NỘP BÀI */
+        .all-cases {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #2c3e50;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 6px;
+        }
+
+        .grid-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 20px;
+        }
+
+        .case-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .case-card h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .case-card p {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .mini-container {
+            display: flex;
+            width: 100%;
+            height: 180px;
+            gap: 8px;
+            border: 2px dashed #94a3b8;
+            padding: 8px;
+            background-color: #f8fafc;
+        }
+
+        .mini-item {
+            width: 130px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Áp dụng từng giá trị */
+        .wrap-nowrap { flex-wrap: nowrap; }
+        .wrap-nowrap .mini-item { background-color: lightgreen; color: #065f46; }
+
+        .wrap-wrap { flex-wrap: wrap; }
+        .wrap-wrap .mini-item { background-color: lightblue; color: #1e40af; }
+
+        .wrap-reverse { flex-wrap: wrap-reverse; }
+        .wrap-reverse .mini-item { background-color: lightcoral; color: #991b1b; }
+
+        .wrap-initial { flex-wrap: initial; }
+        .wrap-initial .mini-item { background-color: #fef08a; color: #854d0e; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header class="header">Header</header>
-        <nav class="sidebar">Sidebar</nav>
-        <main class="content">Nội dung chính</main>
-        <footer class="footer">Footer</footer>
+    <h1>Thực Hành Thuộc Tính CSS flex-wrap</h1>
+
+    <!-- 1. BẢNG ĐIỀU KHIỂN THỬ NGHIỆM TRỰC TIẾP -->
+    <div class="control-panel">
+        <p>Bấm chọn từng giá trị để kiểm tra thay đổi trên khung 600px bên dưới:</p>
+        <div class="btn-group">
+            <button class="btn" onclick="changeWrap('nowrap')">flex-wrap: nowrap</button>
+            <button class="btn active" onclick="changeWrap('wrap')">flex-wrap: wrap</button>
+            <button class="btn" onclick="changeWrap('wrap-reverse')">flex-wrap: wrap-reverse</button>
+            <button class="btn" onclick="changeWrap('initial')">flex-wrap: initial</button>
+        </div>
+        <div class="status-text" id="statusText">Đang áp dụng: flex-wrap: wrap (các item tự động xuống dòng)</div>
     </div>
 
+    <!-- KHUNG DEMO TỔNG HỢP -->
+    <div class="demo-wrapper">
+        <div class="container" id="demoContainer">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+            <div class="item">Item 5</div>
+            <div class="item">Item 6</div>
+        </div>
+    </div>
+
+    <!-- 2. BẢNG TỔNG HỢP CẢ 4 TRƯỜNG HỢP (TIỆN CHỤP ẢNH NỘP BÀI) -->
+    <div class="all-cases">
+        <h2 class="section-title">Bảng so sánh chi tiết 4 giá trị của flex-wrap</h2>
+        <div class="grid-cases">
+            
+            <!-- nowrap -->
+            <div class="case-card">
+                <h3>1. flex-wrap: nowrap (Mặc định)</h3>
+                <p>Không cho phép xuống dòng, các item bị ép co lại trên cùng 1 hàng.</p>
+                <div class="mini-container wrap-nowrap">
+                    <div class="mini-item">1</div>
+                    <div class="mini-item">2</div>
+                    <div class="mini-item">3</div>
+                    <div class="mini-item">4</div>
+                    <div class="mini-item">5</div>
+                    <div class="mini-item">6</div>
+                </div>
+            </div>
+
+            <!-- wrap -->
+            <div class="case-card">
+                <h3>2. flex-wrap: wrap</h3>
+                <p>Cho phép xuống dòng theo chiều từ trên xuống dưới khi thiếu chỗ.</p>
+                <div class="mini-container wrap-wrap">
+                    <div class="mini-item">1</div>
+                    <div class="mini-item">2</div>
+                    <div class="mini-item">3</div>
+                    <div class="mini-item">4</div>
+                    <div class="mini-item">5</div>
+                    <div class="mini-item">6</div>
+                </div>
+            </div>
+
+            <!-- wrap-reverse -->
+            <div class="case-card">
+                <h3>3. flex-wrap: wrap-reverse</h3>
+                <p>Xuống dòng nhưng đảo ngược trục Cross Axis (dòng mới đẩy lên trên).</p>
+                <div class="mini-container wrap-reverse">
+                    <div class="mini-item">1</div>
+                    <div class="mini-item">2</div>
+                    <div class="mini-item">3</div>
+                    <div class="mini-item">4</div>
+                    <div class="mini-item">5</div>
+                    <div class="mini-item">6</div>
+                </div>
+            </div>
+
+            <!-- initial -->
+            <div class="case-card">
+                <h3>4. flex-wrap: initial</h3>
+                <p>Khôi phục về giá trị mặc định của CSS (tương đương với nowrap).</p>
+                <div class="mini-container wrap-initial">
+                    <div class="mini-item">1</div>
+                    <div class="mini-item">2</div>
+                    <div class="mini-item">3</div>
+                    <div class="mini-item">4</div>
+                    <div class="mini-item">5</div>
+                    <div class="mini-item">6</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT HỖ TRỢ CHUYỂN ĐỔI NHANH GIÁ TRỊ -->
+    <script>
+        function changeWrap(value) {
+            const container = document.getElementById('demoContainer');
+            const statusText = document.getElementById('statusText');
+            const buttons = document.querySelectorAll('.btn');
+
+            // Cập nhật thuộc tính CSS
+            container.style.flexWrap = value;
+
+            // Đổi active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Thông báo trạng thái
+            const descriptions = {
+                'nowrap': 'Đang áp dụng: flex-wrap: nowrap (Các item bị ép trên 1 hàng, không xuống dòng)',
+                'wrap': 'Đang áp dụng: flex-wrap: wrap (Item 4, 5, 6 tự động xuống hàng tiếp theo)',
+                'wrap-reverse': 'Đang áp dụng: flex-wrap: wrap-reverse (Hàng 2 nhảy lên trên, hàng 1 xuống dưới)',
+                'initial': 'Đang áp dụng: flex-wrap: initial (Khôi phục giá trị mặc định nowrap)'
+            };
+            statusText.textContent = descriptions[value];
+        }
+    </script>
 </body>
 </html>
