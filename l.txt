@@ -3,175 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Image Gallery</title>
+    <title>Thực hành CSS Grid - grid-row</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            padding: 20px;
+            padding: 24px;
             background-color: #f7f9fa;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 8px;
             color: #333;
         }
 
-        p.sub-title {
+        h1 {
             text-align: center;
-            color: #666;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .example-box {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 25px;
-            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
-        /* Khung bọc từng thẻ ảnh */
-        .gallery {
-            border: 1px solid #ccc;
+        h2 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 6px;
+        }
+
+        p.desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        /* Khung Grid chung: 3 cột, 3 hàng (mỗi hàng cao 80px) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 80px);
+            gap: 10px;
+            background-color: #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .item {
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             border-radius: 4px;
-            overflow: hidden;
-            background-color: #fff;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 16px;
         }
 
-        .gallery:hover {
-            border-color: #777;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Ô 1 được làm nổi bật */
+        .item1 {
+            background-color: #ff9800;
+            color: #ffffff;
         }
 
-        .gallery img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
+        /* 1. Mặc định theo đề bài: Bắt đầu từ line 1 đến line 3 */
+        .case-1 {
+            grid-row: 1 / 3;
         }
 
-        .desc {
-            padding: 15px;
-            text-align: center;
-            font-size: 14px;
-            color: #444;
+        /* 2. Thử nghiệm đổi thành: 2 / 4 (chiếm từ line 2 đến line 4) */
+        .case-2 {
+            grid-row: 2 / 4;
         }
 
-        /* 1. Mặc định (> 700px): Hiển thị 4 ảnh trên 1 dòng */
-        .responsive {
-            padding: 8px;
-            float: left;
-            width: 25%;
-        }
-
-        /* Clearfix xử lý tràn khối khi dùng float */
-        .clearfix::after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* 2. Màn hình nhỏ hơn 700px: Hiển thị 2 ảnh trên 1 dòng */
-        @media only screen and (max-width: 700px) {
-            .responsive {
-                width: 50%;
-                margin: 6px 0;
-            }
-        }
-
-        /* 3. Màn hình nhỏ hơn 500px: Hiển thị 1 ảnh trên 1 dòng */
-        @media only screen and (max-width: 500px) {
-            .responsive {
-                width: 100%;
-            }
+        /* 3. Thử nghiệm đổi thành: span 2 (kéo dài 2 hàng) */
+        .case-3 {
+            grid-row: span 2;
         }
     </style>
 </head>
 <body>
 
-    <h2>Bộ Sưu Tập Ảnh Responsive (RWD)</h2>
-    <p class="sub-title">Thay đổi kích thước cửa sổ trình duyệt để kiểm tra: >700px (4 ảnh), &le;700px (2 ảnh), &le;500px (1 ảnh).</p>
+    <h1>Thực Hành Thuộc Tính grid-row trong CSS Grid</h1>
 
-    <div class="clearfix">
-        <!-- Ảnh 1 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop&q=80" alt="Núi rừng hùng vĩ">
-                </a>
-                <div class="desc">Núi rừng Yosemite hùng vĩ</div>
-            </div>
+    <!-- TRƯỜNG HỢP 1: grid-row: 1 / 3 -->
+    <div class="example-box">
+        <h2>1. Trường hợp gốc: <code>grid-row: 1 / 3;</code></h2>
+        <p class="desc">Ô 1 bắt đầu từ đường kẻ ngang 1 và kết thúc ở đường kẻ 3 &rarr; Ô 1 chiếm trọn 2 hàng đầu tiên ở cột 1.</p>
+        <div class="grid-container">
+            <div class="item item1 case-1">Ô 1 (grid-row: 1 / 3)</div>
+            <div class="item">Ô 2</div>
+            <div class="item">Ô 3</div>
+            <div class="item">Ô 4</div>
+            <div class="item">Ô 5</div>
+            <div class="item">Ô 6</div>
         </div>
+    </div>
 
-        <!-- Ảnh 2 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=600&auto=format&fit=crop&q=80" alt="Con đường mùa thu">
-                </a>
-                <div class="desc">Cung đường lá đỏ mùa thu</div>
-            </div>
+    <!-- TRƯỜNG HỢP 2: grid-row: 2 / 4 -->
+    <div class="example-box">
+        <h2>2. Thử nghiệm thay đổi: <code>grid-row: 2 / 4;</code></h2>
+        <p class="desc">Ô 1 bắt đầu từ đường kẻ ngang 2 và kết thúc ở đường kẻ 4 &rarr; Ô 1 dời xuống chiếm hàng 2 và hàng 3.</p>
+        <div class="grid-container">
+            <div class="item item1 case-2">Ô 1 (grid-row: 2 / 4)</div>
+            <div class="item">Ô 2</div>
+            <div class="item">Ô 3</div>
+            <div class="item">Ô 4</div>
+            <div class="item">Ô 5</div>
+            <div class="item">Ô 6</div>
         </div>
+    </div>
 
-        <!-- Ảnh 3 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&auto=format&fit=crop&q=80" alt="Sương mù ban mai">
-                </a>
-                <div class="desc">Bình minh bảng lảng sương mù</div>
-            </div>
-        </div>
-
-        <!-- Ảnh 4 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&auto=format&fit=crop&q=80" alt="Đồng cỏ xanh ngát">
-                </a>
-                <div class="desc">Cánh đồng xanh bao la</div>
-            </div>
-        </div>
-
-        <!-- Ảnh 5 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&auto=format&fit=crop&q=80" alt="Vẻ đẹp thiên nhiên">
-                </a>
-                <div class="desc">Hồ nước và đồi núi trong xanh</div>
-            </div>
-        </div>
-
-        <!-- Ảnh 6 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=600&auto=format&fit=crop&q=80" alt="Khu rừng nguyên sinh">
-                </a>
-                <div class="desc">Khu rừng nguyên sinh mùa hè</div>
-            </div>
-        </div>
-
-        <!-- Ảnh 7 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600&auto=format&fit=crop&q=80" alt="Rừng thông">
-                </a>
-                <div class="desc">Những tia nắng qua rặng thông</div>
-            </div>
-        </div>
-
-        <!-- Ảnh 8 -->
-        <div class="responsive">
-            <div class="gallery">
-                <a target="_blank" href="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&auto=format&fit=crop&q=80">
-                    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&auto=format&fit=crop&q=80" alt="Thung lũng đá">
-                </a>
-                <div class="desc">Thung lũng đá ngập tràn ánh nắng</div>
-            </div>
+    <!-- TRƯỜNG HỢP 3: grid-row: span 2 -->
+    <div class="example-box">
+        <h2>3. Thử nghiệm cú pháp span: <code>grid-row: span 2;</code></h2>
+        <p class="desc">Ô 1 tự động kéo dài qua 2 hàng liên tiếp tính từ vị trí mặc định của nó.</p>
+        <div class="grid-container">
+            <div class="item item1 case-3">Ô 1 (grid-row: span 2)</div>
+            <div class="item">Ô 2</div>
+            <div class="item">Ô 3</div>
+            <div class="item">Ô 4</div>
+            <div class="item">Ô 5</div>
+            <div class="item">Ô 6</div>
         </div>
     </div>
 
