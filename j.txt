@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kho Hoạt Hình Thiếu Nhi - Vui Học Mỗi Ngày</title>
+  <style>
+    /* =========================================
+       1. RESET & GIAO DIỆN CƠ BẢN
+       ========================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f7f9fc;
+      color: #2d3748;
+      line-height: 1.5;
+    }
+
+    /* =========================================
+       2. MỨC TRUNG BÌNH: HEADER CỐ ĐỊNH & LINK HOVER
+       ========================================= */
+    .header {
+      position: sticky;              /* Header cố định trên đỉnh khi cuộn trang */
+      top: 0;
+      z-index: 1000;
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      height: 70px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-container {
+      width: 95%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    /* Logo bên trái */
+    .logo a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;         /* Bỏ gạch chân */
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #2d3748;
+    }
+
+    .logo-text span {
+      color: #ff6f00;
+    }
+
+    /* Ô tìm kiếm & sắp xếp */
+    .header-search {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      max-width: 450px;
+    }
+
+    .header-search input,
+    .header-search select {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e0;
+      border-radius: 20px;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .header-search input {
+      flex: 1;
+    }
+
+    .header-search input:focus,
+    .header-search select:focus {
+      border-color: #ff6f00;
+    }
+
+    /* Head-link */
+    .head-link ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    .head-link a {
+      text-decoration: none;         /* Loại bỏ gạch chân */
+      color: #2d3748;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    /* Hiệu ứng khi rê chuột: Bôi đậm và đổi màu chữ */
+    .head-link a:hover {
+      color: #ff6f00;
+      font-weight: bold;
+    }
+
+    .head-link a.active {
+      color: #ff6f00;
+      font-weight: bold;
+    }
+
+    /* =========================================
+       3. NỘI DUNG CHÍNH (CONTENT LAYOUT)
+       ========================================= */
+    .main-content {
+      padding: 24px 0;
+    }
+
+    .container-grid {
+      width: 95%;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    /* LEFT CONTENT: Menu hiển thị danh sách video */
+    .left-content {
+      flex: 0 0 380px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #edf2f7;
+    }
+
+    .section-title h2 {
+      font-size: 1.15rem;
+    }
+
+    .badge-count {
+      background: #edf2f7;
+      color: #718096;
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .video-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .video-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.2s;
+    }
+
+    .video-item:hover {
+      background-color: #fff8e1;
+    }
+
+    .video-item.active {
+      background-color: #fff3e0;
+      border-color: #ff6f00;
+    }
+
+    .thumb-wrap {
+      position: relative;
+      width: 110px;
+      height: 68px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .duration {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .video-info h3 {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      color: #2d3748;
+    }
+
+    .video-info .tag {
+      font-size: 0.75rem;
+      color: #ff6f00;
+      font-weight: 600;
+    }
+
+    .video-info .meta {
+      font-size: 0.75rem;
+      color: #718096;
+    }
+
+    /* RIGHT CONTENT: Khu vực xem video */
+    .right-content {
+      flex: 1;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .player-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .player-wrapper video,
+    .player-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .player-details {
+      margin-top: 16px;
+    }
+
+    .player-details h1 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .player-meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-weight: 600;
+    }
+
+    .badge.quality { background: #e3f2fd; color: #1565c0; }
+    .badge.dub     { background: #e8f5e9; color: #2e7d32; }
+    .badge.safe    { background: #fff8e1; color: #f57f17; }
+
+    .views-text {
+      font-size: 0.85rem;
+      color: #718096;
+      margin-left: auto;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      color: #4a5568;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    /* Bảng thông số chi tiết (Luyện tập thẻ <table>) */
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .specs-table th, 
+    .specs-table td {
+      padding: 8px 12px;
+      border: 1px solid #edf2f7;
+      text-align: left;
+    }
+
+    .specs-table th {
+      background: #f8fafc;
+      width: 32%;
+      color: #718096;
+    }
+
+    /* Nhạc nền (Luyện tập thẻ <audio>) */
+    .audio-box {
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .audio-box audio {
+      height: 36px;
+    }
+
+    /* =========================================
+       4. FOOTER
+       ========================================= */
+    .footer {
+      background-color: #1a202c;
+      color: #a0aec0;
+      text-align: center;
+      padding: 24px 16px;
+      margin-top: 40px;
+      font-size: 0.85rem;
+    }
+
+    /* =========================================
+       5. MỨC NÂNG CAO: RESPONSIVE DESIGN (PC/TABLET/MOBILE)
+       ========================================= */
+    @media (max-width: 992px) {
+      .container-grid {
+        flex-direction: column-reverse; /* Đưa video lên đầu trên tablet & điện thoại */
+      }
+      .left-content {
+        flex: 1 1 100%;
+        width: 100%;
+        max-height: 400px;
+      }
+      .right-content {
+        width: 100%;
+      }
+      .header {
+        height: auto;
+      }
+      .header-container {
+        flex-wrap: wrap;
+        padding: 10px 0;
+      }
+      .header-search {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .head-link ul {
+        gap: 10px;
+      }
+      .head-link a {
+        font-size: 0.85rem;
+      }
+      .player-details h1 {
+        font-size: 1.15rem;
+      }
+      .views-text {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER CỐ ĐỊNH -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="#home">
+          <span class="logo-text">KID<span>TOON</span></span>
+        </a>
+      </div>
+
+      <div class="header-search">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm phim hoạt hình...">
+        <select id="sortSelect">
+          <option value="default">Sắp xếp</option>
+          <option value="views">Nhiều lượt xem nhất</option>
+          <option value="newest">Mới cập nhật</option>
+        </select>
+      </div>
+
+      <!-- Head-link -->
+      <nav class="head-link">
+        <ul>
+          <li><a href="#home" class="active">Trang chủ</a></li>
+          <li><a href="#dubbed">Thuyết Minh</a></li>
+          <li><a href="#popular">Xem Nhiều</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="main-content">
+    <div class="container-grid">
+      
+      <!-- LEFT CONTENT: Menu danh sách video -->
+      <aside class="left-content">
+        <div class="section-title">
+          <h2>Danh sách phim</h2>
+          <span class="badge-count" id="videoCount">4 phim</span>
+        </div>
+
+        <ul class="video-list" id="videoList">
+          <!-- Video 1: Dùng thẻ <video> -->
+          <li class="video-item active" 
+              data-type="video" 
+              data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+              data-title="Chú Thỏ Dũng Cảm (Big Buck Bunny)"
+              data-views="254000"
+              data-date="2026-03-10"
+              data-quality="1080p Full HD"
+              data-desc="Câu chuyện phiêu lưu vui nhộn của chú thỏ khổng lồ tốt bụng trong rừng xanh.">
+            <div class="thumb-wrap">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=300&auto=format&fit=crop&q=60" alt="Chú Thỏ Dũng Cảm">
+              <span class="duration">09:56</span>
+            </div>
+            <div class="video-info">
+              <h3>Chú Thỏ Dũng Cảm</h3>
+              <p><span class="tag">Thuyết minh</span> • <span class="tag">1080p</span></p>
+              <span class="meta">254.000 lượt xem</span>
+            </div>
+          </li>
+
+          <!-- Video 2: Nhúng YouTube bằng <iframe> -->
+          <li class="video-item" 
+              data-type="youtube" 
+              data-src="https://www.youtube.com/embed/jNQXAC9IVRw"
+              data-title="Hành Trình Tìm Ngôi Sao Sáng"
+              data-views="180000"
+              data-date="2026-03-15"
+              data-quality="720p HD"
+              data-desc="Bài học bổ ích về tình bạn và tinh thần kiên trì vượt khó để đạt ước mơ.">
+            <div class="thumb-wrap">
+              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&auto=format&fit=crop&q=60" alt="Ngôi Sao Sáng">
+              <span class="duration">12:30</span>
+            </div>
+            <div class="video-info">
+              <h3>Hành Trình Tìm Ngôi Sao Sáng</h3>
+              <p><span class="tag">Thuyết minh</span> • <span class="tag">720p</span></p>
+              <span class="meta">180.000 lượt xem</span>
+            </div>
+          </li>
+
+          <!-- Video 3: Dùng thẻ <video> -->
+          <li class="video-item" 
+              data-type="video" 
+              data-src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+              data-title="Giấc Mơ Kỳ Thú Của Động Vật"
+              data-views="95000"
+              data-date="2026-02-28"
+              data-quality="1080p Full HD"
+              data-desc="Thế giới máy móc và các bạn muông thú qua góc nhìn đầy trí tưởng tượng.">
+            <div class="thumb-wrap">
+              <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=300&auto=format&fit=crop&q=60" alt="Giấc Mơ Kỳ Thú">
+              <span class="duration">10:53</span>
+            </div>
+            <div class="video-info">
+              <h3>Giấc Mơ Kỳ Thú Của Động Vật</h3>
+              <p><span class="tag">Thuyết minh</span> • <span class="tag">1080p</span></p>
+              <span class="meta">95.000 lượt xem</span>
+            </div>
+          </li>
+
+          <!-- Video 4: Nhúng YouTube bằng <iframe> -->
+          <li class="video-item" 
+              data-type="youtube" 
+              data-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              data-title="Bài Học Về Lòng Tốt Của Sóc Nâu"
+              data-views="410000"
+              data-date="2026-03-25"
+              data-quality="1080p Full HD"
+              data-desc="Bộ phim ngắn dạy các bé biết quan tâm và chia sẻ cùng bạn bè.">
+            <div class="thumb-wrap">
+              <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=300&auto=format&fit=crop&q=60" alt="Sóc Nâu">
+              <span class="duration">08:15</span>
+            </div>
+            <div class="video-info">
+              <h3>Bài Học Về Lòng Tốt Của Sóc Nâu</h3>
+              <p><span class="tag">Thuyết minh</span> • <span class="tag">1080p</span></p>
+              <span class="meta">410.000 lượt xem</span>
+            </div>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- RIGHT CONTENT: Khu vực xem video (Mặc định video 1) -->
+      <section class="right-content">
+        <div class="player-wrapper">
+          <!-- Trình phát thẻ <video> -->
+          <video id="html5Player" controls autoplay muted>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+          </video>
+
+          <!-- Trình phát nhúng YouTube <iframe> -->
+          <iframe id="youtubePlayer" 
+                  src="" 
+                  title="YouTube Player" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen 
+                  style="display: none;">
+          </iframe>
+        </div>
+
+        <div class="player-details">
+          <h1 id="currentVideoTitle">Chú Thỏ Dũng Cảm (Big Buck Bunny)</h1>
+          
+          <div class="player-meta-bar">
+            <span class="badge quality" id="currentQuality">1080p Full HD</span>
+            <span class="badge dub">Thuyết minh tiếng Việt</span>
+            <span class="badge safe">An toàn cho trẻ em</span>
+            <span class="views-text" id="currentViews">254.000 lượt xem</span>
+          </div>
+
+          <p id="currentDesc" class="description">
+            Câu chuyện phiêu lưu vui nhộn của chú thỏ khổng lồ tốt bụng trong rừng xanh.
+          </p>
+
+          <!-- Thẻ <table> -->
+          <table class="specs-table">
+            <tr>
+              <th>Độ tuổi phù hợp</th>
+              <td>Từ 3 tuổi trở lên (Nhi đồng & Thiếu nhi)</td>
+            </tr>
+            <tr>
+              <th>Ngôn ngữ</th>
+              <td>Tiếng Việt (Lồng tiếng chuẩn)</td>
+            </tr>
+            <tr>
+              <th>Tiêu chuẩn</th>
+              <td>Không quảng cáo độc hại, tốc độ phát ổn định</td>
+            </tr>
+          </table>
+
+          <!-- Thẻ <audio> -->
+          <div class="audio-box">
+            <p><strong>Nhạc nền thư giãn:</strong></p>
+            <audio controls>
+              <source src="https://actions.google.com/sounds/v1/water/stream_water.ogg" type="audio/ogg">
+            </audio>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2026 KidToon Vietnam - Trang web phim hoạt hình an toàn, giáo dục cho trẻ em.</p>
+  </footer>
+
+  <!-- JAVASCRIPT XỬ LÝ SỰ KIỆN -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const videoItems = document.querySelectorAll(".video-item");
+      const html5Player = document.getElementById("html5Player");
+      const youtubePlayer = document.getElementById("youtubePlayer");
+      const titleEl = document.getElementById("currentVideoTitle");
+      const descEl = document.getElementById("currentDesc");
+      const qualityEl = document.getElementById("currentQuality");
+      const viewsEl = document.getElementById("currentViews");
+      const searchInput = document.getElementById("searchInput");
+      const sortSelect = document.getElementById("sortSelect");
+      const videoList = document.getElementById("videoList");
+      const videoCount = document.getElementById("videoCount");
+
+      // Chuyển video khi click
+      videoItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          videoItems.forEach((v) => v.classList.remove("active"));
+          item.classList.add("active");
+
+          const type = item.getAttribute("data-type");
+          const src = item.getAttribute("data-src");
+          const title = item.getAttribute("data-title");
+          const desc = item.getAttribute("data-desc");
+          const quality = item.getAttribute("data-quality");
+          const views = parseInt(item.getAttribute("data-views")).toLocaleString("vi-VN");
+
+          titleEl.textContent = title;
+          descEl.textContent = desc;
+          qualityEl.textContent = quality;
+          viewsEl.textContent = `${views} lượt xem`;
+
+          if (type === "video") {
+            youtubePlayer.style.display = "none";
+            youtubePlayer.src = "";
+            html5Player.style.display = "block";
+            html5Player.src = src;
+            html5Player.play().catch(() => {});
+          } else if (type === "youtube") {
+            html5Player.pause();
+            html5Player.style.display = "none";
+            youtubePlayer.style.display = "block";
+            youtubePlayer.src = src + "?autoplay=1";
+          }
+        });
+      });
+
+      // Tìm kiếm theo tên
+      searchInput.addEventListener("input", (e) => {
+        const keyword = e.target.value.toLowerCase().trim();
+        let visibleCount = 0;
+        videoItems.forEach((item) => {
+          const title = item.getAttribute("data-title").toLowerCase();
+          if (title.includes(keyword)) {
+            item.style.display = "flex";
+            visibleCount++;
+          } else {
+            item.style.display = "none";
+          }
+        });
+        videoCount.textContent = `${visibleCount} phim`;
+      });
+
+      // Sắp xếp theo Lượt xem hoặc Mới nhất
+      sortSelect.addEventListener("change", (e) => {
+        const sortType = e.target.value;
+        const items = Array.from(videoItems);
+        if (sortType === "views") {
+          items.sort((a, b) => parseInt(b.getAttribute("data-views")) - parseInt(a.getAttribute("data-views")));
+        } else if (sortType === "newest") {
+          items.sort((a, b) => new Date(b.getAttribute("data-date")) - new Date(a.getAttribute("data-date")));
+        }
+        items.forEach((item) => videoList.appendChild(item));
+      });
+    });
+  </script>
+</body>
+</html>
