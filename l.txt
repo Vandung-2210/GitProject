@@ -3,79 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bố cục với Float và Overflow</title>
+    <title>Responsive Navbar</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            padding: 20px;
-            background-color: #f7f9fa;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
 
-        h1 {
-            margin-bottom: 20px;
+        /* Thanh điều hướng */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 15px 20px;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
             font-size: 24px;
-            color: #333;
+            font-weight: bold;
         }
 
-        /* Khối chứa 2 cột sử dụng float */
-        .container {
-            width: 100%;
-            overflow: hidden; /* Clearfix: tự động ôm trọn các phần tử con dùng float */
-            margin-bottom: 25px;
-            border: 1px solid #ddd;
+        /* Menu trên Desktop */
+        .nav-links {
+            list-style: none;
+            display: flex;
         }
 
-        .left-column {
-            width: 50%;
-            float: left;
-            background-color: lightgray;
-            padding: 20px;
-            min-height: 120px;
+        .nav-links li {
+            margin: 0 15px;
         }
 
-        .right-column {
-            width: 50%;
-            float: right;
-            background-color: lightgreen;
-            padding: 20px;
-            min-height: 120px;
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.2s ease;
         }
 
-        /* Khối nội dung dài kiểm tra overflow */
-        .overflow-box {
-            width: 300px;
-            height: 100px;
-            background-color: lightcoral;
-            padding: 10px;
-            overflow: auto; /* Tự động xuất hiện thanh cuộn khi nội dung vượt quá kích thước */
-            border-radius: 4px;
-            color: #fff;
-            line-height: 1.5;
+        .nav-links a:hover {
+            color: #f39c12;
+        }
+
+        /* Biểu tượng ☰ (mặc định ẩn trên Desktop) */
+        .menu-icon {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Responsive cho Mobile (< 768px) */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Ẩn menu mặc định */
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                width: 100%;
+                text-align: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex; /* Hiển thị menu khi bấm nút */
+            }
+
+            .nav-links li {
+                padding: 12px 0;
+                margin: 0;
+                border-top: 1px solid #444;
+            }
+
+            .menu-icon {
+                display: block; /* Hiện nút ☰ trên mobile */
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Bố cục trang với float và overflow</h1>
+    <nav class="navbar">
+        <div class="logo">MyWebsite</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Dịch vụ</a></li>
+            <li><a href="#">Liên hệ</a></li>
+        </ul>
+        <div class="menu-icon" id="menuIcon">☰</div>
+    </nav>
 
-    <!-- Khối 2 cột căn trái - phải bằng float -->
-    <div class="container">
-        <div class="left-column">
-            <h3>Nội dung bên trái</h3>
-            <p>Phần tử này chiếm 50% độ rộng và sử dụng thuộc tính float: left.</p>
-        </div>
-        <div class="right-column">
-            <h3>Nội dung bên phải</h3>
-            <p>Phần tử này chiếm 50% độ rộng và sử dụng thuộc tính float: right.</p>
-        </div>
-    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuIcon = document.getElementById("menuIcon");
+            const navLinks = document.getElementById("navLinks");
 
-    <!-- Khối nội dung dài kiểm tra thanh cuộn với overflow -->
-    <div class="overflow-box">
-        Đây là nội dung rất dài mà chúng ta kiểm tra overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            // Bật/tắt class 'active' khi nhấn vào biểu tượng ☰
+            menuIcon.addEventListener("click", function () {
+                navLinks.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+</html>
