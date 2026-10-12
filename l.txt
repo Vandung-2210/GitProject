@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bố cục trang web cơ bản</title>
+    <title>Bố cục trang web với HTML5 Semantic Tags</title>
     <style>
-        /* 1. Thiết lập toàn trang và phông chữ */
         * {
             margin: 0;
             padding: 0;
@@ -14,144 +13,195 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #f4f6f9;
+            background-color: #f4f6f8;
             color: #333;
+            line-height: 1.6;
         }
 
-        /* Vùng bao bọc toàn bộ trang, căn giữa */
-        #main {
-            width: 1000px;
+        .container {
+            width: 90%;
+            max-width: 1100px;
             margin: 20px auto;
             background-color: #ffffff;
-            border: 1px solid #dcdcdc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        /* 2. Vùng đầu trang (Logo & Banner) */
-        #head {
-            height: 100px;
-            background-color: #3498db;
+        /* 1. Header */
+        header {
+            background-color: #1e3a8a;
             color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            border-bottom: 2px solid #2980b9;
-            margin-bottom: 5px;
+            padding: 30px 20px;
+            text-align: center;
         }
 
-        /* 3. Vùng liên kết đầu trang */
-        #head-link {
-            height: 40px;
-            background-color: #2c3e50;
-            line-height: 40px;
-            padding: 0 15px;
-            margin-bottom: 5px;
+        header h1 {
+            font-size: 26px;
+            margin-bottom: 8px;
         }
 
-        #head-link a {
-            color: #ecf0f1;
-            text-decoration: none;
-            margin-right: 20px;
+        header p {
             font-size: 14px;
-            font-weight: 600;
+            color: #93c5fd;
+        }
+
+        /* 2. Nav (Thanh điều hướng) */
+        nav {
+            background-color: #2563eb;
+            padding: 12px 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
             transition: color 0.2s ease;
         }
 
-        #head-link a:hover {
-            color: #f39c12;
+        nav a:hover {
+            color: #fde047;
             text-decoration: underline;
         }
 
-        /* 4. Vùng nội dung bên trái */
-        #left {
-            width: 200px;
-            min-height: 400px;
-            float: left;
-            background-color: #eaf2f8;
-            padding: 15px;
-            border-right: 1px solid #e0e0e0;
-        }
-
-        /* 5. Vùng nội dung chính ở giữa */
-        #content {
-            width: 600px;
-            min-height: 400px;
-            float: left;
-            background-color: #ffffff;
+        /* Khung nội dung chính chứa Section và Aside */
+        .main-content {
+            display: flex;
+            gap: 20px;
             padding: 20px;
         }
 
-        /* 6. Vùng thông tin bên phải */
-        #right {
-            width: 200px;
-            min-height: 400px;
-            float: right;
-            background-color: #f9ebea;
-            padding: 15px;
-            border-left: 1px solid #e0e0e0;
+        /* 3. Section (Khu vực bài viết chính) */
+        section {
+            flex: 3;
         }
 
-        /* 7. Vùng chân trang */
-        #footer {
-            clear: both; /* Xóa float để không bị tràn bố cục */
-            height: 60px;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            text-align: center;
-            line-height: 60px;
+        /* 4. Article (Từng bài viết độc lập) */
+        article {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        article h2 {
+            color: #1e293b;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        article p {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        /* 5. Aside (Sidebar / Cột phụ) */
+        aside {
+            flex: 1;
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            padding: 18px;
+        }
+
+        aside h3 {
+            color: #1d4ed8;
+            font-size: 16px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #bfdbfe;
+            padding-bottom: 6px;
+        }
+
+        aside ul {
+            list-style: disc;
+            padding-left: 20px;
             font-size: 13px;
-            border-top: 2px solid #34495e;
-            margin-top: 5px;
+            color: #334155;
+        }
+
+        aside li {
+            margin-bottom: 8px;
+        }
+
+        /* 6. Footer (Chân trang) */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 16px;
+            font-size: 13px;
+        }
+
+        /* Responsive cho màn hình di động */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div id="main">
-        <!-- Vùng Head: Logo và Banner -->
-        <div id="head">
-            HEADER (Logo & Banner)
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>TIÊU ĐỀ TRANG WEB (HEADER)</h1>
+            <p>Trang tin tức & học tập lập trình áp dụng các thẻ ngữ nghĩa HTML5</p>
+        </header>
+
+        <!-- NAV -->
+        <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Bài viết</a></li>
+                <li><a href="#">Khóa học</a></li>
+                <li><a href="#">Tài liệu</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+
+        <!-- MAIN LAYOUT (SECTION + ASIDE) -->
+        <div class="main-content">
+            <!-- SECTION -->
+            <section>
+                <!-- ARTICLE 1 -->
+                <article>
+                    <h2>Bài viết 1: Ưu điểm của thẻ ngữ nghĩa HTML5</h2>
+                    <p>Các thẻ như header, nav, section, article, aside, footer giúp cấu trúc mã nguồn rõ ràng, tăng khả năng tiếp cận (Accessibility) và tối ưu hóa SEO hơn so với việc lạm dụng thẻ div thông thường.</p>
+                </article>
+
+                <!-- ARTICLE 2 -->
+                <article>
+                    <h2>Bài viết 2: Phân biệt Section và Article</h2>
+                    <p>Thẻ article đại diện cho một mẩu nội dung hoàn chỉnh, độc lập và có thể phân phối riêng biệt. Trong khi đó, section dùng để nhóm các nội dung có chung chủ đề lại với nhau.</p>
+                </article>
+            </section>
+
+            <!-- ASIDE -->
+            <aside>
+                <h3>Thông tin bên lề (Aside)</h3>
+                <ul>
+                    <li>Tin tức công nghệ mới</li>
+                    <li>Tài liệu HTML5 W3Schools</li>
+                    <li>Cẩm nang CSS Flexbox</li>
+                    <li>Cộng đồng hỗ trợ học viên</li>
+                </ul>
+            </aside>
         </div>
 
-        <!-- Vùng Head-link: Menu liên kết -->
-        <div id="head-link">
-            <a href="#">Home</a>
-            <a href="#">Students</a>
-            <a href="#">Course</a>
-            <a href="#">News</a>
-            <a href="#">About Us</a>
-        </div>
-
-        <!-- Vùng Left: Menu trái -->
-        <div id="left">
-            <h3>Menu Trái</h3>
-            <p style="margin-top: 10px; font-size: 14px; color: #555;">
-                Khu vực chứa danh mục, liên kết phụ hoặc các bộ lọc tìm kiếm.
-            </p>
-        </div>
-
-        <!-- Vùng Content: Nội dung chính -->
-        <div id="content">
-            <h2>Nội Dung Chính</h2>
-            <p style="margin-top: 10px; line-height: 1.6; color: #444;">
-                Đây là khu vực hiển thị bài viết, tin tức nổi bật, hình ảnh hoặc các bài học chính của trang web. Vùng này chiếm độ rộng lớn nhất (600px) ở trung tâm.
-            </p>
-        </div>
-
-        <!-- Vùng Right: Thông tin bên phải -->
-        <div id="right">
-            <h3>Cột Phải</h3>
-            <p style="margin-top: 10px; font-size: 14px; color: #555;">
-                Khu vực hiển thị lịch học, tiện ích thời tiết, biểu đồ hoặc tin tức xem nhiều.
-            </p>
-        </div>
-
-        <!-- Vùng Footer: Bản quyền và thông tin cuối trang -->
-        <div id="footer">
-            &copy; 2026 Bản quyền thuộc về Hệ thống Đào tạo Lập trình.
-        </div>
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2026 Bản quyền thuộc về Hệ thống Đào tạo Lập trình. All rights reserved.</p>
+        </footer>
     </div>
 
 </body>
