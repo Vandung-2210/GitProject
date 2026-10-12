@@ -1,208 +1,77 @@
+[Bài tập] Xây dựng bố cục trang web với display và inline-block
+Mục tiêu:
+Luyện tập sử dụng display: block, inline-block, width, max-width để tạo bố cục trang web cơ bản.
+
+Mô tả:
+Tạo một file mới có tên index.html.
+
+Tạo một file style.css để áp dụng CSS.
+
+Thêm vào trong thẻ <body>:
+
+Một tiêu đề <h1>, nội dung: "Bố cục trang web với display".
+
+Một thanh điều hướng <nav> chứa 4 liên kết.
+
+Một khối nội dung <section> chứa 3 cột sử dụng display: inline-block.
+
+Một <footer> để hiển thị nội dung cuối trang.
+
+Yêu cầu nộp bài:
+Đưa mã nguồn lên GitHub.
+
+Dán link repository vào phần nộp bài dưới đây.
+
+Ví dụ mong đợi (HTML + CSS)
+index.html
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bố cục trang web với HTML5 Semantic Tags</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f4f6f8;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* 1. Header */
-        header {
-            background-color: #1e3a8a;
-            color: #ffffff;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 26px;
-            margin-bottom: 8px;
-        }
-
-        header p {
-            font-size: 14px;
-            color: #93c5fd;
-        }
-
-        /* 2. Nav (Thanh điều hướng) */
-        nav {
-            background-color: #2563eb;
-            padding: 12px 20px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: color 0.2s ease;
-        }
-
-        nav a:hover {
-            color: #fde047;
-            text-decoration: underline;
-        }
-
-        /* Khung nội dung chính chứa Section và Aside */
-        .main-content {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        /* 3. Section (Khu vực bài viết chính) */
-        section {
-            flex: 3;
-        }
-
-        /* 4. Article (Từng bài viết độc lập) */
-        article {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 18px;
-            margin-bottom: 16px;
-        }
-
-        article h2 {
-            color: #1e293b;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        article p {
-            font-size: 14px;
-            color: #475569;
-        }
-
-        /* 5. Aside (Sidebar / Cột phụ) */
-        aside {
-            flex: 1;
-            background-color: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 6px;
-            padding: 18px;
-        }
-
-        aside h3 {
-            color: #1d4ed8;
-            font-size: 16px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #bfdbfe;
-            padding-bottom: 6px;
-        }
-
-        aside ul {
-            list-style: disc;
-            padding-left: 20px;
-            font-size: 13px;
-            color: #334155;
-        }
-
-        aside li {
-            margin-bottom: 8px;
-        }
-
-        /* 6. Footer (Chân trang) */
-        footer {
-            background-color: #0f172a;
-            color: #94a3b8;
-            text-align: center;
-            padding: 16px;
-            font-size: 13px;
-        }
-
-        /* Responsive cho màn hình di động */
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <title>Bố cục với display</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="container">
-        <!-- HEADER -->
-        <header>
-            <h1>TIÊU ĐỀ TRANG WEB (HEADER)</h1>
-            <p>Trang tin tức & học tập lập trình áp dụng các thẻ ngữ nghĩa HTML5</p>
-        </header>
-
-        <!-- NAV -->
-        <nav>
-            <ul>
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Bài viết</a></li>
-                <li><a href="#">Khóa học</a></li>
-                <li><a href="#">Tài liệu</a></li>
-                <li><a href="#">Liên hệ</a></li>
-            </ul>
-        </nav>
-
-        <!-- MAIN LAYOUT (SECTION + ASIDE) -->
-        <div class="main-content">
-            <!-- SECTION -->
-            <section>
-                <!-- ARTICLE 1 -->
-                <article>
-                    <h2>Bài viết 1: Ưu điểm của thẻ ngữ nghĩa HTML5</h2>
-                    <p>Các thẻ như header, nav, section, article, aside, footer giúp cấu trúc mã nguồn rõ ràng, tăng khả năng tiếp cận (Accessibility) và tối ưu hóa SEO hơn so với việc lạm dụng thẻ div thông thường.</p>
-                </article>
-
-                <!-- ARTICLE 2 -->
-                <article>
-                    <h2>Bài viết 2: Phân biệt Section và Article</h2>
-                    <p>Thẻ article đại diện cho một mẩu nội dung hoàn chỉnh, độc lập và có thể phân phối riêng biệt. Trong khi đó, section dùng để nhóm các nội dung có chung chủ đề lại với nhau.</p>
-                </article>
-            </section>
-
-            <!-- ASIDE -->
-            <aside>
-                <h3>Thông tin bên lề (Aside)</h3>
-                <ul>
-                    <li>Tin tức công nghệ mới</li>
-                    <li>Tài liệu HTML5 W3Schools</li>
-                    <li>Cẩm nang CSS Flexbox</li>
-                    <li>Cộng đồng hỗ trợ học viên</li>
-                </ul>
-            </aside>
-        </div>
-
-        <!-- FOOTER -->
-        <footer>
-            <p>&copy; 2026 Bản quyền thuộc về Hệ thống Đào tạo Lập trình. All rights reserved.</p>
-        </footer>
-    </div>
-
+    <h1>Bố cục trang web với display</h1>
+    <nav>
+        <a href="#">Trang chủ</a>
+        <a href="#">Giới thiệu</a>
+        <a href="#">Dịch vụ</a>
+        <a href="#">Liên hệ</a>
+    </nav>
+    <section>
+        <div class="box">Cột 1</div>
+        <div class="box">Cột 2</div>
+        <div class="box">Cột 3</div>
+    </section>
+    <footer>
+        <p>Bản quyền &copy; 2024</p>
+    </footer>
 </body>
 </html>
+style.css
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+nav a {
+    display: inline-block;
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+section {
+    margin-top: 20px;
+}
+
+.box {
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    background-color: lightblue;
+    margin: 10px;
+}
