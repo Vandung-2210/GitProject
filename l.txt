@@ -1,77 +1,81 @@
-[Bài tập] Xây dựng bố cục trang web với display và inline-block
-Mục tiêu:
-Luyện tập sử dụng display: block, inline-block, width, max-width để tạo bố cục trang web cơ bản.
-
-Mô tả:
-Tạo một file mới có tên index.html.
-
-Tạo một file style.css để áp dụng CSS.
-
-Thêm vào trong thẻ <body>:
-
-Một tiêu đề <h1>, nội dung: "Bố cục trang web với display".
-
-Một thanh điều hướng <nav> chứa 4 liên kết.
-
-Một khối nội dung <section> chứa 3 cột sử dụng display: inline-block.
-
-Một <footer> để hiển thị nội dung cuối trang.
-
-Yêu cầu nộp bài:
-Đưa mã nguồn lên GitHub.
-
-Dán link repository vào phần nộp bài dưới đây.
-
-Ví dụ mong đợi (HTML + CSS)
-index.html
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Bố cục với display</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bố cục với Float và Overflow</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+            background-color: #f7f9fa;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Khối chứa 2 cột sử dụng float */
+        .container {
+            width: 100%;
+            overflow: hidden; /* Clearfix: tự động ôm trọn các phần tử con dùng float */
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+        }
+
+        .left-column {
+            width: 50%;
+            float: left;
+            background-color: lightgray;
+            padding: 20px;
+            min-height: 120px;
+        }
+
+        .right-column {
+            width: 50%;
+            float: right;
+            background-color: lightgreen;
+            padding: 20px;
+            min-height: 120px;
+        }
+
+        /* Khối nội dung dài kiểm tra overflow */
+        .overflow-box {
+            width: 300px;
+            height: 100px;
+            background-color: lightcoral;
+            padding: 10px;
+            overflow: auto; /* Tự động xuất hiện thanh cuộn khi nội dung vượt quá kích thước */
+            border-radius: 4px;
+            color: #fff;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bố cục trang web với display</h1>
-    <nav>
-        <a href="#">Trang chủ</a>
-        <a href="#">Giới thiệu</a>
-        <a href="#">Dịch vụ</a>
-        <a href="#">Liên hệ</a>
-    </nav>
-    <section>
-        <div class="box">Cột 1</div>
-        <div class="box">Cột 2</div>
-        <div class="box">Cột 3</div>
-    </section>
-    <footer>
-        <p>Bản quyền &copy; 2024</p>
-    </footer>
-</body>
-</html>
-style.css
 
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
+    <h1>Bố cục trang với float và overflow</h1>
 
-nav a {
-    display: inline-block;
-    margin: 0 15px;
-    text-decoration: none;
-    color: #333;
-}
+    <!-- Khối 2 cột căn trái - phải bằng float -->
+    <div class="container">
+        <div class="left-column">
+            <h3>Nội dung bên trái</h3>
+            <p>Phần tử này chiếm 50% độ rộng và sử dụng thuộc tính float: left.</p>
+        </div>
+        <div class="right-column">
+            <h3>Nội dung bên phải</h3>
+            <p>Phần tử này chiếm 50% độ rộng và sử dụng thuộc tính float: right.</p>
+        </div>
+    </div>
 
-section {
-    margin-top: 20px;
-}
-
-.box {
-    display: inline-block;
-    width: 30%;
-    padding: 20px;
-    background-color: lightblue;
-    margin: 10px;
-}
+    <!-- Khối nội dung dài kiểm tra thanh cuộn với overflow -->
+    <div class="overflow-box">
+        Đây là nội dung rất dài mà chúng ta kiểm tra overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
