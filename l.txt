@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Overflow</title>
+    <title>Bố cục bằng Float</title>
     <style>
-        .overflow-box {
-            width: 300px;
-            height: 100px;
-            background-color: lightgray;
-            padding: 10px;
-            overflow: auto;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .left-column {
+            width: 60%;
+            float: left;
+            background-color: lightblue;
+            padding: 20px;
+        }
+
+        .right-column {
+            width: 38%;
+            float: right;
+            background-color: lightgreen;
+            padding: 20px;
+        }
+
+        /* Xử lý float (Clearfix) */
+        .container::after {
+            content: "";
+            display: block;
+            clear: both;
         }
     </style>
 </head>
 <body>
-    <div class="overflow-box">
-        Đây là một đoạn văn bản rất dài mà chúng ta sẽ kiểm tra cách `overflow` hoạt động khi nội dung vượt quá kích thước của phần tử. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies nunc in mauris pharetra, a ultricies justo fermentum.
+    <div class="container">
+        <div class="left-column">Cột bên trái chứa nội dung chính</div>
+        <div class="right-column">Cột bên phải chứa sidebar</div>
     </div>
 </body>
 </html>
