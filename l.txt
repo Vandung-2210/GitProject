@@ -3,51 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Navbar</title>
+    <title>Bootstrap Landing Page</title>
     <!-- Nhúng Bootstrap 5.3.0 CSS từ CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Tùy chỉnh hiệu ứng hover nhẹ cho Card */
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- NAVBAR BOOTSTRAP -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <!-- Logo / Brand -->
-            <a class="navbar-brand" href="#">MyWebsite</a>
-
-            <!-- Nút hamburger mở menu trên thiết bị di động -->
+    <!-- 1. NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">MyBrand</a>
+            <!-- Nút hamburger menu trên mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Danh sách menu điều hướng -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <!-- Menu thả xuống (Dropdown) -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Services
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Web Design</a></li>
-                            <li><a class="dropdown-item" href="#">SEO</a></li>
-                        </ul>
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Nhúng Bootstrap 5.3.0 JS Bundle (hỗ trợ toggle menu và dropdown) -->
+    <!-- 2. HERO SECTION -->
+    <header class="bg-primary text-white text-center py-5">
+        <div class="container py-4">
+            <h1 class="display-4 fw-bold">Chào mừng đến với MyBrand</h1>
+            <p class="lead mb-4">Giải pháp số 1 cho doanh nghiệp của bạn</p>
+            <a href="#services" class="btn btn-light btn-lg px-4 shadow-sm">Khám phá ngay</a>
+        </div>
+    </header>
+
+    <!-- 3. SERVICES (GRID SYSTEM & CARDS) -->
+    <section id="services" class="container py-5">
+        <h2 class="text-center mb-4 fw-bold">Dịch vụ của chúng tôi</h2>
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="card p-4 shadow-sm border-0">
+                    <h3 class="h4 mb-3 text-primary">Thiết kế Web</h3>
+                    <p class="text-muted">Dịch vụ thiết kế web chuyên nghiệp, giao diện đẹp mắt và chuẩn responsive.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="card p-4 shadow-sm border-0">
+                    <h3 class="h4 mb-3 text-primary">SEO & Marketing</h3>
+                    <p class="text-muted">Nâng cao giá trị thương hiệu và đưa website tiếp cận hàng triệu khách hàng tiềm năng.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="card p-4 shadow-sm border-0">
+                    <h3 class="h4 mb-3 text-primary">Hỗ trợ 24/7</h3>
+                    <p class="text-muted">Đội ngũ kỹ thuật viên tận tâm luôn sẵn sàng hỗ trợ giải đáp mọi thắc mắc của bạn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FOOTER -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 MyBrand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Nhúng Bootstrap 5.3.0 JS Bundle từ CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
