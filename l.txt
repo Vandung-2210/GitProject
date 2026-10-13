@@ -2,183 +2,327 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page - Bootstrap 5 & Hình Ảnh</title>
-    <!-- 1. Nhúng Bootstrap 5.3.0 CSS từ CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- 2. Nhúng Bootstrap Icons để hiển thị biểu tượng cho phần Tính năng -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Layout Bootstrap 3</title>
+    <!-- Nhúng Bootstrap 3.3.7 CSS từ CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-        /* Tùy chỉnh nhẹ cho Hero Section và các thẻ Card */
-        .hero-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        /* =========================================
+           ĐỊNH DẠNG TÙY CHỈNH (CSS TỔNG HỢP)
+           ========================================= */
+        body {
+            background-color: #f5f5f5;
         }
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            border-radius: 50%;
+
+        /* 1. Định dạng Header & Banner */
+        header {
+            position: relative;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 140px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            padding: 15px;
         }
-        .feature-card {
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+        .shopping-mall {
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            font-variant: small-caps;
         }
-        .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+
+        .shopping-mall > h1 {
+            font-family: Impact, Arial Black, sans-serif;
+            font-size: 42px;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+            text-shadow: 0 0 3px #000;
+            padding-bottom: 0px;
+            border-bottom: 1px dotted gray;
+            margin: 0px;
+        }
+
+        .shopping-mall > h5 {
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+            color: #f1f1f1;
+        }
+
+        .header-logo-img {
+            max-height: 110px;
+            margin-top: 5px;
+        }
+
+        /* 2. Định dạng Aside - Giỏ hàng (.poly-cart) */
+        .poly-cart {
+            margin-top: 5px;
+        }
+
+        .poly-cart ul {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            font-variant: small-caps;
+        }
+
+        .poly-cart .panel-body img {
+            max-height: 55px;
+            padding: 0;
+        }
+
+        .poly-cart .panel-heading strong {
+            font-variant: small-caps;
+            font-size: larger;
+            text-shadow: 0 0 2px darkgray;
+        }
+
+        /* 3. Định dạng Article - Khung hiển thị sản phẩm (.poly-prod) */
+        .poly-prod {
+            text-align: center;
+            padding: 5px;
+        }
+
+        .poly-prod .panel-body img {
+            height: 150px;
+            max-width: 95%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .poly-prod .panel-footer {
+            font-weight: bold;
+            color: #c0392b;
+            font-size: 16px;
+        }
+
+        /* 4. Định dạng Footer */
+        footer {
+            margin-top: 20px;
+        }
+        footer p {
+            margin: 0;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <!-- THANH ĐIỀU HƯỚNG (NAVBAR) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">SmartTech</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="#hero">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">Giới Thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Tính Năng</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#cta">Liên Hệ</a></li>
+<div class="container" style="height: auto">
+    
+    <!-- BƯỚC 2 & 3: HEADER -->
+    <header class="row">
+        <div class="shopping-mall">
+            <h1>Online shopping mall</h1>
+            <h5>The center point of the professional programming</h5>
+        </div>
+        <!-- Ảnh header đẩy sang phải -->
+        <img class="pull-right header-logo-img hidden-xs" 
+             src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" 
+             alt="Header Object"/>
+    </header>
+
+    <!-- BƯỚC 4: THANH ĐIỀU HƯỚNG NAVBAR (navbar-inverse) -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- Nút toggle cho mobile -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Các mục liên kết kèm Glyphicon -->
+            <div class="collapse navbar-collapse" id="main-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Trang chủ</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Giới thiệu</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Góp ý</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Hỏi đáp</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user"></span> Tài khoản <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Đăng nhập</a></li>
+                            <li><a href="#">Đăng ký thành viên</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Quên mật khẩu</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- 1. BANNER / HERO SECTION (Tự xây dựng thay thế Jumbotron của Bootstrap 5) -->
-    <header id="hero" class="hero-section py-5">
-        <div class="container py-lg-4">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-6 text-center text-lg-start">
-                    <span class="badge bg-primary-subtle text-primary mb-2 px-3 py-2 rounded-pill fw-semibold">Giải Pháp Công Nghệ 2026</span>
-                    <h1 class="display-4 fw-bold text-dark mb-3">Nâng Tầm Doanh Nghiệp Với Nền Tảng Thông Minh</h1>
-                    <p class="lead text-secondary mb-4">
-                        Tối ưu hóa quy trình làm việc, gia tăng hiệu suất và bảo mật dữ liệu toàn diện với bộ công cụ quản lý thế hệ mới.
-                    </p>
-                    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
-                        <a href="#cta" class="btn btn-primary btn-lg px-4 shadow">Đăng Ký Ngay</a>
-                        <a href="#about" class="btn btn-outline-secondary btn-lg px-4">Tìm Hiểu Thêm</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <!-- Áp dụng img-fluid giúp hình ảnh responsive trên mọi màn hình -->
-                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=80" 
-                         alt="Hero Banner SmartTech" 
-                         class="img-fluid rounded-4 shadow-lg">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. PHẦN GIỚI THIỆU (Hàng chứa ảnh img-fluid + đoạn mô tả dịch vụ) -->
-    <section id="about" class="py-5 bg-white">
-        <div class="container py-lg-3">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6 order-2 order-lg-1">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80" 
-                         alt="Đội ngũ làm việc" 
-                         class="img-fluid rounded-3 shadow">
-                </div>
-                <div class="col-lg-6 order-1 order-lg-2">
-                    <h2 class="fw-bold mb-3 text-dark">Về Dịch Vụ Của Chúng Tôi</h2>
-                    <p class="text-secondary fs-5 mb-3">
-                        Chúng tôi cung cấp hệ thống tích hợp đa nền tảng, giúp các doanh nghiệp vừa và nhỏ chuyển đổi số nhanh chóng mà không gặp trở ngại về kỹ thuật.
-                    </p>
-                    <p class="text-secondary mb-4">
-                        Mỗi tính năng đều được tối ưu theo thời gian thực, giao diện thân thiện với người dùng và có khả năng hoạt động đồng bộ tức thì trên cả điện thoại, máy tính bảng và máy tính để bàn.
-                    </p>
-                    <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Triển khai nhanh chóng chỉ trong 24 giờ</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Không yêu cầu cài đặt phần cứng phức tạp</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Chi phí linh hoạt theo nhu cầu sử dụng thực tế</li>
-                    </ul>
-                    <a href="#features" class="btn btn-outline-primary fw-semibold px-4 py-2">Xem Các Tính Năng</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. DANH SÁCH TÍNH NĂNG (Row gồm 4 cột icon + tiêu đề + mô tả) -->
-    <section id="features" class="py-5 bg-light">
-        <div class="container py-lg-3">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold text-dark">Tính Năng Nổi Bật</h2>
-                <p class="text-muted">Những lợi thế vượt trội giúp bạn quản lý công việc hiệu quả hơn</p>
-            </div>
+    <!-- BỐ CỤC CHÍNH CHIA 2 CỘT (ARTICLE: 9 CỘT, ASIDE: 3 CỘT) -->
+    <div class="row">
+        
+        <!-- BƯỚC 6: ARTICLE (KHU VỰC SẢN PHẨM) -->
+        <article class="col-sm-9">
             
-            <div class="row g-4">
-                <!-- Cột 1 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 p-4 border-0 text-center shadow-sm feature-card">
-                        <div class="feature-icon bg-primary-subtle text-primary mx-auto mb-3">
-                            <i class="bi bi-speedometer2"></i>
+            <!-- Hàng 1 (3 sản phẩm) -->
+            <div class="row">
+                <!-- Sản phẩm 1 -->
+                <div class="col-sm-4 poly-prod">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Nokia Lumia</h4>
                         </div>
-                        <h3 class="h5 fw-bold mb-2">Tốc Độ Cao</h3>
-                        <p class="text-muted small mb-0">Hệ thống xử lý nhanh chóng, giảm thiểu tối đa độ trễ khi tải và xử lý dữ liệu lớn.</p>
+                        <div class="panel-body">
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=350&auto=format&fit=crop&q=80" alt="Nokia Lumia"/>
+                        </div>
+                        <div class="panel-footer">
+                            $ 100.25
+                        </div>
                     </div>
                 </div>
 
-                <!-- Cột 2 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 p-4 border-0 text-center shadow-sm feature-card">
-                        <div class="feature-icon bg-success-subtle text-success mx-auto mb-3">
-                            <i class="bi bi-shield-lock"></i>
+                <!-- Sản phẩm 2 -->
+                <div class="col-sm-4 poly-prod">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Samsung Galaxy</h4>
                         </div>
-                        <h3 class="h5 fw-bold mb-2">Bảo Mật Tối Đa</h3>
-                        <p class="text-muted small mb-0">Áp dụng mã hóa dữ liệu đầu cuối theo tiêu chuẩn quốc tế an toàn tuyệt đối.</p>
+                        <div class="panel-body">
+                            <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=350&auto=format&fit=crop&q=80" alt="Samsung Galaxy"/>
+                        </div>
+                        <div class="panel-footer">
+                            $ 250.00
+                        </div>
                     </div>
                 </div>
 
-                <!-- Cột 3 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 p-4 border-0 text-center shadow-sm feature-card">
-                        <div class="feature-icon bg-warning-subtle text-warning mx-auto mb-3">
-                            <i class="bi bi-phone"></i>
+                <!-- Sản phẩm 3 -->
+                <div class="col-sm-4 poly-prod">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">iPhone 15 Pro</h4>
                         </div>
-                        <h3 class="h5 fw-bold mb-2">Đa Nền Tảng</h3>
-                        <p class="text-muted small mb-0">Thiết kế hoàn toàn responsive, hiển thị mượt mà trên Desktop, Tablet và Mobile.</p>
-                    </div>
-                </div>
-
-                <!-- Cột 4 -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 p-4 border-0 text-center shadow-sm feature-card">
-                        <div class="feature-icon bg-info-subtle text-info mx-auto mb-3">
-                            <i class="bi bi-headset"></i>
+                        <div class="panel-body">
+                            <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=350&auto=format&fit=crop&q=80" alt="iPhone 15 Pro"/>
                         </div>
-                        <h3 class="h5 fw-bold mb-2">Hỗ Trợ 24/7</h3>
-                        <p class="text-muted small mb-0">Đội ngũ kỹ thuật viên luôn túc trực hỗ trợ giải đáp mọi lúc mọi nơi.</p>
+                        <div class="panel-footer">
+                            $ 999.99
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 4. KHU VỰC KÊU GỌI HÀNH ĐỘNG (CTA SECTION) -->
-    <section id="cta" class="py-5 bg-primary text-white text-center">
-        <div class="container py-4">
-            <h2 class="display-6 fw-bold mb-3">Sẵn Sàng Trải Nghiệm Cùng SmartTech?</h2>
-            <p class="lead mb-4 opacity-75">
-                Đăng ký tài khoản ngay hôm nay để nhận 30 ngày dùng thử miễn phí toàn bộ tính năng cao cấp!
-            </p>
-            <a href="#" class="btn btn-light btn-lg text-primary fw-bold px-5 shadow">Đăng Ký Ngay</a>
-        </div>
-    </section>
+            <!-- Hàng 2 (3 sản phẩm) -->
+            <div class="row">
+                <!-- Sản phẩm 4 -->
+                <div class="col-sm-4 poly-prod">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Laptop Dell XPS</h4>
+                        </div>
+                        <div class="panel-body">
+                            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=350&auto=format&fit=crop&q=80" alt="Dell XPS"/>
+                        </div>
+                        <div class="panel-footer">
+                            $ 750.50
+                        </div>
+                    </div>
+                </div>
 
-    <!-- FOOTER: Thông tin bản quyền -->
-    <footer class="bg-dark text-white text-center py-4">
-        <div class="container">
-            <p class="mb-0 small text-secondary">&copy; 2026 SmartTech Vietnam. Tất cả quyền được bảo lưu.</p>
+                <!-- Sản phẩm 5 -->
+                <div class="col-sm-4 poly-prod">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Sony Bravia TV</h4>
+                        </div>
+                        <div class="panel-body">
+                            <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=350&auto=format&fit=crop&q=80" alt="Sony Bravia TV"/>
+                        </div>
+                        <div class="panel-footer">
+                            $ 450.00
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sản phẩm 6 -->
+                <div class="col-sm-4 poly-prod">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Máy Tính Bàn PC</h4>
+                        </div>
+                        <div class="panel-body">
+                            <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=350&auto=format&fit=crop&q=80" alt="Desktop PC"/>
+                        </div>
+                        <div class="panel-footer">
+                            $ 620.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- BƯỚC 5: ASIDE (GIỎ HÀNG, TÌM KIẾM, CHỦNG LOẠI) -->
+        <aside class="col-sm-3">
+            
+            <!-- 1. Giỏ hàng (.poly-cart) -->
+            <div class="poly-cart">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img class="col-sm-5 col-xs-4" src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Cart"/>
+                        <ul class="col-sm-7 col-xs-8">
+                            <li>100 items</li>
+                            <li>$56.8</li>
+                            <li><a href="#">Xem giỏ hàng</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Ô tìm kiếm -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form>
+                        <input placeholder="Keywords" class="form-control"/>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 3. Chủng loại hàng hóa -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list"></span>
+                    <strong>Chủng Loại</strong>
+                </div>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Điện thoại di động</a>
+                    <a href="#" class="list-group-item">Máy tính xách tay</a>
+                    <a href="#" class="list-group-item">Máy tính để bàn</a>
+                    <a href="#" class="list-group-item">Quạt máy</a>
+                    <a href="#" class="list-group-item">Tivi</a>
+                    <a href="#" class="list-group-item">Tủ lạnh</a>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- FOOTER: Chân trang bản quyền -->
+    <footer class="panel panel-default">
+        <div class="panel-heading text-center">
+            <p>CodeGym &copy; 2017</p>
         </div>
     </footer>
 
-    <!-- 3. Nhúng Bootstrap 5.3.0 JS Bundle từ CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+
+<!-- Nhúng jQuery và Bootstrap 3.3.7 JS từ CDN để kích hoạt dropdown & toggle menu -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
