@@ -3,232 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iPhone 16 Pro - Apple (VN)</title>
-
-    <!-- Bootstrap 5.3.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome 6.5.2 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Simple Web Development Template</title>
+    
+    <!-- Nhúng Google Fonts cho Piazzolla và Ubuntu -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,100..900;1,8..30,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
     <style>
-        /* Tùy chỉnh màu tối phong cách Apple Dark Mode */
-        body {
-            background-color: #000000;
-            color: #f5f5f7;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        /* Sửa lỗi selector '*' từ bài tập mẫu */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .text-apple-gray {
-            color: #86868b;
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+            padding: 0 50px;
+            z-index: 1000;
         }
-        .bg-apple-card {
-            background-color: #161617;
+
+        .background {
+            background: black;
+            background-blend-mode: darken;
+            background-size: cover;
         }
-        .apple-btn-buy {
-            background-color: #0071e3;
-            color: #ffffff;
-            border-radius: 980px;
+
+        .nav-list {
+            width: 70%;
+            display: flex;
+            align-items: center;
         }
-        .apple-btn-buy:hover {
-            background-color: #0077ed;
-            color: #ffffff;
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
         }
-        .apple-btn-outline {
-            border: 1px solid #0071e3;
-            color: #2997ff;
-            border-radius: 980px;
+
+        .logo img {
+            width: 140px;
+            border-radius: 50px;
         }
-        .apple-btn-outline:hover {
-            background-color: #0071e3;
-            color: #ffffff;
+
+        .nav-list li {
+            list-style: none;
+            padding: 26px 20px;
         }
-        .hero-img {
-            max-height: 480px;
-            object-fit: contain;
+
+        .nav-list li a {
+            text-decoration: none;
+            color: white;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 18px;
+        }
+
+        .nav-list li a:hover {
+            color: grey;
+        }
+
+        .rightNav {
+            width: 30%;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #search {
+            padding: 5px 10px;
+            font-size: 17px;
+            border: 2px solid grey;
+            border-radius: 9px;
+            outline: none;
+        }
+
+        .firstsection {
+            background-color: #2e7d32; /* Tông màu xanh lá tươi hơn */
+            height: 400px;
+        }
+
+        .secondsection {
+            background-color: #1565c0; /* Tông màu xanh dương tươi hơn */
+            height: 400px;
+        }
+
+        .box-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            max-width: 80%;
+            margin: auto;
+            height: 100%;
+        }
+
+        .firstHalf {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .secondHalf {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .secondHalf img {
+            width: 70%;
+            border: 4px solid white;
+            border-radius: 150px;
+            display: block;
+            margin: auto;
+        }
+
+        .text-big {
+            font-family: 'Piazzolla', serif;
+            font-weight: bold;
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .text-small {
+            font-size: 18px;
+            line-height: 1.6;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            margin: 7px 0;
+            border: 2px solid white;
+            border-radius: 8px;
+            background: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .btn-sm {
+            padding: 6px 15px;
+            vertical-align: middle;
+        }
+
+        .section {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 90%;
+            margin: auto;
+        }
+
+        /* Áp dụng flex-direction: row-reverse để đảo vị trí ảnh/văn bản */
+        .section-Left {
+            flex-direction: row-reverse;
+        }
+
+        .paras {
+            padding: 0px 65px;
+        }
+
+        .thumbnail img {
+            width: 280px;
+            border: 2px solid black;
+            border-radius: 26px;
+            margin-top: 19px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .text-footer {
+            text-align: center;
+            padding: 30px 0;
+            font-family: 'Ubuntu', sans-serif;
+            display: flex;
+            justify-content: center;
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <!-- Sticky Sub-Navbar kiểu Apple -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary border-opacity-25 sticky-top py-2">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand fw-bold text-white fs-4" href="#">
-                <i class="fab fa-apple me-2"></i>iPhone 16 Pro
-            </a>
-            <div class="d-flex align-items-center gap-3">
-                <span class="text-apple-gray d-none d-md-inline small">Từ 28.999.000đ hoặc 1.182.000đ/tháng</span>
-                <a href="#buy" class="btn btn-sm apple-btn-buy px-3 py-1 fw-medium">Mua ngay</a>
+    <nav class="navbar background">
+        <ul class="nav-list">
+            <div class="logo">
+                <!-- Sử dụng SVG Logo mẫu để không bị lỗi đứt ảnh -->
+                <img src="https://via.placeholder.com/180x60/000000/FFFFFF?text=MyBrand" alt="Logo">
             </div>
+            <li><a href="#web">Web Technology</a></li>
+            <li><a href="#program">C Programming</a></li>
+            <li><a href="#java">Java</a></li>
+        </ul>
+
+        <div class="rightNav">
+            <input type="text" name="search" id="search" placeholder="Search...">
+            <button class="btn btn-sm">Search</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="text-center py-5 my-4">
-        <div class="container">
-            <span class="text-warning fw-semibold text-uppercase tracking-wider small d-block mb-2">Thế Hệ Mới</span>
-            <h1 class="display-2 fw-bold text-white mb-3">iPhone 16 Pro</h1>
-            <p class="fs-4 text-apple-gray max-w-lg mx-auto mb-4">Thiết kế Titanium bền bỉ. Chip A18 Pro đột phá. Nút Điều Khiển Camera hoàn toàn mới.</p>
-            <div class="d-flex justify-content-center gap-3 mb-5">
-                <a href="#features" class="btn apple-btn-buy px-4 py-2">Khám phá ngay</a>
-                <a href="#specs" class="btn apple-btn-outline px-4 py-2"><i class="fas fa-play-circle me-2"></i>Xem Phim</a>
-            </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1000&q=80" alt="iPhone 16 Pro Titanium" class="img-fluid hero-img rounded-4 shadow-lg">
-            </div>
-        </div>
-    </section>
-
-    <!-- Highlights Section - Display & Grid System -->
-    <section id="features" class="py-5 bg-black">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold text-white">Thiết kế đỉnh cao. Hiệu năng vượt trội.</h2>
-                <p class="text-apple-gray fs-5">Mọi chi tiết đều được chế tác tỉ mỉ để đem lại trải nghiệm hoàn hảo.</p>
-            </div>
-
-            <!-- Grid 3 cột cho Highlights -->
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="bg-apple-card p-4 rounded-4 h-100 d-flex flex-column justify-content-between text-start border border-secondary border-opacity-10">
-                        <div>
-                            <div class="text-primary fs-2 mb-3"><i class="fas fa-microchip"></i></div>
-                            <h3 class="fs-4 fw-bold text-white mb-2">Chip A18 Pro</h3>
-                            <p class="text-apple-gray mb-0">Hiệu năng CPU nhanh hơn 15%, Ray Tracing tăng tốc bằng phần cứng nhanh gấp 2 lần A17 Pro.</p>
-                        </div>
-                        <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                            <span class="text-white-50 small">Tiết kiệm điện năng vượt trội</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="bg-apple-card p-4 rounded-4 h-100 d-flex flex-column justify-content-between text-start border border-secondary border-opacity-10">
-                        <div>
-                            <div class="text-success fs-2 mb-3"><i class="fas fa-camera"></i></div>
-                            <h3 class="fs-4 fw-bold text-white mb-2">Camera Fusion 48MP</h3>
-                            <p class="text-apple-gray mb-0">Cảm biến Quad-Pixel thế hệ 2 cho phép quay video 4K 120 fps Dolby Vision mượt mà đỉnh cao.</p>
-                        </div>
-                        <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                            <span class="text-white-50 small">Ống kính Telephoto 5x cao cấp</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="bg-apple-card p-4 rounded-4 h-100 d-flex flex-column justify-content-between text-start border border-secondary border-opacity-10">
-                        <div>
-                            <div class="text-warning fs-2 mb-3"><i class="fas fa-battery-full"></i></div>
-                            <h3 class="fs-4 fw-bold text-white mb-2">Thời Lượng Pin Kỷ Lục</h3>
-                            <p class="text-apple-gray mb-0">Xem video liên tục lên đến 27 giờ trên iPhone 16 Pro và 33 giờ trên Pro Max.</p>
-                        </div>
-                        <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-                            <span class="text-white-50 small">Sạc nhanh MagSafe 25W</span>
-                        </div>
-                    </div>
-                </div>
+    <section class="firstsection">
+        <div class="box-main">
+            <div class="firstHalf">
+                <h1 class="text-big" id="web">
+                    Web Technology
+                </h1>
+                
+                <p class="text-small">
+                    HTML stands for HyperText Markup Language. It is used to design
+                    web pages using a markup language. HTML is the combination of Hypertext
+                    and Markup language. Hypertext defines the link between the web
+                    pages. A markup language is used to define the text document within
+                    tag which defines the structure of web pages. HTML is a markup language
+                    that is used by the browser to manipulate text, images, and other
+                    content to display it in the required format.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Flexbox Feature Section -->
-    <section class="py-5 bg-black">
-        <div class="container">
-            <div class="bg-apple-card p-4 p-md-5 rounded-4 border border-secondary border-opacity-10">
-                <div class="row align-items-center gy-4">
-                    <div class="col-lg-6 d-flex flex-column justify-content-center">
-                        <span class="text-info fw-bold text-uppercase small mb-2"><i class="fas fa-shield-alt me-2"></i>Titanium Cấp 5</span>
-                        <h2 class="display-6 fw-bold text-white mb-3">Bền bỉ. Nhẹ nhàng. Tinh tế.</h2>
-                        <p class="text-apple-gray fs-5 mb-4">Khung viền Titanium chuẩn hàng không vũ trụ giúp giảm tối đa trọng lượng nhưng vẫn đảm bảo độ bền tối ưu kết hợp mặt kính Ceramic Shield thế hệ mới cứng hơn 2 lần.</p>
-                        
-                        <div class="d-flex flex-wrap gap-4">
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="fas fa-check-circle text-primary fs-5"></i>
-                                <span class="text-white fw-medium">Titan đen</span>
-                            </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="fas fa-check-circle text-primary fs-5"></i>
-                                <span class="text-white fw-medium">Titan trắng</span>
-                            </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="fas fa-check-circle text-primary fs-5"></i>
-                                <span class="text-white fw-medium">Titan tự nhiên</span>
-                            </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <i class="fas fa-check-circle text-primary fs-5"></i>
-                                <span class="text-white fw-medium">Titan sa mạc</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Titanium Frame" class="img-fluid rounded-4 shadow">
-                    </div>
-                </div>
+    <section class="secondsection">
+        <div class="box-main">
+            <div class="secondHalf">
+                <h1 class="text-big" id="program">
+                    C Programming
+                </h1>
+                <p class="text-small">
+                    C is a procedural programming language. It was initially developed by Dennis
+                    Ritchie as a system programming language to write operating system.
+                    The main features of C language include low-level access to memory, simple set
+                    of keywords, and clean style, these features make C language suitable for
+                    system programming like operating system or compiler development.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Order / Contact Form Section -->
-    <section id="buy" class="py-5 bg-black">
-        <div class="container py-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="bg-apple-card p-4 p-md-5 rounded-4 border border-secondary border-opacity-10 text-center">
-                        <h2 class="fw-bold text-white mb-2"><i class="fas fa-shopping-bag text-primary me-2"></i>Đăng Ký Nhận Thông Tin & Đặt Hàng</h2>
-                        <p class="text-apple-gray mb-4">Để lại thông tin để nhận tư vấn mua hàng trực tiếp từ Apple Authorized Reseller.</p>
+    <section class="section section-Left" id="java">
+        <div class="paras">
+            <h1 class="sectionTag text-big">Java</h1>
 
-                        <form class="text-start">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="name" class="form-label text-white small fw-medium">Họ và tên</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-dark border-secondary text-apple-gray"><i class="fas fa-user"></i></span>
-                                        <input type="text" class="form-control bg-dark border-secondary text-white" id="name" placeholder="Nguyễn Văn A" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label text-white small fw-medium">Số điện thoại</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-dark border-secondary text-apple-gray"><i class="fas fa-phone"></i></span>
-                                        <input type="tel" class="form-control bg-dark border-secondary text-white" id="phone" placeholder="0901234567" required>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label for="model" class="form-label text-white small fw-medium">Chọn phiên bản quan tâm</label>
-                                    <select class="form-select bg-dark border-secondary text-white" id="model">
-                                        <option value="16pro-128">iPhone 16 Pro - 128GB (28.999.000đ)</option>
-                                        <option value="16pro-256">iPhone 16 Pro - 256GB (31.999.000đ)</option>
-                                        <option value="16promax-256">iPhone 16 Pro Max - 256GB (34.999.000đ)</option>
-                                        <option value="16promax-512">iPhone 16 Pro Max - 512GB (40.999.000đ)</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label for="note" class="form-label text-white small fw-medium">Ghi chú thêm</label>
-                                    <textarea class="form-control bg-dark border-secondary text-white" id="note" rows="3" placeholder="Nhập màu sắc ưu tiên hoặc thắc mắc cần tư vấn..."></textarea>
-                                </div>
-                                <div class="col-12 mt-4">
-                                    <button type="submit" class="btn apple-btn-buy w-100 py-3 fw-bold fs-5">
-                                        <i class="fas fa-paper-plane me-2"></i>Gửi Yêu Cầu Đặt Hàng
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <p class="sectionSubTag text-small">
+                Java has been one of the most popular programming language
+                for many years. Java is Object Oriented. However it is not
+                considered as pure object oriented as it provides support for primitive
+                data types (like int, char, etc). The Java codes are first compiled into byte
+                code (machine independent code). Then the byte code is run on Java Virtual
+                Machine (JVM) regardless of the underlying architecture.
+            </p>
+        </div>
+
+        <div class="thumbnail">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80" alt="Laptop Image">
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-apple-gray py-4 border-top border-secondary border-opacity-25 text-center small">
-        <div class="container">
-            <p class="mb-1">Bản quyền &copy; 2026 Apple Inc. Mọi quyền được bảo lưu.</p>
-            <p class="mb-0">Trang web demo phục vụ bài thực hành thiết kế giao diện Bootstrap 5.</p>
-        </div>
+    <footer class="background">
+        <p class="text-footer">
+            Copyright &copy; 2026 - All rights are reserved
+        </p>
     </footer>
 
-    <!-- Bootstrap 5.3.3 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
