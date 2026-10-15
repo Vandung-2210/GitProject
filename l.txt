@@ -3,724 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page - SASS Refactored</title>
+    <title>Giới Thiệu Sách - Bứt Phá Lập Trình Web</title>
 
-    <!-- Font Awesome 6.5.2 & Google Fonts -->
+    <!-- Bootstrap 5.3.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6.5.2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Trình biên dịch SASS tự động chạy trực tiếp trên trình duyệt -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.sync.min.js"></script>
+    <!-- Custom CSS Styles -->
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --dark-color: #212529;
+            --light-bg: #f8f9fa;
+        }
 
-    <style id="compiled-css">
-        /* CSS biên dịch từ SCSS sẽ tự động nạp vào đây */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Hero / Overview Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+            color: white;
+            padding: 100px 0 80px;
+        }
+
+        .book-cover-img {
+            max-height: 420px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .book-cover-img:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Author Avatar */
+        .author-avatar {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Price Cards */
+        .price-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Download CTA */
+        .download-cta {
+            background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+            color: white;
+        }
+
+        /* Reader's Say / Testimonial */
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1. NAVIGATION & HEADER SECTION -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container navbar__wrapper">
-                <a href="#" class="navbar__brand">
-                    <i class="fas fa-cubes text-primary"></i> TechLanding
+    <!-- 1. HEADER & NAVBAR -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    <i class="fas fa-book-open text-primary me-2"></i>DevBook
                 </a>
-                <ul class="navbar__menu">
-                    <li class="navbar__item"><a href="#home" class="navbar__link active">Trang chủ</a></li>
-                    <li class="navbar__item"><a href="#products" class="navbar__link">Sản phẩm</a></li>
-                    <li class="navbar__item"><a href="#stats" class="navbar__link">Thống kê</a></li>
-                    <li class="navbar__item"><a href="#contact" class="navbar__link">Liên hệ</a></li>
-                </ul>
-                <a href="#products" class="btn btn--primary navbar__btn">Dùng thử miễn phí</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto text-uppercase small fw-semibold">
+                        <li class="nav-item"><a class="nav-link" href="#overview">Tổng quan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#author">Tác giả</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#features">Đặc điểm</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#prices">Bảng giá</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#download">Tải về</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#readers">Đánh giá</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
-
-        <section id="home" class="hero">
-            <div class="container hero__wrapper">
-                <div class="hero__content">
-                    <span class="badge">Thế Hệ Mới 2026</span>
-                    <h1 class="hero__title">Giải Pháp Công Nghệ Đột Phá Cho Doanh Nghiệp</h1>
-                    <p class="hero__desc">Tối ưu hóa quy trình làm việc, tăng cường hiệu suất và nâng cao trải nghiệm người dùng với nền tảng quản trị hiện đại.</p>
-                    <div class="hero__actions">
-                        <a href="#products" class="btn btn--primary btn--lg">Khám phá ngay</a>
-                        <a href="#stats" class="btn btn--outline btn--lg"><i class="fas fa-play me-2"></i>Xem Demo</a>
-                    </div>
-                </div>
-                <div class="hero__visual">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Hero Banner" class="hero__img">
-                </div>
-            </div>
-        </section>
     </header>
 
     <main>
-        <!-- 2. SẢN PHẨM NỔI BẬT SECTION -->
-        <section id="products" class="products">
+        <!-- 2. BOOK OVERVIEW (HERO SECTION) -->
+        <section id="overview" class="hero-section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-header__subtitle">Danh Mục Nổi Bật</span>
-                    <h2 class="section-header__title">Sản Phẩm & Dịch Vụ Chủ Lực</h2>
-                    <p class="section-header__desc">Được thiết kế tỉ mỉ đáp ứng mọi tiêu chuẩn khắt khe nhất của thị trường.</p>
-                </div>
-
-                <div class="products__grid">
-                    <!-- Product Card 1 -->
-                    <article class="product-card">
-                        <div class="product-card__image-box">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Phân Tích Dữ Liệu" class="product-card__img">
-                            <span class="product-card__badge">Hot</span>
+                <div class="row align-items-center gy-4">
+                    <div class="col-lg-6 text-center text-lg-start">
+                        <span class="badge bg-warning text-dark mb-3 px-3 py-2 text-uppercase fw-bold">Sách Lập Trình Bán Chạy 2026</span>
+                        <h1 class="display-4 fw-bold mb-3">Bứt Phá Lập Trình Web Chuẩn Hiện Đại</h1>
+                        <p class="lead mb-4 opacity-90">Cuốn sách hướng dẫn toàn diện từ tư duy thiết kế HTML/CSS, Bootstrap 5, SASS/SCSS đến kiến trúc ứng dụng Web thực tế dành cho mọi lập trình viên.</p>
+                        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                            <a href="#prices" class="btn btn-warning btn-lg fw-bold px-4"><i class="fas fa-shopping-cart me-2"></i>Mua Sách Ngay</a>
+                            <a href="#download" class="btn btn-outline-light btn-lg px-4"><i class="fas fa-file-pdf me-2"></i>Đọc Thử Chương 1</a>
                         </div>
-                        <div class="product-card__body">
-                            <h3 class="product-card__title">Nền Tảng Analytics Pro</h3>
-                            <p class="product-card__desc">Hệ thống phân tích dữ liệu thời gian thực giúp dự báo xu hướng kinh doanh chính xác.</p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$49<small>/tháng</small></span>
-                                <a href="#" class="btn btn--secondary btn--sm">Chi tiết</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Product Card 2 -->
-                    <article class="product-card">
-                        <div class="product-card__image-box">
-                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Quản Lý Hệ Thống" class="product-card__img">
-                        </div>
-                        <div class="product-card__body">
-                            <h3 class="product-card__title">Cloud Management UI</h3>
-                            <p class="product-card__desc">Giao diện quản lý điện toán đám mây thân thiện, bảo mật chuẩn doanh nghiệp.</p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$79<small>/tháng</small></span>
-                                <a href="#" class="btn btn--secondary btn--sm">Chi tiết</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Product Card 3 -->
-                    <article class="product-card">
-                        <div class="product-card__image-box">
-                            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Giải Pháp AI" class="product-card__img">
-                            <span class="product-card__badge product-card__badge--new">New</span>
-                        </div>
-                        <div class="product-card__body">
-                            <h3 class="product-card__title">AI Automation Suite</h3>
-                            <p class="product-card__desc">Tự động hóa các tác vụ lặp đi lặp lại bằng trí tuệ nhân tạo thông minh.</p>
-                            <div class="product-card__footer">
-                                <span class="product-card__price">$99<small>/tháng</small></span>
-                                <a href="#" class="btn btn--secondary btn--sm">Chi tiết</a>
-                            </div>
-                        </div>
-                    </article>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Bìa sách Bứt Phá Lập Trình Web" class="img-fluid book-cover-img">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. SỐ LIỆU THỐNG KÊ SECTION -->
-        <section id="stats" class="stats">
+        <!-- 3. AUTHOR SECTION -->
+        <section id="author" class="bg-light">
             <div class="container">
-                <div class="stats__grid">
-                    <div class="stat-item">
-                        <div class="stat-item__icon"><i class="fas fa-users"></i></div>
-                        <div class="stat-item__number">100,000+</div>
-                        <div class="stat-item__label">Khách hàng tin dùng</div>
+                <div class="text-center">
+                    <h2 class="fw-bold section-title">Về Tác Giả</h2>
+                    <p class="text-muted">Gặp gỡ người truyền cảm hứng cho cuốn sách</p>
+                </div>
+
+                <div class="row justify-content-center mt-5 align-items-center">
+                    <div class="col-md-4 text-center mb-4 mb-md-0">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Tác giả Nguyễn Văn A" class="author-avatar mb-3">
+                        <h4 class="fw-bold mb-1">Nguyễn Văn A</h4>
+                        <p class="text-primary font-weight-semibold">Senior Fullstack Engineer & Author</p>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-item__icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                        <div class="stat-item__number">99.99%</div>
-                        <div class="stat-item__label">Uptime hệ thống</div>
+                    <div class="col-md-7">
+                        <h3 class="fw-bold mb-3">10+ Năm Kinh Nghiệm Đào Tạo & Phát Triển Phần Mềm</h3>
+                        <p class="text-secondary leading-relaxed">
+                            Với hơn một thập kỷ tham gia trực tiếp vào các dự án phần mềm quy mô lớn và giảng dạy cho hàng ngàn học viên lập trình, tác giả đã đúc kết những kiến thức cốt lõi, tinh gọn nhất vào cuốn sách này.
+                        </p>
+                        <p class="text-secondary leading-relaxed">
+                            Mục tiêu của cuốn sách là giúp các bạn sinh viên và kỹ sư trẻ không chỉ gõ được code mà còn nắm vững tư duy thiết kế hệ thống web chuẩn chỉnh, tối ưu và dễ bảo trì.
+                        </p>
+                        <div class="d-flex gap-3 text-primary fs-4 mt-4">
+                            <a href="#" class="text-primary"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="text-primary"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-primary"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-primary"><i class="fas fa-globe"></i></a>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-item__icon"><i class="fas fa-globe-americas"></i></div>
-                        <div class="stat-item__number">45+</div>
-                        <div class="stat-item__label">Quốc gia phủ sóng</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. FEATURES SECTION -->
+        <section id="features">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fw-bold section-title">Giá Trị Nội Dung Sách</h2>
+                    <p class="text-muted">Những đặc điểm nổi bật giúp bạn nâng tầm kỹ năng</p>
+                </div>
+
+                <div class="row g-4 mt-4">
+                    <div class="col-md-4">
+                        <div class="p-4 text-center border rounded-3 bg-white h-100 shadow-sm">
+                            <div class="text-primary fs-1 mb-3"><i class="fas fa-code"></i></div>
+                            <h4 class="fw-bold mb-2">Thực Hành 100%</h4>
+                            <p class="text-muted mb-0">Hơn 50+ bài tập thực hành và dự án thực tế kèm theo mã nguồn đầy đủ trên GitHub.</p>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-item__icon"><i class="fas fa-award"></i></div>
-                        <div class="stat-item__number">24/7</div>
-                        <div class="stat-item__label">Hỗ trợ kỹ thuật</div>
+                    <div class="col-md-4">
+                        <div class="p-4 text-center border rounded-3 bg-white h-100 shadow-sm">
+                            <div class="text-primary fs-1 mb-3"><i class="fas fa-mobile-alt"></i></div>
+                            <h4 class="fw-bold mb-2">Responsive Chuẩn</h4>
+                            <p class="text-muted mb-0">Nắm vững Flexbox, CSS Grid và Bootstrap 5 để tự tạo giao diện hoàn hảo trên mọi thiết bị.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-4 text-center border rounded-3 bg-white h-100 shadow-sm">
+                            <div class="text-primary fs-1 mb-3"><i class="fas fa-rocket"></i></div>
+                            <h4 class="fw-bold mb-2">Tối Ưu SASS/SCSS</h4>
+                            <p class="text-muted mb-0">Hướng dẫn tư duy quy hoạch CSS theo mô hình Partials giúp dự án lớn dễ duy trì.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PRICES SECTION -->
+        <section id="prices" class="bg-light">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fw-bold section-title">Lựa Chọn Bảng Giá</h2>
+                    <p class="text-muted">Chọn gói phù hợp nhất với nhu cầu học tập của bạn</p>
+                </div>
+
+                <div class="row g-4 mt-4 justify-content-center">
+                    <!-- Basic Ebook -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card price-card rounded-4 p-4 text-center h-100">
+                            <div class="card-body">
+                                <h4 class="fw-bold text-secondary">Bản PDF Ebook</h4>
+                                <h2 class="display-5 fw-bold text-primary my-3">199.000đ</h2>
+                                <p class="text-muted">Phù hợp học cá nhân</p>
+                                <ul class="list-unstyled my-4 text-start">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>File PDF chất lượng cao</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mã nguồn bài tập mẫu</li>
+                                    <li class="mb-2 text-muted"><i class="fas fa-times me-2"></i>Sách in bìa mềm</li>
+                                    <li class="mb-2 text-muted"><i class="fas fa-times me-2"></i>Video khóa học đi kèm</li>
+                                </ul>
+                                <button class="btn btn-outline-primary w-100 py-2 fw-bold">Chọn Mua Ebook</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Combo Physical Book + Ebook -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card price-card featured rounded-4 p-4 text-center h-100 bg-white shadow">
+                            <div class="card-body">
+                                <span class="badge bg-danger mb-2">Phổ Biến Nhất</span>
+                                <h4 class="fw-bold text-dark">Combo Sách In + Ebook</h4>
+                                <h2 class="display-5 fw-bold text-primary my-3">349.000đ</h2>
+                                <p class="text-muted">Trải nghiệm học tập trọn vẹn</p>
+                                <ul class="list-unstyled my-4 text-start">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Sách in bìa mềm cao cấp</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Trọn bộ Ebook PDF + EPUB</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mã nguồn GitHub đầy đủ</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Miễn phí giao hàng toàn quốc</li>
+                                </ul>
+                                <button class="btn btn-primary w-100 py-2 fw-bold">Đặt Mua Combo Ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DOWNLOAD SECTION -->
+        <section id="download" class="download-cta text-center">
+            <div class="container py-4">
+                <h2 class="fw-bold mb-3">Tải Đọc Thử Chương 1 Miễn Phí</h2>
+                <p class="lead opacity-75 mb-4 mx-auto" style="max-width: 600px;">Để lại email để nhận ngay bản xem trước PDF gồm 40 trang đầu tiên của cuốn sách.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <form class="input-group input-group-lg">
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn..." required>
+                            <button class="btn btn-warning fw-bold px-4" type="submit">Tải Ngay <i class="fas fa-download ms-1"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. READER'S SAY (TESTIMONIALS) SECTION -->
+        <section id="readers" class="bg-light">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fw-bold section-title">Độc Giả Nói Gì</h2>
+                    <p class="text-muted">Cảm nhận thực tế từ các học viên và kỹ sư đã đọc sách</p>
+                </div>
+
+                <div class="row g-4 mt-4">
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Độc giả Trần Văn B" class="testimonial-avatar me-3">
+                                <div>
+                                    <h5 class="fw-bold mb-0">Trần Văn B</h5>
+                                    <small class="text-muted">Frontend Developer</small>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-secondary mb-0">"Cuốn sách trình bày cực kỳ dễ hiểu. Các ví dụ dựng trang bằng Bootstrap 5 vô cùng thực tế, giúp mình tự tin đi phỏng vấn hơn nhiều."</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Độc giả Lê Thị C" class="testimonial-avatar me-3">
+                                <div>
+                                    <h5 class="fw-bold mb-0">Lê Thị C</h5>
+                                    <small class="text-muted">Sinh viên CNTT</small>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                            <p class="text-secondary mb-0">"Rất thích phần hướng dẫn về SASS/SCSS. Nhờ cuốn sách mà mình đã biết cách tổ chức mã nguồn CSS khoa học hơn hẳn."</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="testimonial-card">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" alt="Độc giả Hoàng Minh D" class="testimonial-avatar me-3">
+                                <div>
+                                    <h5 class="fw-bold mb-0">Hoàng Minh D</h5>
+                                    <small class="text-muted">Web Designer</small>
+                                </div>
+                            </div>
+                            <div class="text-warning mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-secondary mb-0">"Sách in chất lượng, hình ảnh minh họa mã nguồn rất rõ ràng. Đáng giá từng xu bỏ ra!"</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- 4. FOOTER SECTION -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <div class="footer__top">
-                <div class="footer__col footer__col--about">
-                    <a href="#" class="footer__logo"><i class="fas fa-cubes text-primary"></i> TechLanding</a>
-                    <p class="footer__desc">Đồng hành cùng sự phát triển chuyển đổi số bền vững của các doanh nghiệp trên toàn cầu.</p>
-                    <div class="footer__socials">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer__col">
-                    <h4 class="footer__title">Sản Phẩm</h4>
-                    <ul class="footer__links">
-                        <li><a href="#">Analytics Platform</a></li>
-                        <li><a href="#">Cloud Manager</a></li>
-                        <li><a href="#">AI Automations</a></li>
-                        <li><a href="#">Tính năng mới</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer__col">
-                    <h4 class="footer__title">Công Ty</h4>
-                    <ul class="footer__links">
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Tuyển dụng</a></li>
-                        <li><a href="#">Blog & Tin tức</a></li>
-                        <li><a href="#">Đối tác</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer__col">
-                    <h4 class="footer__title">Đăng Ký Nhận Tin</h4>
-                    <p class="footer__subtext">Nhận các cập nhật tính năng và ưu đãi sớm nhất.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Nhập email của bạn..." required class="newsletter-form__input">
-                        <button type="submit" class="btn btn--primary newsletter-form__btn"><i class="fas fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <p>&copy; 2026 TechLanding Inc. All rights reserved. Refactored with Modular SASS/SCSS.</p>
-            </div>
+    <!-- 8. FOOTER -->
+    <footer class="bg-dark text-white py-4 border-top border-secondary">
+        <div class="container text-center">
+            <p class="mb-1">&copy; 2026 DevBook. Tất cả các quyền được bảo lưu.</p>
+            <p class="small text-muted mb-0">Thiết kế landing page giới thiệu sách sử dụng Bootstrap 5 & Font Awesome.</p>
         </div>
     </footer>
 
-    <!-- SCSS REFACTORED CODE (Variables, Mixins, Nesting & Componentization) -->
-    <script type="text/scss" id="scss-code">
-        // ==========================================
-        // 1. SASS VARIABLES
-        // ==========================================
-        $primary-color: #2563eb;
-        $primary-hover: #1d4ed8;
-        $secondary-color: #0f172a;
-        $text-main: #334155;
-        $text-muted: #64748b;
-        $bg-light: #f8fafc;
-        $bg-white: #ffffff;
-        $bg-dark: #0f172a;
-        $border-color: #e2e8f0;
-        
-        $font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-        $border-radius-sm: 6px;
-        $border-radius-md: 12px;
-        $border-radius-lg: 20px;
-        $transition-fast: all 0.25s ease-in-out;
-        $box-shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-
-        // ==========================================
-        // 2. SASS MIXINS
-        // ==========================================
-        @mixin flex-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @mixin flex-between {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        @mixin grid-responsive($min-width: 280px, $gap: 30px) {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
-            gap: $gap;
-        }
-
-        @mixin media-md {
-            @media (max-width: 992px) { @content; }
-        }
-
-        @mixin media-sm {
-            @media (max-width: 768px) { @content; }
-        }
-
-        // ==========================================
-        // 3. BASE & RESET
-        // ==========================================
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: $font-family;
-            color: $text-main;
-            background-color: $bg-white;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .text-primary {
-            color: $primary-color;
-        }
-
-        // ==========================================
-        // 4. BUTTONS & BADGES COMPONENTS
-        // ==========================================
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 22px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: $border-radius-sm;
-            transition: $transition-fast;
-            cursor: pointer;
-            border: none;
-
-            &--primary {
-                background-color: $primary-color;
-                color: $bg-white;
-
-                &:hover {
-                    background-color: $primary-hover;
-                    transform: translateY(-2px);
-                }
-            }
-
-            &--secondary {
-                background-color: #eff6ff;
-                color: $primary-color;
-
-                &:hover {
-                    background-color: $primary-color;
-                    color: $bg-white;
-                }
-            }
-
-            &--outline {
-                border: 2px solid $border-color;
-                color: $secondary-color;
-
-                &:hover {
-                    border-color: $primary-color;
-                    color: $primary-color;
-                }
-            }
-
-            &--lg {
-                padding: 14px 32px;
-                font-size: 1.05rem;
-                border-radius: $border-radius-md;
-            }
-
-            &--sm {
-                padding: 6px 14px;
-                font-size: 0.85rem;
-            }
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background-color: #dbeafe;
-            color: $primary-color;
-            font-weight: 700;
-            font-size: 0.85rem;
-            border-radius: 50px;
-            margin-bottom: 20px;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 650px;
-            margin: 0 auto 50px;
-
-            &__subtitle {
-                color: $primary-color;
-                font-weight: 700;
-                font-size: 0.9rem;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-            }
-
-            &__title {
-                font-size: 2.25rem;
-                color: $secondary-color;
-                font-weight: 800;
-                margin: 10px 0;
-
-                @include media-sm {
-                    font-size: 1.75rem;
-                }
-            }
-
-            &__desc {
-                color: $text-muted;
-            }
-        }
-
-        // ==========================================
-        // 5. NAVBAR & HERO SECTION
-        // ==========================================
-        .header {
-            background: linear-gradient(180deg, #f0f9ff 0%, $bg-white 100%);
-        }
-
-        .navbar {
-            padding: 20px 0;
-
-            &__wrapper {
-                @include flex-between;
-            }
-
-            &__brand {
-                font-size: 1.5rem;
-                font-weight: 800;
-                color: $secondary-color;
-            }
-
-            &__menu {
-                display: flex;
-                gap: 30px;
-
-                @include media-md {
-                    display: none;
-                }
-            }
-
-            &__link {
-                font-weight: 600;
-                color: $text-muted;
-                transition: $transition-fast;
-
-                &:hover, &.active {
-                    color: $primary-color;
-                }
-            }
-
-            &__btn {
-                @include media-sm {
-                    display: none;
-                }
-            }
-        }
-
-        .hero {
-            padding: 80px 0 100px;
-
-            &__wrapper {
-                @include grid-responsive(400px, 40px);
-                align-items: center;
-            }
-
-            &__title {
-                font-size: 3rem;
-                font-weight: 800;
-                color: $secondary-color;
-                line-height: 1.2;
-                margin-bottom: 20px;
-
-                @include media-sm {
-                    font-size: 2.2rem;
-                }
-            }
-
-            &__desc {
-                font-size: 1.1rem;
-                color: $text-muted;
-                margin-bottom: 35px;
-            }
-
-            &__actions {
-                display: flex;
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-
-            &__visual {
-                @include flex-center;
-            }
-
-            &__img {
-                border-radius: $border-radius-lg;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            }
-        }
-
-        // ==========================================
-        // 6. FEATURED PRODUCTS SECTION
-        // ==========================================
-        .products {
-            padding: 90px 0;
-
-            &__grid {
-                @include grid-responsive(320px, 30px);
-            }
-        }
-
-        .product-card {
-            background-color: $bg-white;
-            border-radius: $border-radius-md;
-            border: 1px solid $border-color;
-            overflow: hidden;
-            transition: $transition-fast;
-
-            &:hover {
-                transform: translateY(-8px);
-                box-shadow: $box-shadow-card;
-
-                .product-card__img {
-                    transform: scale(1.05);
-                }
-            }
-
-            &__image-box {
-                position: relative;
-                overflow: hidden;
-                height: 220px;
-            }
-
-            &__img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.5s ease;
-            }
-
-            &__badge {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background-color: #ef4444;
-                color: white;
-                font-size: 0.75rem;
-                font-weight: 700;
-                padding: 4px 12px;
-                border-radius: 50px;
-
-                &--new {
-                    background-color: #10b981;
-                }
-            }
-
-            &__body {
-                padding: 25px;
-            }
-
-            &__title {
-                font-size: 1.25rem;
-                font-weight: 700;
-                color: $secondary-color;
-                margin-bottom: 10px;
-            }
-
-            &__desc {
-                font-size: 0.95rem;
-                color: $text-muted;
-                margin-bottom: 20px;
-            }
-
-            &__footer {
-                @include flex-between;
-                border-top: 1px solid $border-color;
-                padding-top: 15px;
-            }
-
-            &__price {
-                font-size: 1.5rem;
-                font-weight: 800;
-                color: $primary-color;
-
-                small {
-                    font-size: 0.85rem;
-                    color: $text-muted;
-                    font-weight: 500;
-                }
-            }
-        }
-
-        // ==========================================
-        // 7. STATISTICAL NUMBERS SECTION
-        // ==========================================
-        .stats {
-            background-color: $bg-dark;
-            color: $bg-white;
-            padding: 70px 0;
-
-            &__grid {
-                @include grid-responsive(220px, 30px);
-            }
-        }
-
-        .stat-item {
-            text-align: center;
-
-            &__icon {
-                font-size: 2.2rem;
-                color: $primary-color;
-                margin-bottom: 15px;
-            }
-
-            &__number {
-                font-size: 2.5rem;
-                font-weight: 800;
-                margin-bottom: 5px;
-            }
-
-            &__label {
-                color: #94a3b8;
-                font-size: 0.95rem;
-            }
-        }
-
-        // ==========================================
-        // 8. FOOTER SECTION
-        // ==========================================
-        .footer {
-            background-color: #020617;
-            color: #94a3b8;
-            padding: 80px 0 30px;
-
-            &__top {
-                @include grid-responsive(220px, 40px);
-                margin-bottom: 60px;
-            }
-
-            &__col--about {
-                grid-column: span 1;
-            }
-
-            &__logo {
-                font-size: 1.4rem;
-                font-weight: 800;
-                color: $bg-white;
-                display: inline-block;
-                margin-bottom: 15px;
-            }
-
-            &__desc {
-                font-size: 0.9rem;
-                margin-bottom: 20px;
-            }
-
-            &__socials {
-                display: flex;
-                gap: 12px;
-            }
-
-            &__title {
-                color: $bg-white;
-                font-size: 1.1rem;
-                font-weight: 700;
-                margin-bottom: 20px;
-            }
-
-            &__links {
-                li {
-                    margin-bottom: 12px;
-                }
-
-                a {
-                    font-size: 0.9rem;
-                    transition: $transition-fast;
-
-                    &:hover {
-                        color: $primary-color;
-                    }
-                }
-            }
-
-            &__subtext {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-
-            &__bottom {
-                border-top: 1px solid #1e293b;
-                padding-top: 30px;
-                text-align: center;
-                font-size: 0.85rem;
-            }
-        }
-
-        .social-link {
-            @include flex-center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #1e293b;
-            color: $bg-white;
-            transition: $transition-fast;
-
-            &:hover {
-                background-color: $primary-color;
-                transform: translateY(-3px);
-            }
-        }
-
-        .newsletter-form {
-            display: flex;
-
-            &__input {
-                flex: 1;
-                padding: 10px 14px;
-                border-radius: $border-radius-sm 0 0 $border-radius-sm;
-                border: 1px solid #334155;
-                background-color: #1e293b;
-                color: $bg-white;
-                outline: none;
-
-                &:focus {
-                    border-color: $primary-color;
-                }
-            }
-
-            &__btn {
-                border-radius: 0 $border-radius-sm $border-radius-sm 0;
-            }
-        }
-    </script>
-
-    <!-- Script biên dịch SCSS tự động -->
-    <script>
-        const scssSource = document.getElementById('scss-code').text;
-        Sass.compile(scssSource, function(result) {
-            if (result.text) {
-                document.getElementById('compiled-css').innerHTML = result.text;
-            } else {
-                console.error("Lỗi biên dịch SASS:", result);
-            }
-        });
-    </script>
+    <!-- Bootstrap 5.3.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
