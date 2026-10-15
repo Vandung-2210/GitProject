@@ -1,324 +1,180 @@
+[Bài tập] Phối màu cho newsletter
+Mục tiêu bài tập
+Trong bài tập này, chúng ta sẽ thực hành kỹ năng phối màu sắc, một yếu tố cốt lõi trong thiết kế trải nghiệm người dùng (UX) và giao diện người dùng (UI). Cụ thể, bạn sẽ:
+
+Luyện tập việc sử dụng công cụ Adobe Color để khám phá và lựa chọn các bộ màu sắc hài hòa.
+
+Áp dụng các bộ màu sắc đã chọn để tạo ra những phiên bản newsletter có phong cách thị giác khác biệt, từ đó rèn luyện khả năng cảm nhận và ứng dụng màu sắc vào thiết kế thực tế.
+
+Bài tập này không chỉ giúp bạn làm quen với một công cụ mạnh mẽ mà còn củng cố kiến thức về cách màu sắc có thể thay đổi hoàn toàn cảm nhận về một sản phẩm thiết kế.
+
+Mô tả bài tập
+Chúng ta sẽ làm việc với một newsletter mẫu có sẵn của Trello. Mục tiêu là sử dụng công cụ Adobe Color để lựa chọn các bộ màu sắc mới, thay thế cho bộ màu sắc hiện tại của newsletter gốc. Từ đó, bạn sẽ tạo ra hai phiên bản newsletter hoàn toàn mới, mỗi phiên bản mang một bộ màu sắc và cảm nhận riêng biệt.
+
+Phiên bản offline của newsletter mẫu có thể tải về tại đây. (Lưu ý: Liên kết tải về sẽ được cung cấp bởi hệ thống khóa học khi bạn thực hiện bài tập này).
+
+Việc thay đổi màu sắc cho một thiết kế có sẵn là một cách hiệu quả để hiểu được tác động của màu sắc đến tâm trạng, sự chú ý và tính nhất quán của thương hiệu.
+
+Hướng dẫn thực hiện
+Để hoàn thành bài tập này, bạn sẽ thực hiện các bước sau:
+
+1. Xây dựng khung Newsletter với Bootstrap
+Trước khi phối màu, chúng ta cần có một cấu trúc cơ bản cho newsletter. Bootstrap là một framework CSS tuyệt vời giúp bạn nhanh chóng xây dựng được bộ khung responsive mà không cần viết quá nhiều CSS từ đầu.
+
+Tại sao lại dùng Bootstrap?
+Bootstrap cung cấp các thành phần UI dựng sẵn như layout grid, nút, thẻ (card), và các lớp tiện ích (utility classes) cho typography, spacing, và màu sắc. Điều này giúp bạn tập trung vào việc thử nghiệm màu sắc mà không bị phân tâm bởi việc xây dựng cấu trúc HTML/CSS cơ bản.
+
+Cách làm:
+Tạo một file index.html và liên kết Bootstrap vào đó. Sau đó, xây dựng cấu trúc cơ bản của một newsletter, bao gồm:
+
+Phần header (tiêu đề, logo).
+
+Các phần nội dung chính (ví dụ: một vài khối văn bản, hình ảnh, nút kêu gọi hành động).
+
+Phần footer.
+
+Bạn có thể tham khảo cấu trúc HTML sau đây như một điểm khởi đầu. Hãy tập trung vào việc tạo các "khu vực" mà bạn sẽ áp dụng màu sắc sau này.
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành Phối màu Đơn Tông (Monochromatic Palette)</title>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <title>Newsletter Mẫu</title>
+    <!-- Liên kết Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* BẢNG MÀU ĐƠN TÔNG (MONOCHROMATIC PALETTE BẬC 1 - BẬC 9)
-           Màu chủ đạo Logo (#00ADEE)
-           - Bậc 1 (Main/Accent): #00ADEE
-           - Bậc 2 (Hover/Badge): #00B2EF
-           - Bậc 4 (Header/Nav Background): #00BFF2
-           - Bậc 7 (Content Background): #8DD7F7
-           - Bậc 9 (Footer Background): #C6E9FA
-        */
-        :root {
-            --color-level-1: #00ADEE;
-            --color-level-2: #00B2EF;
-            --color-level-4: #00BFF2;
-            --color-level-7: #8DD7F7;
-            --color-level-9: #C6E9FA;
-            --text-dark: #000000;
-            --text-white: #ffffff;
+        /* Các lớp CSS tùy chỉnh để dễ dàng thay đổi màu sau này */
+        .primary-bg { background-color: var(--primary-color, #007bff); }
+        .secondary-bg { background-color: var(--secondary-color, #6c757d); }
+        .accent-bg { background-color: var(--accent-color, #28a745); }
+        .text-primary-color { color: var(--primary-color, #007bff); }
+        .text-secondary-color { color: var(--secondary-color, #6c757d); }
+        .text-accent-color { color: var(--accent-color, #28a745); }
+        .btn-primary-custom {
+            background-color: var(--primary-color, #007bff);
+            color: white;
+            border-color: var(--primary-color, #007bff);
         }
-
-        /* Reset Mặc định */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f4f6f8;
-            color: var(--text-dark); /* Bước 6: Giữ màu chữ toàn trang là màu đen */
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Bước 2: Thay đổi màu nền Header/Nav sang màu bậc 4 (#00BFF2) */
-        header {
-            background-color: var(--color-level-4);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-dark);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--color-level-1);
-            color: var(--text-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 1.2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .nav-links a:hover {
-            background-color: var(--color-level-2);
-            color: var(--text-white);
-        }
-
-        /* Bước 4: Đổi màu nền phần nội dung sang màu bậc 7 (#8DD7F7) */
-        .content-section {
-            background-color: var(--color-level-7);
-            padding: 60px 0;
-            margin: 30px 0;
-            border-radius: 12px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-header h2 {
-            font-size: 2.2rem;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Bước 3: Thay đổi màu nền phần ON SALE/PREVIEW sang màu bậc 1 (#00ADEE) / bậc 2 (#00B2EF) */
-        .sale-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: var(--color-level-1);
-            color: var(--text-white);
-            font-size: 0.8rem;
-            font-weight: bold;
-            padding: 5px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 10;
-        }
-
-        .product-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .product-title {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--color-level-1);
-            margin-bottom: 15px;
-        }
-
-        /* Bước 3: Nút PREVIEW sử dụng tông màu bậc 2 (#00B2EF) */
-        .btn-preview {
-            display: inline-block;
-            background-color: var(--color-level-2);
-            color: var(--text-white);
-            padding: 10px 22px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-
-        .btn-preview:hover {
-            opacity: 0.9;
-        }
-
-        /* Bước 5: Thay đổi màu nền phần Footer sang màu bậc 9 (#C6E9FA) */
-        footer {
-            background-color: var(--color-level-9);
-            color: var(--text-dark);
-            padding: 40px 0 20px;
-            margin-top: 50px;
-            border-top: 2px solid var(--color-level-7);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .footer-socials a {
-            color: var(--text-dark);
-            font-size: 1.4rem;
-            margin-left: 15px;
-            transition: color 0.3s;
-        }
-
-        .footer-socials a:hover {
-            color: var(--color-level-1);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            font-size: 0.9rem;
+        .btn-primary-custom:hover {
+            background-color: var(--darker-primary-color, #0056b3);
+            border-color: var(--darker-primary-color, #0056b3);
         }
     </style>
 </head>
 <body>
+    <div class="container py-5">
+        <header class="text-center mb-5 p-4 primary-bg text-white">
+            <h1>Tiêu đề Newsletter</h1>
+            <p>Nơi bắt đầu những câu chuyện mới</p>
+        </header>
 
-    <!-- Bước 2: Header/Nav nền màu Bậc 4 (#00BFF2) -->
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo">
-                <div class="logo-icon"><i class="fas fa-shopping-bag"></i></div>
-                <span>BrandShop</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#products">Sản phẩm</a></li>
-                <li><a href="#">Khuyến mãi</a></li>
-                <li><a href="#">Liên hệ</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Bước 4: Phần Nội dung nền màu Bậc 7 (#8DD7F7) -->
-    <main class="container">
-        <section id="products" class="content-section">
-            <div class="section-header">
-                <h2>Sản Phẩm Mới & Nổi Bật</h2>
-                <p>Danh sách các sản phẩm áp dụng bảng màu đơn tông Monochromatic</p>
+        <section class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title text-primary-color">Chào mừng bạn đến với bản tin của chúng tôi!</h2>
+                <p class="card-text">
+                    Đây là nội dung ví dụ cho phần giới thiệu. Chúng ta sẽ thay đổi màu sắc cho các thành phần này.
+                </p>
+                <a href="#" class="btn btn-primary-custom">Tìm hiểu thêm</a>
             </div>
+        </section>
 
-            <div class="container">
-                <div class="products-grid">
-                    <!-- Card 1 -->
-                    <div class="product-card">
-                        <!-- Bước 3: Nền Badge ON SALE màu Bậc 1 (#00ADEE) -->
-                        <span class="sale-badge">ON SALE</span>
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Đồng hồ thông minh" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-title">Đồng Hồ Thông Minh</h3>
-                            <div class="product-price">1.200.000đ</div>
-                            <!-- Bước 3: Nút PREVIEW màu Bậc 2 (#00B2EF) -->
-                            <a href="#" class="btn-preview"><i class="fas fa-eye me-1"></i> PREVIEW</a>
-                        </div>
+        <section class="row mb-4">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 secondary-bg text-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Tính năng nổi bật 1</h3>
+                        <p class="card-text">Mô tả ngắn gọn về tính năng này. Màu nền và màu chữ sẽ được phối lại.</p>
                     </div>
-
-                    <!-- Card 2 -->
-                    <div class="product-card">
-                        <span class="sale-badge">ON SALE</span>
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="Tai nghe không dây" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-title">Tai Nghe Bluetooth</h3>
-                            <div class="product-price">850.000đ</div>
-                            <a href="#" class="btn-preview"><i class="fas fa-eye me-1"></i> PREVIEW</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="product-card">
-                        <span class="sale-badge">ON SALE</span>
-                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80" alt="Kính mát thời trang" class="product-img">
-                        <div class="product-info">
-                            <h3 class="product-title">Kính Mát Thời Trang</h3>
-                            <div class="product-price">450.000đ</div>
-                            <a href="#" class="btn-preview"><i class="fas fa-eye me-1"></i> PREVIEW</a>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 accent-bg text-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Tính năng nổi bật 2</h3>
+                        <p class="card-text">Mô tả ngắn gọn về tính năng khác. Hãy thử các sắc thái màu khác nhau.</p>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <!-- Bước 5: Phần Footer nền màu Bậc 9 (#C6E9FA) -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h3>BrandShop Monochromatic</h3>
-                    <p>Bài thực hành phối màu đơn tông theo màu chủ đạo #00ADEE</p>
-                </div>
-                <div class="footer-socials">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 BrandShop. Tất cả các quyền được bảo lưu.</p>
-            </div>
-        </div>
-    </footer>
-
+        <footer class="text-center mt-5 p-3 secondary-bg text-white">
+            <p>&copy; 2024 Tên Công ty. Mọi quyền được bảo lưu.</p>
+        </footer>
+    </div>
+    <!-- Liên kết Bootstrap JS (tùy chọn nếu không cần tương tác) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+Lưu ý rằng tôi đã thêm một số biến CSS (--primary-color, --secondary-color, --accent-color) và các lớp tùy chỉnh (primary-bg, text-primary-color, btn-primary-custom). Điều này giúp bạn dễ dàng thay đổi màu sắc của toàn bộ newsletter chỉ bằng cách cập nhật giá trị của các biến CSS này trong <style> tag, thay vì phải tìm và thay đổi từng lớp màu Bootstrap mặc định.
+
+2. Phối màu lần 1 với Adobe Color
+Bây giờ là lúc phát huy sức mạnh của Adobe Color! Nếu bạn chưa quen thuộc với công cụ này, hãy xem lại bài [Thực hành] Sử dụng Adobe Color để nắm vững cách sử dụng.
+
+Các bước thực hiện:
+
+Truy cập Adobe Color: Mở trình duyệt và truy cập https://color.adobe.com/.
+
+Khám phá và chọn bộ màu:
+
+Sử dụng các quy tắc phối màu có sẵn (Tương đồng, Đơn sắc, Bộ ba, Bổ túc, v.v.) hoặc khám phá tab "Khám phá" để tìm cảm hứng.
+
+Mục tiêu là chọn một bộ gồm 3-5 màu sắc hài hòa. Hãy thử tưởng tượng bộ màu này sẽ trông như thế nào trên newsletter của Trello.
+
+Bạn có thể lấy màu chủ đạo từ logo Trello gốc (nếu có thể xác định được) và xây dựng palette xung quanh nó, hoặc tạo một bộ màu hoàn toàn mới.
+
+Áp dụng màu sắc vào Newsletter:
+
+Khi đã có bộ màu ưng ý, hãy ghi lại các mã màu HEX (ví dụ: #RRGGBB).
+
+Quay lại file index.html của bạn. Thay đổi giá trị của các biến CSS --primary-color, --secondary-color, --accent-color và các biến màu khác (nếu bạn thêm) bằng các mã màu HEX đã chọn.
+
+Ví dụ:
+<style>
+:root {
+--primary-color: #4CAF50; /* Một màu xanh lá cây tươi mới */
+--secondary-color: #FFC107; /* Màu vàng cam làm điểm nhấn */
+--accent-color: #2196F3; /* Màu xanh dương bổ sung */
+--text-color: #333333; /* Màu chữ chính */
+--light-bg-color: #F8F9FA; /* Màu nền nhẹ */
+}
+/* ... các lớp CSS đã định nghĩa ở trên */
+</style>
+
+Đảm bảo rằng các màu sắc bạn chọn được áp dụng nhất quán cho các phần tử như nền, tiêu đề, nút, và các khối nội dung. Mục tiêu là tạo ra một phiên bản newsletter mới với bộ màu sắc này.
+
+Kiểm tra độ tương phản giữa màu chữ và màu nền để đảm bảo dễ đọc, đặc biệt là với các phần văn bản quan trọng.
+
+3. Tạo phiên bản Newsletter thứ hai
+Để rèn luyện thêm khả năng phối màu và thấy được sự đa dạng của thiết kế, bạn sẽ tạo một phiên bản newsletter thứ hai với một bộ màu hoàn toàn khác.
+
+Các bước thực hiện:
+
+Lưu phiên bản đầu tiên: Sau khi hoàn thành phiên bản đầu tiên, hãy lưu file index.html của bạn dưới một tên khác (ví dụ: newsletter_version1.html). Hoặc, bạn có thể tạo một file CSS mới (style1.css) và chuyển các biến màu vào đó, sau đó tạo style2.css cho phiên bản thứ hai.
+
+Quay lại Adobe Color: Lần này, hãy thử chọn một quy tắc phối màu khác hoặc tìm kiếm cảm hứng từ một chủ đề khác. Ví dụ, nếu phiên bản đầu tiên của bạn sử dụng màu sắc tươi sáng, hãy thử một bộ màu trầm hơn, chuyên nghiệp hơn, hoặc ngược lại.
+
+Áp dụng bộ màu mới: Tương tự như Bước 2, cập nhật các biến CSS trong file HTML (hoặc file CSS mới) của phiên bản thứ hai với bộ màu mới bạn vừa chọn.
+
+So sánh: Sau khi hoàn thành cả hai phiên bản, hãy mở chúng cạnh nhau. Bạn có nhận thấy sự khác biệt rõ rệt về cảm nhận, tâm trạng mà mỗi bộ màu mang lại không? Điều này giúp bạn hiểu sâu hơn về tầm quan trọng của màu sắc trong việc truyền tải thông điệp và tạo ấn tượng ban đầu.
+
+Lời khuyên và Lưu ý
+Đừng ngại thử nghiệm: Adobe Color là một công cụ mạnh mẽ. Hãy dành thời gian khám phá các tùy chọn khác nhau và đừng ngần ngại thử những bộ màu mà bạn chưa từng nghĩ đến.
+
+Chú ý đến ngữ cảnh: Mặc dù đây là bài tập về màu sắc, hãy cố gắng nghĩ về "tính cách" của Trello hoặc đối tượng người dùng của nó khi chọn màu. Màu sắc có thể hỗ trợ hoặc đi ngược lại thông điệp của thương hiệu.
+
+Tương phản và khả năng tiếp cận (Accessibility): Luôn đảm bảo rằng các màu bạn chọn có độ tương phản đủ cao giữa chữ và nền để người đọc có thể dễ dàng đọc nội dung. Đây là một khía cạnh quan trọng của UX.
+
+Đơn giản hóa: Với bài tập này, bạn không cần phải thay đổi mọi màu sắc nhỏ nhặt. Tập trung vào các màu chính cho nền, tiêu đề, văn bản và các nút kêu gọi hành động.
+
+Chúc bạn thành công với bài tập phối màu này!
+
+## YÊU CẦU NỘP BÀI:
+
+- Hoàn thành 2 phiên bản newsletter với 2 bộ màu khác nhau được lựa chọn bằng Adobe Color.
+
+- Đảm bảo mã nguồn HTML/CSS của cả 2 phiên bản hoạt động đúng.
+
+- Đưa mã nguồn lên GitHub hoặc CodePen.
+
+- Dán link repository hoặc link CodePen vào phần nộp bài.
