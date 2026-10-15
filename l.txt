@@ -3,349 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới Thiệu Sách - Bứt Phá Lập Trình Web</title>
-
-    <!-- Bootstrap 5.3.3 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome 6.5.2 -->
+    <title>Thực hành Phối màu Đơn Tông (Monochromatic Palette)</title>
+    
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Custom CSS Styles -->
     <style>
+        /* BẢNG MÀU ĐƠN TÔNG (MONOCHROMATIC PALETTE BẬC 1 - BẬC 9)
+           Màu chủ đạo Logo (#00ADEE)
+           - Bậc 1 (Main/Accent): #00ADEE
+           - Bậc 2 (Hover/Badge): #00B2EF
+           - Bậc 4 (Header/Nav Background): #00BFF2
+           - Bậc 7 (Content Background): #8DD7F7
+           - Bậc 9 (Footer Background): #C6E9FA
+        */
         :root {
-            --primary-color: #0d6efd;
-            --dark-color: #212529;
-            --light-bg: #f8f9fa;
+            --color-level-1: #00ADEE;
+            --color-level-2: #00B2EF;
+            --color-level-4: #00BFF2;
+            --color-level-7: #8DD7F7;
+            --color-level-9: #C6E9FA;
+            --text-dark: #000000;
+            --text-white: #ffffff;
+        }
+
+        /* Reset Mặc định */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
+            background-color: #f4f6f8;
+            color: var(--text-dark); /* Bước 6: Giữ màu chữ toàn trang là màu đen */
+            line-height: 1.6;
         }
 
-        /* Hero / Overview Section */
-        .hero-section {
-            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
-            color: white;
-            padding: 100px 0 80px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .book-cover-img {
-            max-height: 420px;
-            object-fit: cover;
+        /* Bước 2: Thay đổi màu nền Header/Nav sang màu bậc 4 (#00BFF2) */
+        header {
+            background-color: var(--color-level-4);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-level-1);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--color-level-2);
+            color: var(--text-white);
+        }
+
+        /* Bước 4: Đổi màu nền phần nội dung sang màu bậc 7 (#8DD7F7) */
+        .content-section {
+            background-color: var(--color-level-7);
+            padding: 60px 0;
+            margin: 30px 0;
             border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
             transition: transform 0.3s ease;
         }
 
-        .book-cover-img:hover {
-            transform: translateY(-8px);
+        .product-card:hover {
+            transform: translateY(-5px);
         }
 
-        /* Section Styling */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            position: relative;
-            margin-bottom: 50px;
-        }
-
-        .section-title::after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary-color);
+        /* Bước 3: Thay đổi màu nền phần ON SALE/PREVIEW sang màu bậc 1 (#00ADEE) / bậc 2 (#00B2EF) */
+        .sale-badge {
             position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
+            top: 15px;
+            left: 15px;
+            background-color: var(--color-level-1);
+            color: var(--text-white);
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
         }
 
-        /* Author Avatar */
-        .author-avatar {
-            width: 180px;
-            height: 180px;
+        .product-img {
+            width: 100%;
+            height: 220px;
             object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* Price Cards */
-        .price-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e9ecef;
+        .product-info {
+            padding: 20px;
+            text-align: center;
         }
 
-        .price-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        .product-title {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
         }
 
-        .price-card.featured {
-            border: 2px solid var(--primary-color);
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--color-level-1);
+            margin-bottom: 15px;
         }
 
-        /* Download CTA */
-        .download-cta {
-            background: linear-gradient(135deg, #212529 0%, #343a40 100%);
-            color: white;
+        /* Bước 3: Nút PREVIEW sử dụng tông màu bậc 2 (#00B2EF) */
+        .btn-preview {
+            display: inline-block;
+            background-color: var(--color-level-2);
+            color: var(--text-white);
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
         }
 
-        /* Reader's Say / Testimonial */
-        .testimonial-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            height: 100%;
+        .btn-preview:hover {
+            opacity: 0.9;
         }
 
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 50%;
+        /* Bước 5: Thay đổi màu nền phần Footer sang màu bậc 9 (#C6E9FA) */
+        footer {
+            background-color: var(--color-level-9);
+            color: var(--text-dark);
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            border-top: 2px solid var(--color-level-7);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-socials a {
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--color-level-1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. HEADER & NAVBAR -->
+    <!-- Bước 2: Header/Nav nền màu Bậc 4 (#00BFF2) -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
-            <div class="container">
-                <a class="navbar-brand fw-bold" href="#">
-                    <i class="fas fa-book-open text-primary me-2"></i>DevBook
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto text-uppercase small fw-semibold">
-                        <li class="nav-item"><a class="nav-link" href="#overview">Tổng quan</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#author">Tác giả</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#features">Đặc điểm</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#prices">Bảng giá</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#download">Tải về</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#readers">Đánh giá</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="container navbar">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-shopping-bag"></i></div>
+                <span>BrandShop</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#products">Sản phẩm</a></li>
+                <li><a href="#">Khuyến mãi</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </div>
     </header>
 
-    <main>
-        <!-- 2. BOOK OVERVIEW (HERO SECTION) -->
-        <section id="overview" class="hero-section">
-            <div class="container">
-                <div class="row align-items-center gy-4">
-                    <div class="col-lg-6 text-center text-lg-start">
-                        <span class="badge bg-warning text-dark mb-3 px-3 py-2 text-uppercase fw-bold">Sách Lập Trình Bán Chạy 2026</span>
-                        <h1 class="display-4 fw-bold mb-3">Bứt Phá Lập Trình Web Chuẩn Hiện Đại</h1>
-                        <p class="lead mb-4 opacity-90">Cuốn sách hướng dẫn toàn diện từ tư duy thiết kế HTML/CSS, Bootstrap 5, SASS/SCSS đến kiến trúc ứng dụng Web thực tế dành cho mọi lập trình viên.</p>
-                        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                            <a href="#prices" class="btn btn-warning btn-lg fw-bold px-4"><i class="fas fa-shopping-cart me-2"></i>Mua Sách Ngay</a>
-                            <a href="#download" class="btn btn-outline-light btn-lg px-4"><i class="fas fa-file-pdf me-2"></i>Đọc Thử Chương 1</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-center">
-                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Bìa sách Bứt Phá Lập Trình Web" class="img-fluid book-cover-img">
-                    </div>
-                </div>
+    <!-- Bước 4: Phần Nội dung nền màu Bậc 7 (#8DD7F7) -->
+    <main class="container">
+        <section id="products" class="content-section">
+            <div class="section-header">
+                <h2>Sản Phẩm Mới & Nổi Bật</h2>
+                <p>Danh sách các sản phẩm áp dụng bảng màu đơn tông Monochromatic</p>
             </div>
-        </section>
 
-        <!-- 3. AUTHOR SECTION -->
-        <section id="author" class="bg-light">
             <div class="container">
-                <div class="text-center">
-                    <h2 class="fw-bold section-title">Về Tác Giả</h2>
-                    <p class="text-muted">Gặp gỡ người truyền cảm hứng cho cuốn sách</p>
-                </div>
-
-                <div class="row justify-content-center mt-5 align-items-center">
-                    <div class="col-md-4 text-center mb-4 mb-md-0">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Tác giả Nguyễn Văn A" class="author-avatar mb-3">
-                        <h4 class="fw-bold mb-1">Nguyễn Văn A</h4>
-                        <p class="text-primary font-weight-semibold">Senior Fullstack Engineer & Author</p>
-                    </div>
-                    <div class="col-md-7">
-                        <h3 class="fw-bold mb-3">10+ Năm Kinh Nghiệm Đào Tạo & Phát Triển Phần Mềm</h3>
-                        <p class="text-secondary leading-relaxed">
-                            Với hơn một thập kỷ tham gia trực tiếp vào các dự án phần mềm quy mô lớn và giảng dạy cho hàng ngàn học viên lập trình, tác giả đã đúc kết những kiến thức cốt lõi, tinh gọn nhất vào cuốn sách này.
-                        </p>
-                        <p class="text-secondary leading-relaxed">
-                            Mục tiêu của cuốn sách là giúp các bạn sinh viên và kỹ sư trẻ không chỉ gõ được code mà còn nắm vững tư duy thiết kế hệ thống web chuẩn chỉnh, tối ưu và dễ bảo trì.
-                        </p>
-                        <div class="d-flex gap-3 text-primary fs-4 mt-4">
-                            <a href="#" class="text-primary"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="text-primary"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="text-primary"><i class="fab fa-github"></i></a>
-                            <a href="#" class="text-primary"><i class="fas fa-globe"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. FEATURES SECTION -->
-        <section id="features">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="fw-bold section-title">Giá Trị Nội Dung Sách</h2>
-                    <p class="text-muted">Những đặc điểm nổi bật giúp bạn nâng tầm kỹ năng</p>
-                </div>
-
-                <div class="row g-4 mt-4">
-                    <div class="col-md-4">
-                        <div class="p-4 text-center border rounded-3 bg-white h-100 shadow-sm">
-                            <div class="text-primary fs-1 mb-3"><i class="fas fa-code"></i></div>
-                            <h4 class="fw-bold mb-2">Thực Hành 100%</h4>
-                            <p class="text-muted mb-0">Hơn 50+ bài tập thực hành và dự án thực tế kèm theo mã nguồn đầy đủ trên GitHub.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-4 text-center border rounded-3 bg-white h-100 shadow-sm">
-                            <div class="text-primary fs-1 mb-3"><i class="fas fa-mobile-alt"></i></div>
-                            <h4 class="fw-bold mb-2">Responsive Chuẩn</h4>
-                            <p class="text-muted mb-0">Nắm vững Flexbox, CSS Grid và Bootstrap 5 để tự tạo giao diện hoàn hảo trên mọi thiết bị.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="p-4 text-center border rounded-3 bg-white h-100 shadow-sm">
-                            <div class="text-primary fs-1 mb-3"><i class="fas fa-rocket"></i></div>
-                            <h4 class="fw-bold mb-2">Tối Ưu SASS/SCSS</h4>
-                            <p class="text-muted mb-0">Hướng dẫn tư duy quy hoạch CSS theo mô hình Partials giúp dự án lớn dễ duy trì.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. PRICES SECTION -->
-        <section id="prices" class="bg-light">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="fw-bold section-title">Lựa Chọn Bảng Giá</h2>
-                    <p class="text-muted">Chọn gói phù hợp nhất với nhu cầu học tập của bạn</p>
-                </div>
-
-                <div class="row g-4 mt-4 justify-content-center">
-                    <!-- Basic Ebook -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card price-card rounded-4 p-4 text-center h-100">
-                            <div class="card-body">
-                                <h4 class="fw-bold text-secondary">Bản PDF Ebook</h4>
-                                <h2 class="display-5 fw-bold text-primary my-3">199.000đ</h2>
-                                <p class="text-muted">Phù hợp học cá nhân</p>
-                                <ul class="list-unstyled my-4 text-start">
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>File PDF chất lượng cao</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mã nguồn bài tập mẫu</li>
-                                    <li class="mb-2 text-muted"><i class="fas fa-times me-2"></i>Sách in bìa mềm</li>
-                                    <li class="mb-2 text-muted"><i class="fas fa-times me-2"></i>Video khóa học đi kèm</li>
-                                </ul>
-                                <button class="btn btn-outline-primary w-100 py-2 fw-bold">Chọn Mua Ebook</button>
-                            </div>
+                <div class="products-grid">
+                    <!-- Card 1 -->
+                    <div class="product-card">
+                        <!-- Bước 3: Nền Badge ON SALE màu Bậc 1 (#00ADEE) -->
+                        <span class="sale-badge">ON SALE</span>
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Đồng hồ thông minh" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Đồng Hồ Thông Minh</h3>
+                            <div class="product-price">1.200.000đ</div>
+                            <!-- Bước 3: Nút PREVIEW màu Bậc 2 (#00B2EF) -->
+                            <a href="#" class="btn-preview"><i class="fas fa-eye me-1"></i> PREVIEW</a>
                         </div>
                     </div>
 
-                    <!-- Combo Physical Book + Ebook -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card price-card featured rounded-4 p-4 text-center h-100 bg-white shadow">
-                            <div class="card-body">
-                                <span class="badge bg-danger mb-2">Phổ Biến Nhất</span>
-                                <h4 class="fw-bold text-dark">Combo Sách In + Ebook</h4>
-                                <h2 class="display-5 fw-bold text-primary my-3">349.000đ</h2>
-                                <p class="text-muted">Trải nghiệm học tập trọn vẹn</p>
-                                <ul class="list-unstyled my-4 text-start">
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Sách in bìa mềm cao cấp</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Trọn bộ Ebook PDF + EPUB</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mã nguồn GitHub đầy đủ</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Miễn phí giao hàng toàn quốc</li>
-                                </ul>
-                                <button class="btn btn-primary w-100 py-2 fw-bold">Đặt Mua Combo Ngay</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. DOWNLOAD SECTION -->
-        <section id="download" class="download-cta text-center">
-            <div class="container py-4">
-                <h2 class="fw-bold mb-3">Tải Đọc Thử Chương 1 Miễn Phí</h2>
-                <p class="lead opacity-75 mb-4 mx-auto" style="max-width: 600px;">Để lại email để nhận ngay bản xem trước PDF gồm 40 trang đầu tiên của cuốn sách.</p>
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6">
-                        <form class="input-group input-group-lg">
-                            <input type="email" class="form-control" placeholder="Nhập email của bạn..." required>
-                            <button class="btn btn-warning fw-bold px-4" type="submit">Tải Ngay <i class="fas fa-download ms-1"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. READER'S SAY (TESTIMONIALS) SECTION -->
-        <section id="readers" class="bg-light">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="fw-bold section-title">Độc Giả Nói Gì</h2>
-                    <p class="text-muted">Cảm nhận thực tế từ các học viên và kỹ sư đã đọc sách</p>
-                </div>
-
-                <div class="row g-4 mt-4">
-                    <div class="col-md-4">
-                        <div class="testimonial-card">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Độc giả Trần Văn B" class="testimonial-avatar me-3">
-                                <div>
-                                    <h5 class="fw-bold mb-0">Trần Văn B</h5>
-                                    <small class="text-muted">Frontend Developer</small>
-                                </div>
-                            </div>
-                            <div class="text-warning mb-2">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-secondary mb-0">"Cuốn sách trình bày cực kỳ dễ hiểu. Các ví dụ dựng trang bằng Bootstrap 5 vô cùng thực tế, giúp mình tự tin đi phỏng vấn hơn nhiều."</p>
+                    <!-- Card 2 -->
+                    <div class="product-card">
+                        <span class="sale-badge">ON SALE</span>
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="Tai nghe không dây" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Tai Nghe Bluetooth</h3>
+                            <div class="product-price">850.000đ</div>
+                            <a href="#" class="btn-preview"><i class="fas fa-eye me-1"></i> PREVIEW</a>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="testimonial-card">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Độc giả Lê Thị C" class="testimonial-avatar me-3">
-                                <div>
-                                    <h5 class="fw-bold mb-0">Lê Thị C</h5>
-                                    <small class="text-muted">Sinh viên CNTT</small>
-                                </div>
-                            </div>
-                            <div class="text-warning mb-2">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-secondary mb-0">"Rất thích phần hướng dẫn về SASS/SCSS. Nhờ cuốn sách mà mình đã biết cách tổ chức mã nguồn CSS khoa học hơn hẳn."</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="testimonial-card">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" alt="Độc giả Hoàng Minh D" class="testimonial-avatar me-3">
-                                <div>
-                                    <h5 class="fw-bold mb-0">Hoàng Minh D</h5>
-                                    <small class="text-muted">Web Designer</small>
-                                </div>
-                            </div>
-                            <div class="text-warning mb-2">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <p class="text-secondary mb-0">"Sách in chất lượng, hình ảnh minh họa mã nguồn rất rõ ràng. Đáng giá từng xu bỏ ra!"</p>
+                    <!-- Card 3 -->
+                    <div class="product-card">
+                        <span class="sale-badge">ON SALE</span>
+                        <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80" alt="Kính mát thời trang" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">Kính Mát Thời Trang</h3>
+                            <div class="product-price">450.000đ</div>
+                            <a href="#" class="btn-preview"><i class="fas fa-eye me-1"></i> PREVIEW</a>
                         </div>
                     </div>
                 </div>
@@ -353,15 +300,25 @@
         </section>
     </main>
 
-    <!-- 8. FOOTER -->
-    <footer class="bg-dark text-white py-4 border-top border-secondary">
-        <div class="container text-center">
-            <p class="mb-1">&copy; 2026 DevBook. Tất cả các quyền được bảo lưu.</p>
-            <p class="small text-muted mb-0">Thiết kế landing page giới thiệu sách sử dụng Bootstrap 5 & Font Awesome.</p>
+    <!-- Bước 5: Phần Footer nền màu Bậc 9 (#C6E9FA) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>BrandShop Monochromatic</h3>
+                    <p>Bài thực hành phối màu đơn tông theo màu chủ đạo #00ADEE</p>
+                </div>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BrandShop. Tất cả các quyền được bảo lưu.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5.3.3 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
