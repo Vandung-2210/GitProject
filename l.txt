@@ -2,387 +2,159 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Layout Bootstrap 3</title>
-    <!-- Nhúng Bootstrap 3.3.7 CSS từ CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-        /* =========================================
-           ĐỊNH DẠNG TÙY CHỈNH (CSS TỔNG HỢP)
-           ========================================= */
-        body {
-            background-color: #f5f5f5;
-        }
-
-        /* 1. Định dạng Header & Banner */
-        header {
-            position: relative;
-            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-            min-height: 140px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            padding: 15px;
-        }
-
-        .shopping-mall {
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-            font-variant: small-caps;
-        }
-
-        .shopping-mall > h1 {
-            font-family: Impact, Arial Black, sans-serif;
-            font-size: 42px;
-            color: #ffffff;
-            letter-spacing: 0.3px;
-            text-shadow: 0 0 3px #000;
-            padding-bottom: 0px;
-            border-bottom: 1px dotted gray;
-            margin: 0px;
-        }
-
-        .shopping-mall > h5 {
-            margin-top: 5px;
-            letter-spacing: 0.5px;
-            color: #f1f1f1;
-        }
-
-        .header-logo-img {
-            max-height: 110px;
-            margin-top: 5px;
-        }
-
-        /* 2. Định dạng Aside - Giỏ hàng (.poly-cart) */
-        .poly-cart {
-            margin-top: 5px;
-        }
-
-        .poly-cart ul {
-            padding: 0px;
-            margin: 0px;
-            list-style: none;
-            font-variant: small-caps;
-        }
-
-        .poly-cart .panel-body img {
-            max-height: 55px;
-            padding: 0;
-        }
-
-        .poly-cart .panel-heading strong {
-            font-variant: small-caps;
-            font-size: larger;
-            text-shadow: 0 0 2px darkgray;
-        }
-
-        /* 3. Định dạng Article - Khung hiển thị sản phẩm (.poly-prod) */
-        .poly-prod {
-            text-align: center;
-            padding: 5px;
-        }
-
-        .poly-prod .panel-body img {
-            height: 150px;
-            max-width: 95%;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .poly-prod .panel-footer {
-            font-weight: bold;
-            color: #c0392b;
-            font-size: 16px;
-        }
-
-        /* 4. Định dạng Footer */
-        footer {
-            margin-top: 20px;
-        }
-        footer p {
-            margin: 0;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container" style="height: auto">
-    
-    <!-- BƯỚC 2 & 3: HEADER -->
-    <header class="row">
-        <div class="shopping-mall">
-            <h1>Online shopping mall</h1>
-            <h5>The center point of the professional programming</h5>
-        </div>
-        <!-- Ảnh header đẩy sang phải -->
-        <img class="pull-right header-logo-img hidden-xs" 
-             src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" 
-             alt="Header Object"/>
-    </header>
-
-    <!-- BƯỚC 4: THANH ĐIỀU HƯỚNG NAVBAR (navbar-inverse) -->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <!-- Nút toggle cho mobile -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <!-- Các mục liên kết kèm Glyphicon -->
-            <div class="collapse navbar-collapse" id="main-navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Trang chủ</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Giới thiệu</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-earphone"></span> Liên hệ</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Góp ý</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Hỏi đáp</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-user"></span> Tài khoản <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Đăng nhập</a></li>
-                            <li><a href="#">Đăng ký thành viên</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Quên mật khẩu</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- BỐ CỤC CHÍNH CHIA 2 CỘT (ARTICLE: 9 CỘT, ASIDE: 3 CỘT) -->
-    <div class="row">
-        
-        <!-- BƯỚC 6: ARTICLE (KHU VỰC SẢN PHẨM) -->
-        <article class="col-sm-9">
-            
-            <!-- Hàng 1 (3 sản phẩm) -->
-            <div class="row">
-                <!-- Sản phẩm 1 -->
-                <div class="col-sm-4 poly-prod">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Nokia Lumia</h4>
-                        </div>
-                        <div class="panel-body">
-                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=350&auto=format&fit=crop&q=80" alt="Nokia Lumia"/>
-                        </div>
-                        <div class="panel-footer">
-                            $ 100.25
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sản phẩm 2 -->
-                <div class="col-sm-4 poly-prod">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Samsung Galaxy</h4>
-                        </div>
-                        <div class="panel-body">
-                            <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=350&auto=format&fit=crop&q=80" alt="Samsung Galaxy"/>
-                        </div>
-                        <div class="panel-footer">
-                            $ 250.00
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sản phẩm 3 -->
-                <div class="col-sm-4 poly-prod">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">iPhone 15 Pro</h4>
-                        </div>
-                        <div class="panel-body">
-                            <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=350&auto=format&fit=crop&q=80" alt="iPhone 15 Pro"/>
-                        </div>
-                        <div class="panel-footer">
-                            $ 999.99
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hàng 2 (3 sản phẩm) -->
-            <div class="row">
-                <!-- Sản phẩm 4 -->
-                <div class="col-sm-4 poly-prod">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Laptop Dell XPS</h4>
-                        </div>
-                        <div class="panel-body">
-                            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=350&auto=format&fit=crop&q=80" alt="Dell XPS"/>
-                        </div>
-                        <div class="panel-footer">
-                            $ 750.50
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sản phẩm 5 -->
-                <div class="col-sm-4 poly-prod">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Sony Bravia TV</h4>
-                        </div>
-                        <div class="panel-body">
-                            <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=350&auto=format&fit=crop&q=80" alt="Sony Bravia TV"/>
-                        </div>
-                        <div class="panel-footer">
-                            $ 450.00
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sản phẩm 6 -->
-                <div class="col-sm-4 poly-prod">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Máy Tính Bàn PC</h4>
-                        </div>
-                        <div class="panel-body">
-                            <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=350&auto=format&fit=crop&q=80" alt="Desktop PC"/>
-                        </div>
-                        <div class="panel-footer">
-                            $ 620.00
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </article>
-
-        <!-- BƯỚC 5: ASIDE (GIỎ HÀNG, TÌM KIẾM, CHỦNG LOẠI) -->
-        <aside class="col-sm-3">
-            
-            <!-- 1. Giỏ hàng (.poly-cart) -->
-            <div class="poly-cart">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <img class="col-sm-5 col-xs-4" src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png" alt="Cart"/>
-                        <ul class="col-sm-7 col-xs-8">
-                            <li>100 items</li>
-                            <li>$56.8</li>
-                            <li><a href="#">Xem giỏ hàng</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. Ô tìm kiếm -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form>
-                        <input placeholder="Keywords" class="form-control"/>
-                    </form>
-                </div>
-            </div>
-
-            <!-- 3. Chủng loại hàng hóa -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-th-list"></span>
-                    <strong>Chủng Loại</strong>
-                </div>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Điện thoại di động</a>
-                    <a href="#" class="list-group-item">Máy tính xách tay</a>
-                    <a href="#" class="list-group-item">Máy tính để bàn</a>
-                    <a href="#" class="list-group-item">Quạt máy</a>
-                    <a href="#" class="list-group-item">Tivi</a>
-                    <a href="#" class="list-group-item">Tủ lạnh</a>
-                </div>
-            </div>
-
-        </aside>
-
-    </div>
-
-    <!-- FOOTER: Chân trang bản quyền -->
-    <footer class="panel panel-default">
-        <div class="panel-heading text-center">
-            <p>CodeGym &copy; 2017</p>
-        </div>
-    </footer>
-
-</div>
-
-<!-- Nhúng jQuery <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ - Bootstrap Practice</title>
-    
-    <!-- Bước 1: Thêm Bootstrap 5.3.3 CSS -->
+    <title>Thực hành Bootstrap Grid & Flexbox</title>
+
+    <!-- Thêm Bootstrap 5.3.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bước 1: Thêm Font Awesome 6.5.2 -->
+
+    <!-- Bước 5: Thêm Font Awesome 6.5.2 vào <head> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-        /* Tùy chỉnh chiều cao cố định cho Carousel để giao diện cân đối */
+        /* Tùy chỉnh chiều cao cố định và bo góc cho Carousel */
         .carousel-item img {
-            height: 450px;
+            height: 400px;
             object-fit: cover;
         }
     </style>
 </head>
 <body>
 
-    <!-- Bước 2: Tạo Navbar với Font Awesome -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-home me-2"></i>MyWebsite</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-house-user me-1"></i> Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i> About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services"><i class="fas fa-cogs me-1"></i> Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i> Contact</a></li>
-                </ul>
-            </div>
+    <!-- Header có sử dụng Font Awesome Icon -->
+    <header class="bg-primary text-white py-4 shadow-sm">
+        <div class="container text-center">
+            <h1>
+                <i class="fas fa-home me-2"></i>Trang chủ
+            </h1>
+            <p class="mb-0">Bài thực hành Bố Cục 3 Cột, Flexbox, Carousel & Form với Bootstrap 5</p>
         </div>
-    </nav>
+    </header>
 
-    <!-- Bước 3: Tạo Hero Section với Carousel -->
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Slide 1">
-                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
-                    <h5>Chào mừng đến với MyWebsite</h5>
-                    <p>Giải pháp phát triển Web hiện đại và tối ưu.</p>
+    <main class="py-4">
+        <!-- Bước 1: Cấu trúc Grid với 3 cột (kết hợp Flexbox) -->
+        <section class="container mt-4">
+            <h4 class="mb-3 text-secondary"><i class="fas fa-th-large me-2"></i>Bước 1: Bố cục 3 Cột Grid & Flexbox</h4>
+            <div class="row g-3">
+                <div class="col-md-4 d-flex justify-content-center align-items-center bg-light p-4 rounded shadow-sm border">
+                    <p class="mb-0 fw-bold text-primary"><i class="fas fa-star me-2"></i>Phần 1</p>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center align-items-center bg-secondary p-4 text-white rounded shadow-sm">
+                    <p class="mb-0 fw-bold"><i class="fas fa-heart me-2"></i>Phần 2</p>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center align-items-center bg-light p-4 rounded shadow-sm border">
+                    <p class="mb-0 fw-bold text-primary"><i class="fas fa-gem me-2"></i>Phần 3</p>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Slide 2">
-                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
-                    <h5>Sáng Tạo & Đột Phá</h5>
-                    <p>Xây dựng giao diện Responsive chuyên nghiệp với Bootstrap Bootstrap 3.3.7 JS từ CDN để kích hoạt dropdown & toggle menu -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        </section>
+
+        <!-- Bước 2: Áp dụng Margin & Padding để điều chỉnh khoảng cách -->
+        <section class="container my-5 py-3 bg-light rounded border text-center">
+            <h3 class="text-center text-dark mb-2">Khoảng cách được điều chỉnh bằng Margin & Padding</h3>
+            <p class="text-muted mb-0">Sử dụng class <code>my-5</code> (margin top & bottom) và <code>py-3</code> (padding top & bottom) để căn chỉnh không gian.</p>
+        </section>
+
+        <!-- Bước 3: Sử dụng Display Property để hiển thị ẩn hiện nội dung -->
+        <section class="container mb-5">
+            <div class="d-none d-md-block bg-warning text-center p-3 rounded shadow-sm">
+                <p class="mb-0 fw-bold text-dark">
+                    <i class="fas fa-desktop me-2"></i>Nội dung này chỉ hiển thị trên màn hình lớn hơn hoặc bằng 768px (Desktop/Tablet)
+                </p>
+            </div>
+        </section>
+
+        <!-- Bước 4: Tạo Carousel -->
+        <section class="container mt-5">
+            <h4 class="mb-3 text-secondary"><i class="fas fa-images me-2"></i>Bước 4: Bootstrap Carousel</h4>
+            <div id="myCarousel" class="carousel slide shadow rounded overflow-hidden" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Hình ảnh 1">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Hình ảnh 1</h5>
+                            <p>Không gian thiên nhiên tươi đẹp</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Hình ảnh 2">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Hình ảnh 2</h5>
+                            <p>Cảnh quan núi rừng hùng vĩ</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=1200&q=80" class="d-block w-100" alt="Hình ảnh 3">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            <h5>Hình ảnh 3</h5>
+                            <p>Khu rừng xanh ngát tràn đầy sức sống</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Bước 6: Tạo Form liên hệ -->
+        <section class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-primary text-white p-3">
+                            <h4 class="card-title mb-0"><i class="fas fa-envelope me-2"></i>Biểu mẫu liên hệ</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label font-weight-bold">Họ và tên</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                        <input type="email" class="form-control" id="email" placeholder="Nhập email" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Nội dung</label>
+                                    <textarea class="form-control" id="message" rows="4" placeholder="Nhập nội dung"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-paper-plane me-1"></i> Gửi
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2026 Bootstrap Exercise. Designed with Bootstrap 5 & Font Awesome 6.</p>
+    </footer>
+
+    <!-- Thêm JavaScript của Bootstrap 5.3.3 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
