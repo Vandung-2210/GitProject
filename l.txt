@@ -3,284 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Web Development Template</title>
+    <title>Creative Web Design - Template Nâng Cao</title>
     
-    <!-- Nhúng Google Fonts cho Piazzolla và Ubuntu -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,100..900;1,8..30,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-
     <style>
-        /* Sửa lỗi selector '*' từ bài tập mẫu */
+        /* Reset mặc định */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Thanh điều hướng cố định (Fixed Navbar) */
         .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
+            position: fixed;
             top: 0;
-            cursor: pointer;
-            padding: 0 50px;
+            left: 0;
+            width: 100%;
+            background: rgba(51, 51, 51, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 15px 0;
+            text-align: center;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .background {
-            background: black;
-            background-blend-mode: darken;
-            background-size: cover;
-        }
-
-        .nav-list {
-            width: 70%;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
+        .navbar ul {
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin-right: 20px;
-        }
-
-        .logo img {
-            width: 140px;
-            border-radius: 50px;
-        }
-
-        .nav-list li {
             list-style: none;
-            padding: 26px 20px;
         }
 
-        .nav-list li a {
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
             text-decoration: none;
             color: white;
-            font-family: 'Ubuntu', sans-serif;
             font-size: 18px;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
         }
 
-        .nav-list li a:hover {
-            color: grey;
+        .navbar ul li a:hover {
+            color: #f39c12;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .rightNav {
-            width: 30%;
-            text-align: right;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #search {
-            padding: 5px 10px;
-            font-size: 17px;
-            border: 2px solid grey;
-            border-radius: 9px;
-            outline: none;
-        }
-
-        .firstsection {
-            background-color: #2e7d32; /* Tông màu xanh lá tươi hơn */
-            height: 400px;
-        }
-
-        .secondsection {
-            background-color: #1565c0; /* Tông màu xanh dương tươi hơn */
-            height: 400px;
-        }
-
-        .box-main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Header với hiệu ứng mờ (Blur) và hình nền */
+        .header {
+            background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             color: white;
-            max-width: 80%;
-            margin: auto;
+            text-align: center;
+            padding: 160px 20px 100px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            background: inherit;
+            filter: blur(8px);
+            z-index: 0;
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%; 
             height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
         }
 
-        .firstHalf {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
 
-        .secondHalf {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .secondHalf img {
-            width: 70%;
-            border: 4px solid white;
-            border-radius: 150px;
-            display: block;
-            margin: auto;
-        }
-
-        .text-big {
-            font-family: 'Piazzolla', serif;
-            font-weight: bold;
-            font-size: 35px;
+        .header h1 {
+            font-size: 3rem;
             margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .text-small {
-            font-size: 18px;
-            line-height: 1.6;
-            font-family: 'Ubuntu', sans-serif;
+        .header p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .btn {
-            padding: 8px 20px;
-            margin: 7px 0;
-            border: 2px solid white;
-            border-radius: 8px;
-            background: none;
+            background: #1abc9c;
             color: white;
-            cursor: pointer;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
         }
 
         .btn:hover {
+            background: #16a085;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 160, 133, 0.6);
+        }
+
+        /* Content Section & Card Layout (CSS Grid) */
+        .content {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .content > p {
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 10px;
+        }
+
+        .card {
             background: white;
-            color: black;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid #eee;
         }
 
-        .btn-sm {
-            padding: 6px 15px;
-            vertical-align: middle;
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .section {
-            height: 400px;
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #34495e;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Footer 2 Cột Chuyên Nghiệp */
+        .footer {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            max-width: 90%;
-            margin: auto;
-        }
-
-        /* Áp dụng flex-direction: row-reverse để đảo vị trí ảnh/văn bản */
-        .section-Left {
-            flex-direction: row-reverse;
-        }
-
-        .paras {
-            padding: 0px 65px;
-        }
-
-        .thumbnail img {
-            width: 280px;
-            border: 2px solid black;
-            border-radius: 26px;
-            margin-top: 19px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .text-footer {
-            text-align: center;
-            padding: 30px 0;
-            font-family: 'Ubuntu', sans-serif;
-            display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px 50px;
+            background: #2c3e50;
             color: white;
+        }
+
+        .footer-left p {
+            font-size: 0.95rem;
+            color: #bdc3c7;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-right p {
+            font-size: 0.95rem;
+            color: #ecf0f1;
+        }
+
+        .footer-right a {
+            color: #1abc9c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-right a:hover {
+            color: #f39c12;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-right {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar background">
-        <ul class="nav-list">
-            <div class="logo">
-                <!-- Sử dụng SVG Logo mẫu để không bị lỗi đứt ảnh -->
-                <img src="https://via.placeholder.com/180x60/000000/FFFFFF?text=MyBrand" alt="Logo">
-            </div>
-            <li><a href="#web">Web Technology</a></li>
-            <li><a href="#program">C Programming</a></li>
-            <li><a href="#java">Java</a></li>
+    <!-- Thanh điều hướng cố định -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#services">Dịch vụ</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Liên hệ</a></li>
         </ul>
-
-        <div class="rightNav">
-            <input type="text" name="search" id="search" placeholder="Search...">
-            <button class="btn btn-sm">Search</button>
-        </div>
     </nav>
 
-    <section class="firstsection">
-        <div class="box-main">
-            <div class="firstHalf">
-                <h1 class="text-big" id="web">
-                    Web Technology
-                </h1>
-                
-                <p class="text-small">
-                    HTML stands for HyperText Markup Language. It is used to design
-                    web pages using a markup language. HTML is the combination of Hypertext
-                    and Markup language. Hypertext defines the link between the web
-                    pages. A markup language is used to define the text document within
-                    tag which defines the structure of web pages. HTML is a markup language
-                    that is used by the browser to manipulate text, images, and other
-                    content to display it in the required format.
-                </p>
+    <!-- Header với nền ảnh và hiệu ứng blur -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Creative Web Design</h1>
+            <p>Thiết kế website chuyên nghiệp • Hiện đại • Ấn tượng</p>
+            <a href="#services" class="btn">Khám phá ngay</a>
+        </div>
+    </header>
+
+    <!-- Content Section với Card Layout -->
+    <section class="content" id="services">
+        <h2>Dịch vụ của chúng tôi</h2>
+        <p>Giải pháp tối ưu nâng tầm thương hiệu doanh nghiệp của bạn</p>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Thiết kế Website">
+                <h3>Thiết kế Website</h3>
+                <p>Chúng tôi tạo ra những trang web chuyên nghiệp, thân thiện với người dùng và tối ưu trên mọi thiết bị.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" alt="SEO & Marketing">
+                <h3>SEO & Marketing</h3>
+                <p>Giúp website của bạn đạt thứ hạng cao trên công cụ tìm kiếm và tiếp cận hàng ngàn khách hàng tiềm năng.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1534536281715-e28d76741772?auto=format&fit=crop&w=600&q=80" alt="Hỗ trợ 24/7">
+                <h3>Hỗ trợ 24/7</h3>
+                <p>Đội ngũ kỹ thuật chuyên nghiệp luôn sẵn sàng đồng hành và giúp bạn giải quyết mọi vấn đề nhanh chóng.</p>
             </div>
         </div>
     </section>
 
-    <section class="secondsection">
-        <div class="box-main">
-            <div class="secondHalf">
-                <h1 class="text-big" id="program">
-                    C Programming
-                </h1>
-                <p class="text-small">
-                    C is a procedural programming language. It was initially developed by Dennis
-                    Ritchie as a system programming language to write operating system.
-                    The main features of C language include low-level access to memory, simple set
-                    of keywords, and clean style, these features make C language suitable for
-                    system programming like operating system or compiler development.
-                </p>
-            </div>
+    <!-- Footer chuyên nghiệp -->
+    <footer class="footer">
+        <div class="footer-left">
+            <p>&copy; 2026 Creative Web. All rights reserved.</p>
         </div>
-    </section>
-
-    <section class="section section-Left" id="java">
-        <div class="paras">
-            <h1 class="sectionTag text-big">Java</h1>
-
-            <p class="sectionSubTag text-small">
-                Java has been one of the most popular programming language
-                for many years. Java is Object Oriented. However it is not
-                considered as pure object oriented as it provides support for primitive
-                data types (like int, char, etc). The Java codes are first compiled into byte
-                code (machine independent code). Then the byte code is run on Java Virtual
-                Machine (JVM) regardless of the underlying architecture.
-            </p>
+        <div class="footer-right">
+            <p>Theo dõi chúng tôi: <a href="#">Facebook</a> • <a href="#">Twitter</a> • <a href="#">LinkedIn</a></p>
         </div>
-
-        <div class="thumbnail">
-            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=500&q=80" alt="Laptop Image">
-        </div>
-    </section>
-
-    <footer class="background">
-        <p class="text-footer">
-            Copyright &copy; 2026 - All rights are reserved
-        </p>
     </footer>
 
 </body>
