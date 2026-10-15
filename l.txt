@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thực hành SASS Variables & Mixins</title>
+    <title>Tái Cấu Trúc CSS Responsive Grid Sang SASS</title>
 
-    <!-- Nhúng thư viện SASS compiler chạy trực tiếp trên trình duyệt -->
+    <!-- Nhúng SASS Compiler tự động biên dịch SCSS trực tiếp trên trình duyệt -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.sync.min.js"></script>
 
     <style id="compiled-css">
@@ -14,100 +14,207 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Tiêu đề H1 - Tối ưu với Variables</h1>
-        <h2>Tiêu đề H2 - Kích thước Medium</h2>
+    <!-- Responsive Grid Test Layout -->
+    <div class="grid">
+        <header class="header">
+            <h1 class="header__title">Responsive Grid System - SASS Refactored</h1>
+        </header>
 
-        <div class="card">
-            <p>Đây là thẻ Card được định kiểu thông qua <code>@mixin box-style</code> tái sử dụng.</p>
-            <br>
-            <button class="button">Nút bấm chính</button>
+        <div class="row">
+            <div class="col-12 col-s-12">
+                <div class="card card--primary">
+                    <h3>Header Block (12 Columns)</h3>
+                    <p>Khung responsive tự động co giãn theo kích thước màn hình.</p>
+                </div>
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-3 col-s-12">
+                <div class="card">
+                    <h4>Sidebar</h4>
+                    <p>3 Cột (Desktop) / 12 Cột (Mobile)</p>
+                </div>
+            </div>
+
+            <div class="col-9 col-s-12">
+                <div class="row">
+                    <div class="col-6 col-s-6">
+                        <div class="card card--accent">
+                            <h4>Main Content A</h4>
+                            <p>6 Cột</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-s-6">
+                        <div class="card card--accent">
+                            <h4>Main Content B</h4>
+                            <p>6 Cột</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 col-s-12">
+                <div class="card">
+                    <h4>Feature 1</h4>
+                    <p>4 Cột</p>
+                </div>
+            </div>
+            <div class="col-4 col-s-12">
+                <div class="card">
+                    <h4>Feature 2</h4>
+                    <p>4 Cột</p>
+                </div>
+            </div>
+            <div class="col-4 col-s-12">
+                <div class="card">
+                    <h4>Feature 3</h4>
+                    <p>4 Cột</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 Responsive Grid Refactored with SASS/SCSS.</p>
+        </footer>
     </div>
 
-    <!-- Mã nguồn SCSS hoàn chỉnh tích hợp theo đúng các bước bài tập -->
+    <!-- Mã nguồn SCSS tái cấu trúc hoàn chỉnh -->
     <script type="text/scss" id="scss-code">
         // ==========================================
-        // BƯỚC 2: BẢNG BIẾN (abstracts/_variables.scss)
+        // 1. VARIABLES (Biến số quản lý giao diện)
         // ==========================================
-        $primary-color: red;
-        $text-color: #222;
-        $font-large: 32px;
-        $font-medium: 28px;
-        $padding-standard: 10px 20px;
-        $box-shadow-default: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        $grid-columns: 12;
+        $breakpoint-mobile: 768px;
+        $primary-color: #3498db;
+        $accent-color: #2ecc71;
+        $text-color: #2c3e50;
+        $bg-color: #f8f9fa;
+        $card-bg: #ffffff;
+        $border-radius: 8px;
+        $gutter: 15px;
 
         // ==========================================
-        // BƯỚC 3: MIXINS (abstracts/_mixins.scss)
+        // 2. MIXINS (Mã dùng chung & Breakpoint)
         // ==========================================
-        @mixin button-style($bg-color) {
-            background: $bg-color;
-            color: white;
-            padding: $padding-standard;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: opacity 0.2s ease;
-
-            &:hover {
-                opacity: 0.85;
+        @mixin respond-to-mobile {
+            @media only screen and (max-width: #{$breakpoint-mobile}) {
+                @content;
             }
         }
 
-        @mixin box-style {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: $box-shadow-default;
+        @mixin card-shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         // ==========================================
-        // BƯỚC 4: ÁP DỤNG SCSS (base & components)
+        // 3. BASE & RESET
         // ==========================================
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: $bg-color;
+            color: $text-color;
+            line-height: 1.6;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 800px;
+        // ==========================================
+        // 4. GRID SYSTEM REFACTORED (Lưới 12 cột SASS)
+        // ==========================================
+        .grid {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        // base/_typography.scss
-        h1 {
-            font-size: $font-large;
-            color: $text-color;
-            margin-bottom: 10px;
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -$gutter;
+            margin-right: -$gutter;
+
+            &::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
         }
 
-        h2 {
-            font-size: $font-medium;
-            color: $text-color;
-            margin-bottom: 20px;
+        // Tạo vòng lặp sinh tự động các cột Responsive Desktop (.col-1 đến .col-12)
+        @for $i from 1 through $grid-columns {
+            .col-#{$i} {
+                width: percentage($i / $grid-columns);
+                float: left;
+                padding-left: $gutter;
+                padding-right: $gutter;
+            }
         }
 
-        // components/_buttons.scss
-        .button {
-            @include button-style($primary-color);
+        // Vòng lặp sinh các cột cho Mobile (.col-s-1 đến .col-s-12)
+        @include respond-to-mobile {
+            @for $i from 1 through $grid-columns {
+                .col-s-#{$i} {
+                    width: percentage($i / $grid-columns);
+                }
+            }
         }
 
-        // components/_cards.scss
+        // ==========================================
+        // 5. COMPONENTS (BEM & Nesting)
+        // ==========================================
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+
+            &__title {
+                color: $primary-color;
+                font-size: 2rem;
+            }
+        }
+
         .card {
-            @include box-style;
-            margin-top: 20px;
+            background-color: $card-bg;
+            border-radius: $border-radius;
+            padding: 20px;
+            margin-bottom: 20px;
+            @include card-shadow;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            &--primary {
+                background-color: $primary-color;
+                color: #ffffff;
+            }
+
+            &--accent {
+                border-left: 4px solid $accent-color;
+            }
+
+            h3, h4 {
+                margin-bottom: 8px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
         }
     </script>
 
-    <!-- Script tự động biên dịch SCSS thành CSS khi load trang -->
+    <!-- Script biên dịch SCSS -->
     <script>
         const scssSource = document.getElementById('scss-code').text;
         Sass.compile(scssSource, function(result) {
