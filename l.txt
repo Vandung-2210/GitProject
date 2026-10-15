@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tái Cấu Trúc CSS Responsive Grid Sang SASS</title>
+    <title>Landing Page - SASS Refactored</title>
 
-    <!-- Nhúng SASS Compiler tự động biên dịch SCSS trực tiếp trên trình duyệt -->
+    <!-- Font Awesome 6.5.2 & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Trình biên dịch SASS tự động chạy trực tiếp trên trình duyệt -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.sync.min.js"></script>
 
     <style id="compiled-css">
@@ -14,207 +20,698 @@
 </head>
 <body>
 
-    <!-- Responsive Grid Test Layout -->
-    <div class="grid">
-        <header class="header">
-            <h1 class="header__title">Responsive Grid System - SASS Refactored</h1>
-        </header>
-
-        <div class="row">
-            <div class="col-12 col-s-12">
-                <div class="card card--primary">
-                    <h3>Header Block (12 Columns)</h3>
-                    <p>Khung responsive tự động co giãn theo kích thước màn hình.</p>
-                </div>
+    <!-- 1. NAVIGATION & HEADER SECTION -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container navbar__wrapper">
+                <a href="#" class="navbar__brand">
+                    <i class="fas fa-cubes text-primary"></i> TechLanding
+                </a>
+                <ul class="navbar__menu">
+                    <li class="navbar__item"><a href="#home" class="navbar__link active">Trang chủ</a></li>
+                    <li class="navbar__item"><a href="#products" class="navbar__link">Sản phẩm</a></li>
+                    <li class="navbar__item"><a href="#stats" class="navbar__link">Thống kê</a></li>
+                    <li class="navbar__item"><a href="#contact" class="navbar__link">Liên hệ</a></li>
+                </ul>
+                <a href="#products" class="btn btn--primary navbar__btn">Dùng thử miễn phí</a>
             </div>
-        </div>
+        </nav>
 
-        <div class="row">
-            <div class="col-3 col-s-12">
-                <div class="card">
-                    <h4>Sidebar</h4>
-                    <p>3 Cột (Desktop) / 12 Cột (Mobile)</p>
-                </div>
-            </div>
-
-            <div class="col-9 col-s-12">
-                <div class="row">
-                    <div class="col-6 col-s-6">
-                        <div class="card card--accent">
-                            <h4>Main Content A</h4>
-                            <p>6 Cột</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-s-6">
-                        <div class="card card--accent">
-                            <h4>Main Content B</h4>
-                            <p>6 Cột</p>
-                        </div>
+        <section id="home" class="hero">
+            <div class="container hero__wrapper">
+                <div class="hero__content">
+                    <span class="badge">Thế Hệ Mới 2026</span>
+                    <h1 class="hero__title">Giải Pháp Công Nghệ Đột Phá Cho Doanh Nghiệp</h1>
+                    <p class="hero__desc">Tối ưu hóa quy trình làm việc, tăng cường hiệu suất và nâng cao trải nghiệm người dùng với nền tảng quản trị hiện đại.</p>
+                    <div class="hero__actions">
+                        <a href="#products" class="btn btn--primary btn--lg">Khám phá ngay</a>
+                        <a href="#stats" class="btn btn--outline btn--lg"><i class="fas fa-play me-2"></i>Xem Demo</a>
                     </div>
                 </div>
+                <div class="hero__visual">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Hero Banner" class="hero__img">
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- 2. SẢN PHẨM NỔI BẬT SECTION -->
+        <section id="products" class="products">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-header__subtitle">Danh Mục Nổi Bật</span>
+                    <h2 class="section-header__title">Sản Phẩm & Dịch Vụ Chủ Lực</h2>
+                    <p class="section-header__desc">Được thiết kế tỉ mỉ đáp ứng mọi tiêu chuẩn khắt khe nhất của thị trường.</p>
+                </div>
+
+                <div class="products__grid">
+                    <!-- Product Card 1 -->
+                    <article class="product-card">
+                        <div class="product-card__image-box">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Phân Tích Dữ Liệu" class="product-card__img">
+                            <span class="product-card__badge">Hot</span>
+                        </div>
+                        <div class="product-card__body">
+                            <h3 class="product-card__title">Nền Tảng Analytics Pro</h3>
+                            <p class="product-card__desc">Hệ thống phân tích dữ liệu thời gian thực giúp dự báo xu hướng kinh doanh chính xác.</p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$49<small>/tháng</small></span>
+                                <a href="#" class="btn btn--secondary btn--sm">Chi tiết</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 2 -->
+                    <article class="product-card">
+                        <div class="product-card__image-box">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Quản Lý Hệ Thống" class="product-card__img">
+                        </div>
+                        <div class="product-card__body">
+                            <h3 class="product-card__title">Cloud Management UI</h3>
+                            <p class="product-card__desc">Giao diện quản lý điện toán đám mây thân thiện, bảo mật chuẩn doanh nghiệp.</p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$79<small>/tháng</small></span>
+                                <a href="#" class="btn btn--secondary btn--sm">Chi tiết</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Product Card 3 -->
+                    <article class="product-card">
+                        <div class="product-card__image-box">
+                            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=600&q=80" alt="Giải Pháp AI" class="product-card__img">
+                            <span class="product-card__badge product-card__badge--new">New</span>
+                        </div>
+                        <div class="product-card__body">
+                            <h3 class="product-card__title">AI Automation Suite</h3>
+                            <p class="product-card__desc">Tự động hóa các tác vụ lặp đi lặp lại bằng trí tuệ nhân tạo thông minh.</p>
+                            <div class="product-card__footer">
+                                <span class="product-card__price">$99<small>/tháng</small></span>
+                                <a href="#" class="btn btn--secondary btn--sm">Chi tiết</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SỐ LIỆU THỐNG KÊ SECTION -->
+        <section id="stats" class="stats">
+            <div class="container">
+                <div class="stats__grid">
+                    <div class="stat-item">
+                        <div class="stat-item__icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-item__number">100,000+</div>
+                        <div class="stat-item__label">Khách hàng tin dùng</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item__icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div class="stat-item__number">99.99%</div>
+                        <div class="stat-item__label">Uptime hệ thống</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item__icon"><i class="fas fa-globe-americas"></i></div>
+                        <div class="stat-item__number">45+</div>
+                        <div class="stat-item__label">Quốc gia phủ sóng</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-item__icon"><i class="fas fa-award"></i></div>
+                        <div class="stat-item__number">24/7</div>
+                        <div class="stat-item__label">Hỗ trợ kỹ thuật</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 4. FOOTER SECTION -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__col footer__col--about">
+                    <a href="#" class="footer__logo"><i class="fas fa-cubes text-primary"></i> TechLanding</a>
+                    <p class="footer__desc">Đồng hành cùng sự phát triển chuyển đổi số bền vững của các doanh nghiệp trên toàn cầu.</p>
+                    <div class="footer__socials">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Sản Phẩm</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">Analytics Platform</a></li>
+                        <li><a href="#">Cloud Manager</a></li>
+                        <li><a href="#">AI Automations</a></li>
+                        <li><a href="#">Tính năng mới</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Công Ty</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Blog & Tin tức</a></li>
+                        <li><a href="#">Đối tác</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4 class="footer__title">Đăng Ký Nhận Tin</h4>
+                    <p class="footer__subtext">Nhận các cập nhật tính năng và ưu đãi sớm nhất.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Nhập email của bạn..." required class="newsletter-form__input">
+                        <button type="submit" class="btn btn--primary newsletter-form__btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p>&copy; 2026 TechLanding Inc. All rights reserved. Refactored with Modular SASS/SCSS.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="row">
-            <div class="col-4 col-s-12">
-                <div class="card">
-                    <h4>Feature 1</h4>
-                    <p>4 Cột</p>
-                </div>
-            </div>
-            <div class="col-4 col-s-12">
-                <div class="card">
-                    <h4>Feature 2</h4>
-                    <p>4 Cột</p>
-                </div>
-            </div>
-            <div class="col-4 col-s-12">
-                <div class="card">
-                    <h4>Feature 3</h4>
-                    <p>4 Cột</p>
-                </div>
-            </div>
-        </div>
-
-        <footer class="footer">
-            <p>&copy; 2026 Responsive Grid Refactored with SASS/SCSS.</p>
-        </footer>
-    </div>
-
-    <!-- Mã nguồn SCSS tái cấu trúc hoàn chỉnh -->
+    <!-- SCSS REFACTORED CODE (Variables, Mixins, Nesting & Componentization) -->
     <script type="text/scss" id="scss-code">
         // ==========================================
-        // 1. VARIABLES (Biến số quản lý giao diện)
+        // 1. SASS VARIABLES
         // ==========================================
-        $grid-columns: 12;
-        $breakpoint-mobile: 768px;
-        $primary-color: #3498db;
-        $accent-color: #2ecc71;
-        $text-color: #2c3e50;
-        $bg-color: #f8f9fa;
-        $card-bg: #ffffff;
-        $border-radius: 8px;
-        $gutter: 15px;
+        $primary-color: #2563eb;
+        $primary-hover: #1d4ed8;
+        $secondary-color: #0f172a;
+        $text-main: #334155;
+        $text-muted: #64748b;
+        $bg-light: #f8fafc;
+        $bg-white: #ffffff;
+        $bg-dark: #0f172a;
+        $border-color: #e2e8f0;
+        
+        $font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        $border-radius-sm: 6px;
+        $border-radius-md: 12px;
+        $border-radius-lg: 20px;
+        $transition-fast: all 0.25s ease-in-out;
+        $box-shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
 
         // ==========================================
-        // 2. MIXINS (Mã dùng chung & Breakpoint)
+        // 2. SASS MIXINS
         // ==========================================
-        @mixin respond-to-mobile {
-            @media only screen and (max-width: #{$breakpoint-mobile}) {
-                @content;
-            }
+        @mixin flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @mixin card-shadow {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+        @mixin flex-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @mixin grid-responsive($min-width: 280px, $gap: 30px) {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+            gap: $gap;
+        }
+
+        @mixin media-md {
+            @media (max-width: 992px) { @content; }
+        }
+
+        @mixin media-sm {
+            @media (max-width: 768px) { @content; }
         }
 
         // ==========================================
         // 3. BASE & RESET
         // ==========================================
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: $bg-color;
-            color: $text-color;
+            font-family: $font-family;
+            color: $text-main;
+            background-color: $bg-white;
             line-height: 1.6;
-            padding: 20px;
         }
 
-        // ==========================================
-        // 4. GRID SYSTEM REFACTORED (Lưới 12 cột SASS)
-        // ==========================================
-        .grid {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            margin-left: -$gutter;
-            margin-right: -$gutter;
+        .text-primary {
+            color: $primary-color;
+        }
 
-            &::after {
-                content: "";
-                clear: both;
-                display: table;
+        // ==========================================
+        // 4. BUTTONS & BADGES COMPONENTS
+        // ==========================================
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: $border-radius-sm;
+            transition: $transition-fast;
+            cursor: pointer;
+            border: none;
+
+            &--primary {
+                background-color: $primary-color;
+                color: $bg-white;
+
+                &:hover {
+                    background-color: $primary-hover;
+                    transform: translateY(-2px);
+                }
+            }
+
+            &--secondary {
+                background-color: #eff6ff;
+                color: $primary-color;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: $bg-white;
+                }
+            }
+
+            &--outline {
+                border: 2px solid $border-color;
+                color: $secondary-color;
+
+                &:hover {
+                    border-color: $primary-color;
+                    color: $primary-color;
+                }
+            }
+
+            &--lg {
+                padding: 14px 32px;
+                font-size: 1.05rem;
+                border-radius: $border-radius-md;
+            }
+
+            &--sm {
+                padding: 6px 14px;
+                font-size: 0.85rem;
             }
         }
 
-        // Tạo vòng lặp sinh tự động các cột Responsive Desktop (.col-1 đến .col-12)
-        @for $i from 1 through $grid-columns {
-            .col-#{$i} {
-                width: percentage($i / $grid-columns);
-                float: left;
-                padding-left: $gutter;
-                padding-right: $gutter;
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: #dbeafe;
+            color: $primary-color;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 50px;
+
+            &__subtitle {
+                color: $primary-color;
+                font-weight: 700;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            &__title {
+                font-size: 2.25rem;
+                color: $secondary-color;
+                font-weight: 800;
+                margin: 10px 0;
+
+                @include media-sm {
+                    font-size: 1.75rem;
+                }
+            }
+
+            &__desc {
+                color: $text-muted;
             }
         }
 
-        // Vòng lặp sinh các cột cho Mobile (.col-s-1 đến .col-s-12)
-        @include respond-to-mobile {
-            @for $i from 1 through $grid-columns {
-                .col-s-#{$i} {
-                    width: percentage($i / $grid-columns);
+        // ==========================================
+        // 5. NAVBAR & HERO SECTION
+        // ==========================================
+        .header {
+            background: linear-gradient(180deg, #f0f9ff 0%, $bg-white 100%);
+        }
+
+        .navbar {
+            padding: 20px 0;
+
+            &__wrapper {
+                @include flex-between;
+            }
+
+            &__brand {
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: $secondary-color;
+            }
+
+            &__menu {
+                display: flex;
+                gap: 30px;
+
+                @include media-md {
+                    display: none;
+                }
+            }
+
+            &__link {
+                font-weight: 600;
+                color: $text-muted;
+                transition: $transition-fast;
+
+                &:hover, &.active {
+                    color: $primary-color;
+                }
+            }
+
+            &__btn {
+                @include media-sm {
+                    display: none;
+                }
+            }
+        }
+
+        .hero {
+            padding: 80px 0 100px;
+
+            &__wrapper {
+                @include grid-responsive(400px, 40px);
+                align-items: center;
+            }
+
+            &__title {
+                font-size: 3rem;
+                font-weight: 800;
+                color: $secondary-color;
+                line-height: 1.2;
+                margin-bottom: 20px;
+
+                @include media-sm {
+                    font-size: 2.2rem;
+                }
+            }
+
+            &__desc {
+                font-size: 1.1rem;
+                color: $text-muted;
+                margin-bottom: 35px;
+            }
+
+            &__actions {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            &__visual {
+                @include flex-center;
+            }
+
+            &__img {
+                border-radius: $border-radius-lg;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        // ==========================================
+        // 6. FEATURED PRODUCTS SECTION
+        // ==========================================
+        .products {
+            padding: 90px 0;
+
+            &__grid {
+                @include grid-responsive(320px, 30px);
+            }
+        }
+
+        .product-card {
+            background-color: $bg-white;
+            border-radius: $border-radius-md;
+            border: 1px solid $border-color;
+            overflow: hidden;
+            transition: $transition-fast;
+
+            &:hover {
+                transform: translateY(-8px);
+                box-shadow: $box-shadow-card;
+
+                .product-card__img {
+                    transform: scale(1.05);
+                }
+            }
+
+            &__image-box {
+                position: relative;
+                overflow: hidden;
+                height: 220px;
+            }
+
+            &__img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+
+            &__badge {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background-color: #ef4444;
+                color: white;
+                font-size: 0.75rem;
+                font-weight: 700;
+                padding: 4px 12px;
+                border-radius: 50px;
+
+                &--new {
+                    background-color: #10b981;
+                }
+            }
+
+            &__body {
+                padding: 25px;
+            }
+
+            &__title {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: $secondary-color;
+                margin-bottom: 10px;
+            }
+
+            &__desc {
+                font-size: 0.95rem;
+                color: $text-muted;
+                margin-bottom: 20px;
+            }
+
+            &__footer {
+                @include flex-between;
+                border-top: 1px solid $border-color;
+                padding-top: 15px;
+            }
+
+            &__price {
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: $primary-color;
+
+                small {
+                    font-size: 0.85rem;
+                    color: $text-muted;
+                    font-weight: 500;
                 }
             }
         }
 
         // ==========================================
-        // 5. COMPONENTS (BEM & Nesting)
+        // 7. STATISTICAL NUMBERS SECTION
         // ==========================================
-        .header {
+        .stats {
+            background-color: $bg-dark;
+            color: $bg-white;
+            padding: 70px 0;
+
+            &__grid {
+                @include grid-responsive(220px, 30px);
+            }
+        }
+
+        .stat-item {
             text-align: center;
-            margin-bottom: 30px;
+
+            &__icon {
+                font-size: 2.2rem;
+                color: $primary-color;
+                margin-bottom: 15px;
+            }
+
+            &__number {
+                font-size: 2.5rem;
+                font-weight: 800;
+                margin-bottom: 5px;
+            }
+
+            &__label {
+                color: #94a3b8;
+                font-size: 0.95rem;
+            }
+        }
+
+        // ==========================================
+        // 8. FOOTER SECTION
+        // ==========================================
+        .footer {
+            background-color: #020617;
+            color: #94a3b8;
+            padding: 80px 0 30px;
+
+            &__top {
+                @include grid-responsive(220px, 40px);
+                margin-bottom: 60px;
+            }
+
+            &__col--about {
+                grid-column: span 1;
+            }
+
+            &__logo {
+                font-size: 1.4rem;
+                font-weight: 800;
+                color: $bg-white;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+
+            &__desc {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            &__socials {
+                display: flex;
+                gap: 12px;
+            }
 
             &__title {
-                color: $primary-color;
-                font-size: 2rem;
+                color: $bg-white;
+                font-size: 1.1rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+            }
+
+            &__links {
+                li {
+                    margin-bottom: 12px;
+                }
+
+                a {
+                    font-size: 0.9rem;
+                    transition: $transition-fast;
+
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            &__subtext {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            &__bottom {
+                border-top: 1px solid #1e293b;
+                padding-top: 30px;
+                text-align: center;
+                font-size: 0.85rem;
             }
         }
 
-        .card {
-            background-color: $card-bg;
-            border-radius: $border-radius;
-            padding: 20px;
-            margin-bottom: 20px;
-            @include card-shadow;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .social-link {
+            @include flex-center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #1e293b;
+            color: $bg-white;
+            transition: $transition-fast;
 
             &:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-            }
-
-            &--primary {
                 background-color: $primary-color;
-                color: #ffffff;
-            }
-
-            &--accent {
-                border-left: 4px solid $accent-color;
-            }
-
-            h3, h4 {
-                margin-bottom: 8px;
+                transform: translateY(-3px);
             }
         }
 
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            color: #7f8c8d;
-            font-size: 0.9rem;
+        .newsletter-form {
+            display: flex;
+
+            &__input {
+                flex: 1;
+                padding: 10px 14px;
+                border-radius: $border-radius-sm 0 0 $border-radius-sm;
+                border: 1px solid #334155;
+                background-color: #1e293b;
+                color: $bg-white;
+                outline: none;
+
+                &:focus {
+                    border-color: $primary-color;
+                }
+            }
+
+            &__btn {
+                border-radius: 0 $border-radius-sm $border-radius-sm 0;
+            }
         }
     </script>
 
-    <!-- Script biên dịch SCSS -->
+    <!-- Script biên dịch SCSS tự động -->
     <script>
         const scssSource = document.getElementById('scss-code').text;
         Sass.compile(scssSource, function(result) {
