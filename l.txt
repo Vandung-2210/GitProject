@@ -1,180 +1,349 @@
-[Bài tập] Phối màu cho newsletter
-Mục tiêu bài tập
-Trong bài tập này, chúng ta sẽ thực hành kỹ năng phối màu sắc, một yếu tố cốt lõi trong thiết kế trải nghiệm người dùng (UX) và giao diện người dùng (UI). Cụ thể, bạn sẽ:
-
-Luyện tập việc sử dụng công cụ Adobe Color để khám phá và lựa chọn các bộ màu sắc hài hòa.
-
-Áp dụng các bộ màu sắc đã chọn để tạo ra những phiên bản newsletter có phong cách thị giác khác biệt, từ đó rèn luyện khả năng cảm nhận và ứng dụng màu sắc vào thiết kế thực tế.
-
-Bài tập này không chỉ giúp bạn làm quen với một công cụ mạnh mẽ mà còn củng cố kiến thức về cách màu sắc có thể thay đổi hoàn toàn cảm nhận về một sản phẩm thiết kế.
-
-Mô tả bài tập
-Chúng ta sẽ làm việc với một newsletter mẫu có sẵn của Trello. Mục tiêu là sử dụng công cụ Adobe Color để lựa chọn các bộ màu sắc mới, thay thế cho bộ màu sắc hiện tại của newsletter gốc. Từ đó, bạn sẽ tạo ra hai phiên bản newsletter hoàn toàn mới, mỗi phiên bản mang một bộ màu sắc và cảm nhận riêng biệt.
-
-Phiên bản offline của newsletter mẫu có thể tải về tại đây. (Lưu ý: Liên kết tải về sẽ được cung cấp bởi hệ thống khóa học khi bạn thực hiện bài tập này).
-
-Việc thay đổi màu sắc cho một thiết kế có sẵn là một cách hiệu quả để hiểu được tác động của màu sắc đến tâm trạng, sự chú ý và tính nhất quán của thương hiệu.
-
-Hướng dẫn thực hiện
-Để hoàn thành bài tập này, bạn sẽ thực hiện các bước sau:
-
-1. Xây dựng khung Newsletter với Bootstrap
-Trước khi phối màu, chúng ta cần có một cấu trúc cơ bản cho newsletter. Bootstrap là một framework CSS tuyệt vời giúp bạn nhanh chóng xây dựng được bộ khung responsive mà không cần viết quá nhiều CSS từ đầu.
-
-Tại sao lại dùng Bootstrap?
-Bootstrap cung cấp các thành phần UI dựng sẵn như layout grid, nút, thẻ (card), và các lớp tiện ích (utility classes) cho typography, spacing, và màu sắc. Điều này giúp bạn tập trung vào việc thử nghiệm màu sắc mà không bị phân tâm bởi việc xây dựng cấu trúc HTML/CSS cơ bản.
-
-Cách làm:
-Tạo một file index.html và liên kết Bootstrap vào đó. Sau đó, xây dựng cấu trúc cơ bản của một newsletter, bao gồm:
-
-Phần header (tiêu đề, logo).
-
-Các phần nội dung chính (ví dụ: một vài khối văn bản, hình ảnh, nút kêu gọi hành động).
-
-Phần footer.
-
-Bạn có thể tham khảo cấu trúc HTML sau đây như một điểm khởi đầu. Hãy tập trung vào việc tạo các "khu vực" mà bạn sẽ áp dụng màu sắc sau này.
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newsletter Mẫu</title>
-    <!-- Liên kết Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>CodeGym Career - Nâng Tầm Sự Nghiệp Lập Trình Viên</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap (MDB) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css">
+
+    <!-- Custom Material Design Style Overrides -->
     <style>
-        /* Các lớp CSS tùy chỉnh để dễ dàng thay đổi màu sau này */
-        .primary-bg { background-color: var(--primary-color, #007bff); }
-        .secondary-bg { background-color: var(--secondary-color, #6c757d); }
-        .accent-bg { background-color: var(--accent-color, #28a745); }
-        .text-primary-color { color: var(--primary-color, #007bff); }
-        .text-secondary-color { color: var(--secondary-color, #6c757d); }
-        .text-accent-color { color: var(--accent-color, #28a745); }
-        .btn-primary-custom {
-            background-color: var(--primary-color, #007bff);
-            color: white;
-            border-color: var(--primary-color, #007bff);
+        html, body {
+            font-family: 'Roboto', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f5f5f5;
         }
-        .btn-primary-custom:hover {
-            background-color: var(--darker-primary-color, #0056b3);
-            border-color: var(--darker-primary-color, #0056b3);
+
+        /* Hero / Jumbotron Styling */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.9) 0%, rgba(25, 118, 210, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: #ffffff;
+            padding: 120px 0 80px;
+        }
+
+        .section-heading {
+            position: relative;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 50px;
+        }
+
+        .section-heading::after {
+            content: '';
+            width: 70px;
+            height: 4px;
+            background-color: #ff6f00; /* Material Amber/Orange Accent */
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Material Card Styling */
+        .card {
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15) !important;
+        }
+
+        .avatar-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-top: -45px;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* Material Wave Button Adjustment */
+        .btn-amber-accent {
+            background-color: #ff6f00 !important;
+            color: #ffffff !important;
+            font-weight: bold;
+        }
+
+        .btn-amber-accent:hover {
+            background-color: #e65100 !important;
+            color: #ffffff !important;
         }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <header class="text-center mb-5 p-4 primary-bg text-white">
-            <h1>Tiêu đề Newsletter</h1>
-            <p>Nơi bắt đầu những câu chuyện mới</p>
-        </header>
 
-        <section class="card mb-4">
-            <div class="card-body">
-                <h2 class="card-title text-primary-color">Chào mừng bạn đến với bản tin của chúng tôi!</h2>
-                <p class="card-text">
-                    Đây là nội dung ví dụ cho phần giới thiệu. Chúng ta sẽ thay đổi màu sắc cho các thành phần này.
-                </p>
-                <a href="#" class="btn btn-primary-custom">Tìm hiểu thêm</a>
+    <!-- 1. HEADER / NAVBAR (Material Design Navbar) -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color-dark fixed-top scrolling-navbar z-depth-1">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold" href="#">
+                    <i class="fas fa-laptop-code mr-2 text-warning"></i>CodeGym Career
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ml-auto text-uppercase font-weight-bold">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#about">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#benefits">Quyền lợi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#jobs">Cơ hội việc làm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#testimonials">Học viên nói gì</a>
+                        </li>
+                    </ul>
+                    <a href="#cta" class="btn btn-amber-accent btn-sm btn-rounded waves-effect waves-light ml-lg-3">Đăng Ký Ngay</a>
+                </div>
             </div>
-        </section>
+        </nav>
+    </header>
 
-        <section class="row mb-4">
-            <div class="col-md-6 mb-3">
-                <div class="card h-100 secondary-bg text-white">
-                    <div class="card-body">
-                        <h3 class="card-title">Tính năng nổi bật 1</h3>
-                        <p class="card-text">Mô tả ngắn gọn về tính năng này. Màu nền và màu chữ sẽ được phối lại.</p>
+    <!-- 2. HERO SECTION (Jumbotron + Material Shadows) -->
+    <section class="hero-section text-center text-md-left">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <span class="badge badge-warning p-2 px-3 mb-3 text-uppercase font-weight-bold z-depth-1">Giải Pháp Việc Làm CNTT</span>
+                    <h1 class="display-4 font-weight-bold mb-3">Kết Nối Lập Trình Viên Với Doanh Nghiệp Hàng Đầu</h1>
+                    <p class="lead mb-4 opacity-90">CodeGym Career hỗ trợ học viên và lập trình viên tìm kiếm công việc mơ ước, nâng cao năng lực chuyên môn và phát triển sự nghiệp bền vững trong ngành công nghệ thông tin.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#cta" class="btn btn-amber-accent btn-md btn-rounded waves-effect waves-light mr-2 mb-2"><i class="fas fa-paper-plane mr-2"></i>Ứng Tựu Ngay</a>
+                        <a href="#benefits" class="btn btn-outline-white btn-md btn-rounded waves-effect waves-light mb-2"><i class="fas fa-info-circle mr-2"></i>Tìm Hiểu Thêm</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="CodeGym Career" class="img-fluid rounded z-depth-2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="py-5">
+
+        <!-- 3. TÍNH NĂNG / LỢI ÍCH (Material Cards Grid) -->
+        <section id="benefits" class="container py-4">
+            <div class="text-center">
+                <h2 class="section-heading text-center">Tại Sao Chọn CodeGym Career?</h2>
+                <p class="text-muted mb-5">Hệ sinh thái hỗ trợ toàn diện giúp bạn vững bước tiến vào thị trường việc làm IT</p>
+            </div>
+
+            <div class="row">
+                <!-- Benefit 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 z-depth-1 p-3">
+                        <div class="card-body text-center">
+                            <div class="icon-wrapper mb-3 text-primary">
+                                <i class="fas fa-handshake fa-3x"></i>
+                            </div>
+                            <h4 class="font-weight-bold mb-3">Mạng Lưới Đối Tác Rộng Lớn</h4>
+                            <p class="text-muted">Kết nối trực tiếp với hơn 200+ doanh nghiệp công nghệ hàng đầu tại Việt Nam và Nhật Bản, mở rộng cơ hội tuyển dụng.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 z-depth-1 p-3">
+                        <div class="card-body text-center">
+                            <div class="icon-wrapper mb-3 text-success">
+                                <i class="fas fa-user-tie fa-3x"></i>
+                            </div>
+                            <h4 class="font-weight-bold mb-3">Tư Vấn & Luyện Phỏng Vấn</h4>
+                            <p class="text-muted">Hỗ trợ chuẩn hóa CV cá nhân chuẩn ATS, định hướng lộ trình nghề nghiệp 1-1 và luyện phỏng vấn thử cùng chuyên gia HR.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 z-depth-1 p-3">
+                        <div class="card-body text-center">
+                            <div class="icon-wrapper mb-3 text-warning">
+                                <i class="fas fa-briefcase fa-3x"></i>
+                            </div>
+                            <h4 class="font-weight-bold mb-3">Cam Kết Việc Làm</h4>
+                            <p class="text-muted">Đồng hành cùng học viên cho đến khi tìm được công việc phù hợp với mức lương hấp dẫn sau khi tốt nghiệp.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3">
-                <div class="card h-100 accent-bg text-white">
-                    <div class="card-body">
-                        <h3 class="card-title">Tính năng nổi bật 2</h3>
-                        <p class="card-text">Mô tả ngắn gọn về tính năng khác. Hãy thử các sắc thái màu khác nhau.</p>
+        </section>
+
+        <!-- 4. THỐNG KÊ ẤN TƯỢNG (Material Counter Section) -->
+        <section class="indigo darken-4 text-white py-5 my-5 z-depth-1">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-4 mb-md-0">
+                        <h2 class="display-4 font-weight-bold text-warning">98%</h2>
+                        <p class="text-uppercase font-weight-bold mb-0">Học Viên Có Việc Làm</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4 mb-md-0">
+                        <h2 class="display-4 font-weight-bold text-warning">200+</h2>
+                        <p class="text-uppercase font-weight-bold mb-0">Doanh Nghiệp Đối Tác</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h2 class="display-4 font-weight-bold text-warning">15M+</h2>
+                        <p class="text-uppercase font-weight-bold mb-0">Lương Khởi Điểm Trung Bình</p>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <h2 class="display-4 font-weight-bold text-warning">5,000+</h2>
+                        <p class="text-uppercase font-weight-bold mb-0">Lập Trình Viên Đã Tốt Nghiệp</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="text-center mt-5 p-3 secondary-bg text-white">
-            <p>&copy; 2024 Tên Công ty. Mọi quyền được bảo lưu.</p>
-        </footer>
-    </div>
-    <!-- Liên kết Bootstrap JS (tùy chọn nếu không cần tương tác) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- 5. TESTIMONIALS (CẢM NHẬN HỌC VIÊN) -->
+        <section id="testimonials" class="container py-4">
+            <div class="text-center">
+                <h2 class="section-heading text-center">Học Viên Thành Công</h2>
+                <p class="text-muted mb-5">Lắng nghe chia sẻ từ những lập trình viên đã khẳng định vị thế nhờ CodeGym</p>
+            </div>
+
+            <div class="row pt-4">
+                <!-- Testimonial 1 -->
+                <div class="col-md-4 mb-5">
+                    <div class="card border-0 z-depth-1 text-center p-4">
+                        <div class="d-flex justify-content-center">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Nguyễn Minh Anh" class="avatar-img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mb-1">Nguyễn Minh Anh</h5>
+                            <p class="text-primary small mb-3">Java Developer @ FPT Software</p>
+                            <p class="text-muted card-text font-italic">"Nhờ sự kết nối tận tình của đội ngũ CodeGym Career, tôi đã nhận được offer công việc mơ ước chỉ sau 2 tuần tốt nghiệp."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="col-md-4 mb-5">
+                    <div class="card border-0 z-depth-1 text-center p-4">
+                        <div class="d-flex justify-content-center">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Phạm Quốc Bảo" class="avatar-img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mb-1">Phạm Quốc Bảo</h5>
+                            <p class="text-primary small mb-3">Fullstack Web Developer</p>
+                            <p class="text-muted card-text font-italic">"Các buổi phỏng vấn thử 1-1 giúp tôi khắc phục tâm lý hồi hộp và thể hiện trọn vẹn năng lực trước nhà tuyển dụng."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="col-md-4 mb-5">
+                    <div class="card border-0 z-depth-1 text-center p-4">
+                        <div class="d-flex justify-content-center">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Lê Thanh Hằng" class="avatar-img">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mb-1">Lê Thanh Hằng</h5>
+                            <p class="text-primary small mb-3">Frontend Engineer @ Techcombank</p>
+                            <p class="text-muted card-text font-italic">"Chương trình tư vấn CV chuyên nghiệp giúp bộ hồ sơ của tôi nổi bật hoàn toàn giữa hàng trăm ứng viên khác."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CALL TO ACTION (CTA FORM) -->
+        <section id="cta" class="container my-5">
+            <div class="card border-0 z-depth-2 overflow-hidden">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 primary-color-dark text-white p-5 d-flex flex-column justify-content-center">
+                        <h3 class="font-weight-bold mb-3">Sẵn Sàng Bứt Phá Sự Nghiệp CNTT?</h3>
+                        <p class="mb-4">Hãy để CodeGym Career đồng hành và hỗ trợ bạn tiếp cận những cơ hội việc làm hấp dẫn nhất ngay hôm nay.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-warning mr-2"></i>Tư vấn định hướng nghề nghiệp 100% miễn phí</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-warning mr-2"></i>Nhận bản tin việc làm IT mới nhất hàng tuần</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-warning mr-2"></i>Kết nối trực tiếp với doanh nghiệp ứng tuyển</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 p-5 bg-white">
+                        <h4 class="font-weight-bold text-center mb-4 text-primary">Đăng Ký Nhận Tư Vấn Việc Làm</h4>
+                        <form>
+                            <div class="md-form">
+                                <i class="fas fa-user prefix text-muted"></i>
+                                <input type="text" id="formName" class="form-control" required>
+                                <label for="formName">Họ và tên *</label>
+                            </div>
+                            <div class="md-form">
+                                <i class="fas fa-envelope prefix text-muted"></i>
+                                <input type="email" id="formEmail" class="form-control" required>
+                                <label for="formEmail">Địa chỉ Email *</label>
+                            </div>
+                            <div class="md-form">
+                                <i class="fas fa-phone prefix text-muted"></i>
+                                <input type="tel" id="formPhone" class="form-control" required>
+                                <label for="formPhone">Số điện thoại *</label>
+                            </div>
+                            <button type="submit" class="btn btn-amber-accent btn-block btn-rounded waves-effect waves-light mt-4 py-3">
+                                <i class="fas fa-paper-plane mr-2"></i>Gửi Thông Tin Ngay
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 7. FOOTER (Material Design Footer) -->
+    <footer class="page-footer font-small primary-color-dark pt-4">
+        <div class="container text-center text-md-left">
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3 mb-3">
+                    <h5 class="text-uppercase font-weight-bold text-warning"><i class="fas fa-laptop-code mr-2"></i>CodeGym Career</h5>
+                    <p>Hệ thống kết nối và phát triển sự nghiệp lập trình viên hàng đầu, giúp thế hệ trẻ Việt Nam tự tin làm chủ công nghệ.</p>
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase font-weight-bold mb-3">Liên Kết</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-white-50">Giới thiệu</a></li>
+                        <li><a href="#benefits" class="text-white-50">Lợi ích</a></li>
+                        <li><a href="#testimonials" class="text-white-50">Cảm nhận</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-md-0 mb-3">
+                    <h5 class="text-uppercase font-weight-bold mb-3">Liên Hệ</h5>
+                    <p class="text-white-50 mb-1"><i class="fas fa-envelope mr-2"></i>career@codegym.vn</p>
+                    <p class="text-white-50"><i class="fas fa-phone mr-2"></i>1800 6325</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-copyright text-center py-3 rgba-black-strong">
+            © 2026 CodeGym Career. Built with Material Design Bootstrap (MDB).
+        </div>
+    </footer>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
 </body>
 </html>
-Lưu ý rằng tôi đã thêm một số biến CSS (--primary-color, --secondary-color, --accent-color) và các lớp tùy chỉnh (primary-bg, text-primary-color, btn-primary-custom). Điều này giúp bạn dễ dàng thay đổi màu sắc của toàn bộ newsletter chỉ bằng cách cập nhật giá trị của các biến CSS này trong <style> tag, thay vì phải tìm và thay đổi từng lớp màu Bootstrap mặc định.
-
-2. Phối màu lần 1 với Adobe Color
-Bây giờ là lúc phát huy sức mạnh của Adobe Color! Nếu bạn chưa quen thuộc với công cụ này, hãy xem lại bài [Thực hành] Sử dụng Adobe Color để nắm vững cách sử dụng.
-
-Các bước thực hiện:
-
-Truy cập Adobe Color: Mở trình duyệt và truy cập https://color.adobe.com/.
-
-Khám phá và chọn bộ màu:
-
-Sử dụng các quy tắc phối màu có sẵn (Tương đồng, Đơn sắc, Bộ ba, Bổ túc, v.v.) hoặc khám phá tab "Khám phá" để tìm cảm hứng.
-
-Mục tiêu là chọn một bộ gồm 3-5 màu sắc hài hòa. Hãy thử tưởng tượng bộ màu này sẽ trông như thế nào trên newsletter của Trello.
-
-Bạn có thể lấy màu chủ đạo từ logo Trello gốc (nếu có thể xác định được) và xây dựng palette xung quanh nó, hoặc tạo một bộ màu hoàn toàn mới.
-
-Áp dụng màu sắc vào Newsletter:
-
-Khi đã có bộ màu ưng ý, hãy ghi lại các mã màu HEX (ví dụ: #RRGGBB).
-
-Quay lại file index.html của bạn. Thay đổi giá trị của các biến CSS --primary-color, --secondary-color, --accent-color và các biến màu khác (nếu bạn thêm) bằng các mã màu HEX đã chọn.
-
-Ví dụ:
-<style>
-:root {
---primary-color: #4CAF50; /* Một màu xanh lá cây tươi mới */
---secondary-color: #FFC107; /* Màu vàng cam làm điểm nhấn */
---accent-color: #2196F3; /* Màu xanh dương bổ sung */
---text-color: #333333; /* Màu chữ chính */
---light-bg-color: #F8F9FA; /* Màu nền nhẹ */
-}
-/* ... các lớp CSS đã định nghĩa ở trên */
-</style>
-
-Đảm bảo rằng các màu sắc bạn chọn được áp dụng nhất quán cho các phần tử như nền, tiêu đề, nút, và các khối nội dung. Mục tiêu là tạo ra một phiên bản newsletter mới với bộ màu sắc này.
-
-Kiểm tra độ tương phản giữa màu chữ và màu nền để đảm bảo dễ đọc, đặc biệt là với các phần văn bản quan trọng.
-
-3. Tạo phiên bản Newsletter thứ hai
-Để rèn luyện thêm khả năng phối màu và thấy được sự đa dạng của thiết kế, bạn sẽ tạo một phiên bản newsletter thứ hai với một bộ màu hoàn toàn khác.
-
-Các bước thực hiện:
-
-Lưu phiên bản đầu tiên: Sau khi hoàn thành phiên bản đầu tiên, hãy lưu file index.html của bạn dưới một tên khác (ví dụ: newsletter_version1.html). Hoặc, bạn có thể tạo một file CSS mới (style1.css) và chuyển các biến màu vào đó, sau đó tạo style2.css cho phiên bản thứ hai.
-
-Quay lại Adobe Color: Lần này, hãy thử chọn một quy tắc phối màu khác hoặc tìm kiếm cảm hứng từ một chủ đề khác. Ví dụ, nếu phiên bản đầu tiên của bạn sử dụng màu sắc tươi sáng, hãy thử một bộ màu trầm hơn, chuyên nghiệp hơn, hoặc ngược lại.
-
-Áp dụng bộ màu mới: Tương tự như Bước 2, cập nhật các biến CSS trong file HTML (hoặc file CSS mới) của phiên bản thứ hai với bộ màu mới bạn vừa chọn.
-
-So sánh: Sau khi hoàn thành cả hai phiên bản, hãy mở chúng cạnh nhau. Bạn có nhận thấy sự khác biệt rõ rệt về cảm nhận, tâm trạng mà mỗi bộ màu mang lại không? Điều này giúp bạn hiểu sâu hơn về tầm quan trọng của màu sắc trong việc truyền tải thông điệp và tạo ấn tượng ban đầu.
-
-Lời khuyên và Lưu ý
-Đừng ngại thử nghiệm: Adobe Color là một công cụ mạnh mẽ. Hãy dành thời gian khám phá các tùy chọn khác nhau và đừng ngần ngại thử những bộ màu mà bạn chưa từng nghĩ đến.
-
-Chú ý đến ngữ cảnh: Mặc dù đây là bài tập về màu sắc, hãy cố gắng nghĩ về "tính cách" của Trello hoặc đối tượng người dùng của nó khi chọn màu. Màu sắc có thể hỗ trợ hoặc đi ngược lại thông điệp của thương hiệu.
-
-Tương phản và khả năng tiếp cận (Accessibility): Luôn đảm bảo rằng các màu bạn chọn có độ tương phản đủ cao giữa chữ và nền để người đọc có thể dễ dàng đọc nội dung. Đây là một khía cạnh quan trọng của UX.
-
-Đơn giản hóa: Với bài tập này, bạn không cần phải thay đổi mọi màu sắc nhỏ nhặt. Tập trung vào các màu chính cho nền, tiêu đề, văn bản và các nút kêu gọi hành động.
-
-Chúc bạn thành công với bài tập phối màu này!
-
-## YÊU CẦU NỘP BÀI:
-
-- Hoàn thành 2 phiên bản newsletter với 2 bộ màu khác nhau được lựa chọn bằng Adobe Color.
-
-- Đảm bảo mã nguồn HTML/CSS của cả 2 phiên bản hoạt động đúng.
-
-- Đưa mã nguồn lên GitHub hoặc CodePen.
-
-- Dán link repository hoặc link CodePen vào phần nộp bài.
