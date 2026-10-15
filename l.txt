@@ -3,295 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Web Design - Template Nâng Cao</title>
+    <title>Website Template Analysis & Layout</title>
     
     <style>
-        /* Reset mặc định */
+        /* CSS Reset & Quy tắc cơ bản */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
+            background-color: #f4f6f8;
             color: #333;
-        }
-
-        /* Thanh điều hướng cố định (Fixed Navbar) */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(51, 51, 51, 0.95);
-            backdrop-filter: blur(5px);
-            padding: 15px 0;
-            text-align: center;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar ul {
+            line-height: 1.6;
             display: flex;
-            justify-content: center;
-            list-style: none;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        .navbar ul li {
-            margin: 0 15px;
-        }
-
-        .navbar ul li a {
-            text-decoration: none;
+        /* 1. Header & Navigation Menu */
+        header {
+            background-color: #1e293b;
             color: white;
-            font-size: 18px;
-            padding: 8px 16px;
-            transition: all 0.3s ease;
-            border-radius: 4px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .navbar ul li a:hover {
-            color: #f39c12;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Header với hiệu ứng mờ (Blur) và hình nền */
-        .header {
-            background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            color: white;
-            text-align: center;
-            padding: 160px 20px 100px;
-            position: relative;
-            overflow: hidden;
-            margin-top: 50px;
-        }
-
-        .header::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            width: calc(100% + 20px);
-            height: calc(100% + 20px);
-            background: inherit;
-            filter: blur(8px);
-            z-index: 0;
-        }
-
-        .header::after {
-            content: "";
-            position: absolute;
-            top: 0; 
-            left: 0;
-            width: 100%; 
-            height: 100%;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: 1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .header p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .btn {
-            background: #1abc9c;
-            color: white;
-            padding: 12px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
-        }
-
-        .btn:hover {
-            background: #16a085;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(22, 160, 133, 0.6);
-        }
-
-        /* Content Section & Card Layout (CSS Grid) */
-        .content {
-            text-align: center;
-            padding: 80px 20px;
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .content h2 {
-            font-size: 2.2rem;
+        .logo h1 {
+            font-size: 1.5rem;
+            color: #38bdf8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #f8fafc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #334155;
+            color: #38bdf8;
+        }
+
+        /* 2. Content Section (Hero Banner + Cards Grid) */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero-banner {
+            background-color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .hero-banner h2 {
+            font-size: 2rem;
+            color: #0f172a;
             margin-bottom: 10px;
-            color: #2c3e50;
         }
 
-        .content > p {
-            color: #7f8c8d;
-            margin-bottom: 40px;
+        .hero-banner p {
+            color: #64748b;
         }
 
-        .card-container {
+        .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 10px;
+            gap: 25px;
         }
 
         .card {
             background: white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 25px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            text-align: center;
-            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
         .card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 20px;
         }
 
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: #34495e;
+        .card-body {
+            padding: 20px;
         }
 
-        .card p {
-            color: #666;
-            line-height: 1.6;
+        .card-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .card-body p {
+            color: #64748b;
             font-size: 0.95rem;
         }
 
-        /* Footer 2 Cột Chuyên Nghiệp */
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 30px 50px;
-            background: #2c3e50;
-            color: white;
+        /* 3. Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
         }
 
-        .footer-left p {
-            font-size: 0.95rem;
-            color: #bdc3c7;
-        }
-
-        .footer-right {
-            text-align: right;
-        }
-
-        .footer-right p {
-            font-size: 0.95rem;
-            color: #ecf0f1;
-        }
-
-        .footer-right a {
-            color: #1abc9c;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-right a:hover {
-            color: #f39c12;
+        footer p {
+            font-size: 0.9rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            .footer {
+            .header-container {
                 flex-direction: column;
-                text-align: center;
+                gap: 15px;
             }
-            .footer-right {
-                text-align: center;
+            nav ul {
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Thanh điều hướng cố định -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#services">Dịch vụ</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Liên hệ</a></li>
-        </ul>
-    </nav>
-
-    <!-- Header với nền ảnh và hiệu ứng blur -->
-    <header class="header">
-        <div class="header-content">
-            <h1>Creative Web Design</h1>
-            <p>Thiết kế website chuyên nghiệp • Hiện đại • Ấn tượng</p>
-            <a href="#services" class="btn">Khám phá ngay</a>
+    <!-- Header & Navigation Menu -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>DevTemplate</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#posts">Bài viết</a></li>
+                    <li><a href="#services">Dịch vụ</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Content Section với Card Layout -->
-    <section class="content" id="services">
-        <h2>Dịch vụ của chúng tôi</h2>
-        <p>Giải pháp tối ưu nâng tầm thương hiệu doanh nghiệp của bạn</p>
-        <div class="card-container">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Thiết kế Website">
-                <h3>Thiết kế Website</h3>
-                <p>Chúng tôi tạo ra những trang web chuyên nghiệp, thân thiện với người dùng và tối ưu trên mọi thiết bị.</p>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" alt="SEO & Marketing">
-                <h3>SEO & Marketing</h3>
-                <p>Giúp website của bạn đạt thứ hạng cao trên công cụ tìm kiếm và tiếp cận hàng ngàn khách hàng tiềm năng.</p>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1534536281715-e28d76741772?auto=format&fit=crop&w=600&q=80" alt="Hỗ trợ 24/7">
-                <h3>Hỗ trợ 24/7</h3>
-                <p>Đội ngũ kỹ thuật chuyên nghiệp luôn sẵn sàng đồng hành và giúp bạn giải quyết mọi vấn đề nhanh chóng.</p>
-            </div>
-        </div>
-    </section>
+    <!-- Content Section -->
+    <main>
+        <section class="hero-banner">
+            <h2>Chào Mừng Đến Với Website Template</h2>
+            <p>Mô hình bố cục giao diện chuẩn sử dụng HTML5 và CSS Grid/Flexbox.</p>
+        </section>
 
-    <!-- Footer chuyên nghiệp -->
-    <footer class="footer">
-        <div class="footer-left">
-            <p>&copy; 2026 Creative Web. All rights reserved.</p>
-        </div>
-        <div class="footer-right">
-            <p>Theo dõi chúng tôi: <a href="#">Facebook</a> • <a href="#">Twitter</a> • <a href="#">LinkedIn</a></p>
-        </div>
+        <section class="cards-grid" id="posts">
+            <!-- Card 1 -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Lập trình Web">
+                <div class="card-body">
+                    <h3>Phân Tích Cấu Trúc Web</h3>
+                    <p>Tìm hiểu cách phân chia các khu vực Semantic HTML như Header, Main, Nav và Footer để tối ưu bố cục.</p>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Thiết kế UI/UX">
+                <div class="card-body">
+                    <h3>Tối Ưu Giao Diện UX/UI</h3>
+                    <p>Sử dụng Flexbox và CSS Grid giúp giao diện phản hồi linh hoạt (Responsive) trên mọi màn hình.</p>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80" alt="Mã nguồn Clean Code">
+                <div class="card-body">
+                    <h3>Tổ Chức Mã Nguồn</h3>
+                    <p>Quy hoạch cấu trúc thư mục dự án sạch sẽ giúp việc duy trì và nâng cấp mã nguồn dễ dàng hơn.</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 DevTemplate. All rights reserved. Designed with HTML & CSS.</p>
     </footer>
 
 </body>
