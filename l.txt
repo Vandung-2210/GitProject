@@ -1,22 +1,135 @@
-# Bước 1 & 2: Kiểm tra môi trường Node.js & npm
-node -v
-# Output ví dụ: v18.14.0
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển Đổi CSS sang SASS Chuẩn</title>
 
-npm -v
-# Output ví dụ: 9.6.0
+    <!-- Nhúng thư viện SASS compiler chạy trực tiếp trên trình duyệt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sass.js/0.11.1/sass.sync.min.js"></script>
 
-# Bước 3: Cài đặt SASS ở chế độ Global
-npm install -g sass
+    <style id="compiled-css">
+        /* CSS biên dịch từ SCSS sẽ tự động nạp vào đây */
+    </style>
+</head>
+<body>
 
-# Bước 4: Kiểm tra cài đặt SASS thành công
-sass -v
-# Output ví dụ: 1.62.0
+    <div class="container">
+        <div class="card">
+            <h2 class="card__title">Bài Thực Hành SASS / SCSS Chuẩn</h2>
+            <p class="card__text">
+                Mã nguồn SCSS ban đầu đã được chuyển đổi từ CSS truyền thống, áp dụng đầy đủ 
+                <strong>Variables</strong>, <strong>Mixins</strong>, <strong>Nesting</strong> và cấu trúc thư mục mô phỏng (Abstracts, Base, Layout, Components).
+            </p>
+            <div class="card__actions">
+                <button class="button">Xác nhận</button>
+                <button class="button button--secondary">Hủy bỏ</button>
+            </div>
+        </div>
+    </div>
 
-# Bước 5: Biên dịch 1 file duy nhất
-sass scss/styles.scss css/styles.css
+    <!-- Mã nguồn SCSS hoàn chỉnh tích hợp theo chuẩn cấu trúc bài tập -->
+    <script type="text/scss" id="scss-code">
+        // ==========================================
+        // 1. ABSTRACTS (_variables.scss & _mixins.scss)
+        // ==========================================
+        $primary-color: #007bff;
+        $secondary-color: #6c757d;
+        $text-color: #333333;
+        $background-color: #f4f4f4;
+        $border-color: #dddddd;
+        $white-color: #ffffff;
+        $box-shadow-val: 2px 2px 10px rgba(0, 0, 0, 0.1);
 
-# Bước 6: Lệnh watch 1 file tự động
-sass scss/styles.scss css/styles.css --watch
+        @mixin button-style($bg-color) {
+            background-color: $bg-color;
+            color: $white-color;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s ease-in-out;
 
-# Bước 7: Biên dịch & Watch toàn bộ thư mục SCSS sang CSS (Khuyên dùng)
-sass scss:css --watch
+            &:hover {
+                opacity: 0.85;
+            }
+        }
+
+        @mixin box-shadow($shadow: $box-shadow-val) {
+            box-shadow: $shadow;
+        }
+
+        // ==========================================
+        // 2. BASE (_global.scss)
+        // ==========================================
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: $text-color;
+            background-color: $background-color;
+            line-height: 1.6;
+            padding: 50px 0;
+        }
+
+        // ==========================================
+        // 3. LAYOUT (_container.scss)
+        // ==========================================
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        // ==========================================
+        // 4. COMPONENTS (_buttons.scss & _cards.scss)
+        // ==========================================
+        .button {
+            @include button-style($primary-color);
+
+            &--secondary {
+                @include button-style($secondary-color);
+            }
+        }
+
+        .card {
+            background-color: $white-color;
+            border: 1px solid $border-color;
+            padding: 30px;
+            border-radius: 8px;
+            @include box-shadow;
+
+            &__title {
+                color: $primary-color;
+                margin-bottom: 15px;
+            }
+
+            &__text {
+                margin-bottom: 20px;
+            }
+
+            &__actions {
+                display: flex;
+                gap: 10px;
+            }
+        }
+    </script>
+
+    <!-- Script tự động biên dịch SCSS thành CSS khi load trang -->
+    <script>
+        const scssSource = document.getElementById('scss-code').text;
+        Sass.compile(scssSource, function(result) {
+            if (result.text) {
+                document.getElementById('compiled-css').innerHTML = result.text;
+            } else {
+                console.error("Lỗi biên dịch SASS:", result);
+            }
+        });
+    </script>
+</body>
+</html>
