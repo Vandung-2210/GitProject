@@ -1,126 +1,175 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%!
-    // Định nghĩa class Customer bên trong thẻ Declaration của JSP
-    public static class Customer {
-        private String name;
-        private String dob;
-        private String address;
-        private String image;
-
-        public Customer(String name, String dob, String address, String image) {
-            this.name = name;
-            this.dob = dob;
-            this.address = address;
-            this.image = image;
-        }
-
-        public String getName() { return name; }
-        public String getDob() { return dob; }
-        public String getAddress() { return address; }
-        public String getImage() { return image; }
-    }
-%>
-
-<%
-    // Khởi tạo danh sách khách hàng mẫu
-    List<Customer> customerList = new ArrayList<>();
-    customerList.add(new Customer("Mai Văn Hoàn", "1983-08-20", "Hà Nội", "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=faces"));
-    customerList.add(new Customer("Nguyễn Văn Nam", "1983-08-21", "Bắc Giang", "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop&crop=faces"));
-    customerList.add(new Customer("Nguyễn Thái Hòa", "1983-08-22", "Nam Định", "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=faces"));
-    customerList.add(new Customer("Trần Đăng Khoa", "1983-08-17", "Hà Tây", "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=faces"));
-    customerList.add(new Customer("Nguyễn Đình Thi", "1983-08-19", "Hà Nội", "https://images.unsplash.com/photo-1628157582853-a796fa650a6a?w=100&h=100&fit=crop&crop=faces"));
-
-    // Đưa danh sách vào scope request để JSTL và EL truy xuất
-    request.setAttribute("customerList", customerList);
-%>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Danh Sách Khách Hàng</title>
+    <title>Simple Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8fafc;
-            margin: 40px;
+            background-color: #f4f6f9;
+            margin: 50px auto;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+        }
+        .calculator-card {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 30px;
+            width: 380px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
         h2 {
-            color: #1b2a7a;
-            margin-bottom: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            background-color: #ffffff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid #e2e8f0;
-            padding: 12px 16px;
-            text-align: left;
-        }
-        th {
-            background-color: #1b2a7a;
-            color: white;
-            font-size: 15px;
-        }
-        tr:nth-child(even) {
-            background-color: #f8fafc;
-        }
-        tr:hover {
-            background-color: #edf2f7;
-        }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #ccc;
-        }
-        .center-col {
+            margin-top: 0;
+            color: #1f2937;
             text-align: center;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #374151;
+            font-size: 14px;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .result-box {
+            margin-top: 24px;
+            padding: 15px;
+            background-color: #ecfdf5;
+            border-left: 5px solid #10b981;
+            border-radius: 4px;
+        }
+        .result-box h3 {
+            margin: 0;
+            color: #065f46;
+            font-size: 18px;
+        }
+        .error-box {
+            margin-top: 24px;
+            padding: 15px;
+            background-color: #fef2f2;
+            border-left: 5px solid #ef4444;
+            border-radius: 4px;
+        }
+        .error-box h3 {
+            margin: 0;
+            color: #991b1b;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-    <h2>DANH SÁCH KHÁCH HÀNG</h2>
+<%!
+    // Lớp Calculator hỗ trợ tính toán và ném Exception khi chia cho 0
+    public static class Calculator {
+        public static float calculate(float firstOperand, float secondOperand, char operator) {
+            switch (operator) {
+                case '+':
+                    return firstOperand + secondOperand;
+                case '-':
+                    return firstOperand - secondOperand;
+                case '*':
+                    return firstOperand * secondOperand;
+                case '/':
+                    if (secondOperand != 0) {
+                        return firstOperand / secondOperand;
+                    } else {
+                        throw new RuntimeException("Can't divide by zero");
+                    }
+                default:
+                    throw new RuntimeException("Invalid operation");
+            }
+        }
+    }
+%>
 
-    <table>
-        <thead>
-            <tr>
-                <th class="center-col">STT</th>
-                <th>Tên</th>
-                <th>Ngày sinh</th>
-                <th>Địa chỉ</th>
-                <th class="center-col">Ảnh</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%-- Sử dụng thẻ JSTL c:forEach để duyệt danh sách và in ra các dòng --%>
-            <c:forEach var="customer" items="${customerList}" varStatus="status">
-                <tr>
-                    <td class="center-col">${status.count}</td>
-                    <td><strong>${customer.name}</strong></td>
-                    <td>${customer.dob}</td>
-                    <td>${customer.address}</td>
-                    <td class="center-col">
-                        <img class="avatar" src="${customer.image}" alt="${customer.name}" />
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+<div class="calculator-card">
+    <h2>Simple Calculator</h2>
+    
+    <form action="index.jsp" method="POST">
+        <div class="form-group">
+            <label for="firstOperand">First operand:</label>
+            <input type="number" step="any" id="firstOperand" name="firstOperand" 
+                   value="<%= request.getParameter("firstOperand") != null ? request.getParameter("firstOperand") : "" %>" required />
+        </div>
+
+        <div class="form-group">
+            <label for="operator">Operator:</label>
+            <select id="operator" name="operator">
+                <option value="+" <%= "+".equals(request.getParameter("operator")) ? "selected" : "" %>>Addition (+)</option>
+                <option value="-" <%= "-".equals(request.getParameter("operator")) ? "selected" : "" %>>Subtraction (-)</option>
+                <option value="*" <%= "*".equals(request.getParameter("operator")) ? "selected" : "" %>>Multiplication (*)</option>
+                <option value="/" <%= "/".equals(request.getParameter("operator")) ? "selected" : "" %>>Division (/)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="secondOperand">Second operand:</label>
+            <input type="number" step="any" id="secondOperand" name="secondOperand" 
+                   value="<%= request.getParameter("secondOperand") != null ? request.getParameter("secondOperand") : "" %>" required />
+        </div>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <%
+        String firstOpStr = request.getParameter("firstOperand");
+        String secondOpStr = request.getParameter("secondOperand");
+        String operatorStr = request.getParameter("operator");
+
+        if (firstOpStr != null && secondOpStr != null && operatorStr != null) {
+            try {
+                float firstOperand = Float.parseFloat(firstOpStr);
+                float secondOperand = Float.parseFloat(secondOpStr);
+                char operator = operatorStr.charAt(0);
+
+                float result = Calculator.calculate(firstOperand, secondOperand, operator);
+    %>
+        <div class="result-box">
+            <h3>Result:</h3>
+            <p style="margin: 8px 0 0 0; font-size: 16px;">
+                <%= firstOperand %> <%= operator %> <%= secondOperand %> = <b><%= result %></b>
+            </p>
+        </div>
+    <%
+            } catch (Exception ex) {
+    %>
+        <div class="error-box">
+            <h3>Error:</h3>
+            <p style="margin: 8px 0 0 0; font-size: 15px;"><%= ex.getMessage() %></p>
+        </div>
+    <%
+            }
+        }
+    %>
+</div>
 
 </body>
 </html>
