@@ -5,10 +5,10 @@
 <html lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Quản Lý Người Dùng - JSP JDBC MySQL</title>
+    <title>Cập Nhật Quản Lý User - JSP JDBC</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 30px; background-color: #f8fafc; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .container { max-width: 950px; margin: auto; background: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
         h2 { color: #1b2a7a; text-align: center; }
         table { width: 100%; margin-top: 15px; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
@@ -18,6 +18,11 @@
         .btn-add { background-color: #27ae60; margin-bottom: 15px; }
         .btn-edit { background-color: #2980b9; margin-right: 5px; }
         .btn-delete { background-color: #c0392b; }
+        .btn-search { background-color: #34495e; padding: 9px 15px; }
+        .btn-sort { background-color: #e67e22; margin-left: 10px; }
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .search-box { display: flex; gap: 8px; }
+        .search-box input { padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; width: 220px; }
         .form-group { margin-bottom: 15px; text-align: left; }
         label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
         input[type="text"], input[type="email"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
@@ -74,7 +79,7 @@
     String message = "";
     String errorMessage = "";
 
-    // Xử lý POST (Thêm, Sửa, Xóa vào MySQL)
+    // Xử lý POST (Thêm, Sửa, Xóa)
     if ("POST".equalsIgnoreCase(method)) {
         if ("create".equals(action)) {
             String name = request.getParameter("name");
@@ -199,11 +204,28 @@
             <a href="index.jsp" class="btn" style="background:#95a5a6;">Hủy bỏ</a>
         </form>
 
-    <%-- Mặc định: Hiển thị danh sách User từ MySQL --%>
+    <%-- Mặc định: Hiển thị danh sách User (Kèm Tìm kiếm theo Country & Sắp xếp theo Name) --%>
     <% } else { 
+        String searchCountry = request.getParameter("searchCountry");
+        String sortBy = request.getParameter("sort");
         List<UserItem> userList = new ArrayList<>();
+
+        // Xây dựng câu lệnh truy vấn SQL động theo yêu cầu
+        String sql = "SELECT id, name, email, country FROM users";
+        if (searchCountry != null && !searchCountry.trim().isEmpty()) {
+            sql += " WHERE country LIKE ?";
+        }
+        if ("name".equalsIgnoreCase(sortBy)) {
+            sql += " ORDER BY name ASC";
+        } else {
+            sql += " ORDER BY id DESC";
+        }
+
         try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT id, name, email, country FROM users ORDER BY id DESC;")) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            if (searchCountry != null && !searchCountry.trim().isEmpty()) {
+                ps.setString(1, "%" + searchCountry.trim() + "%");
+            }
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 userList.add(new UserItem(
@@ -214,11 +236,28 @@
                 ));
             }
         } catch (Exception e) {
-            out.println("<p style='color:red;'>Không thể kết nối CSDL MySQL. Vui lòng kiểm tra lại dịch vụ MySQL và cấu hình kết nối.</p>");
+            out.println("<p style='color:red;'>Lỗi truy vấn CSDL: " + e.getMessage() + "</p>");
         }
     %>
-        <h2>Danh Sách Người Dùng (Users)</h2>
-        <a href="index.jsp?action=create" class="btn btn-add">+ Thêm mới User</a>
+        <h2>Quản Lý Người Dùng (Users)</h2>
+
+        <!-- Thanh công cụ: Tìm kiếm theo Country & Nút sắp xếp -->
+        <div class="toolbar">
+            <form action="index.jsp" method="GET" class="search-box">
+                <input type="text" name="searchCountry" placeholder="Nhập quốc gia cần tìm..." 
+                       value="<%= searchCountry != null ? searchCountry : "" %>" />
+                <button type="submit" class="btn btn-search">Tìm kiếm</button>
+                <% if (searchCountry != null && !searchCountry.trim().isEmpty()) { %>
+                    <a href="index.jsp" class="btn" style="background:#95a5a6;">Bỏ tìm</a>
+                <% } %>
+            </form>
+
+            <div>
+                <a href="index.jsp?sort=name<%= (searchCountry != null && !searchCountry.isEmpty()) ? "&searchCountry=" + searchCountry : "" %>" class="btn btn-sort">Sắp xếp theo Tên (A-Z)</a>
+                <a href="index.jsp?action=create" class="btn btn-add" style="margin-bottom:0;">+ Thêm mới</a>
+            </div>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -232,7 +271,9 @@
             <tbody>
                 <% if (userList.isEmpty()) { %>
                     <tr>
-                        <td colspan="5" style="text-align: center; color: #888;">Chưa có dữ liệu người dùng.</td>
+                        <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
+                            Không tìm thấy người dùng phù hợp.
+                        </td>
                     </tr>
                 <% } else {
                     for (UserItem u : userList) { %>
