@@ -1,72 +1,68 @@
+<%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Quản Lý Sản Phẩm - MVC</title>
+    <title>Quản Lý Người Dùng - JSP JDBC MySQL</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f6f9; }
-        .container { max-width: 1000px; margin: auto; background: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        h1, h2 { color: #1e293b; }
-        table { border-collapse: collapse; width: 100%; margin-top: 15px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-        th { background-color: #2563eb; color: white; }
-        tr:hover { background-color: #f8fafc; }
-        .btn { display: inline-block; padding: 8px 14px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; }
-        .btn-create { background-color: #16a34a; color: white; margin-bottom: 15px; }
-        .btn-edit { background-color: #0284c7; color: white; margin-right: 4px; }
-        .btn-delete { background-color: #dc2626; color: white; margin-right: 4px; }
-        .btn-view { background-color: #d97706; color: white; }
-        .btn-search { background-color: #4b5563; color: white; padding: 9px 16px; }
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f8fafc; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        h2 { color: #1b2a7a; text-align: center; }
+        table { width: 100%; margin-top: 15px; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #1b2a7a; color: white; }
+        tr:hover { background-color: #f1f5f9; }
+        .btn { display: inline-block; padding: 8px 14px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; border: none; color: white; }
+        .btn-add { background-color: #27ae60; margin-bottom: 15px; }
+        .btn-edit { background-color: #2980b9; margin-right: 5px; }
+        .btn-delete { background-color: #c0392b; }
         .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #334155; }
-        input[type="text"], input[type="number"], textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
-        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
-        .search-box input { width: 300px; }
-        .alert { background-color: #dcfce7; color: #15803d; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-weight: bold; }
-        .back-link { display: inline-block; margin-top: 15px; color: #2563eb; text-decoration: none; font-weight: bold; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
+        input[type="text"], input[type="email"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .alert { background-color: #e8f5e9; color: #27ae60; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-weight: bold; }
+        .error-alert { background-color: #ffebee; color: #c0392b; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-weight: bold; }
+        .back-link { display: inline-block; margin-top: 15px; color: #1b2a7a; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <%!
-    // 1. TẦNG MODEL: Class Product
-    public static class Product {
+    // Cấu hình kết nối MySQL JDBC
+    private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private String jdbcUsername = "root";
+    private String jdbcPassword = "password"; // Đổi thành mật khẩu MySQL của bạn
+
+    private Connection getConnection() {
+        Connection conn = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+    // Model User
+    public static class UserItem {
         private int id;
         private String name;
-        private double price;
-        private String description;
-        private String manufacturer;
+        private String email;
+        private String country;
 
-        public Product(int id, String name, double price, String description, String manufacturer) {
+        public UserItem(int id, String name, String email, String country) {
             this.id = id;
             this.name = name;
-            this.price = price;
-            this.description = description;
-            this.manufacturer = manufacturer;
+            this.email = email;
+            this.country = country;
         }
 
         public int getId() { return id; }
         public String getName() { return name; }
-        public void setName(String name) { this.name = name; }
-        public double getPrice() { return price; }
-        public void setPrice(double price) { this.price = price; }
-        public String getDescription() { return description; }
-        public void setDescription(String description) { this.description = description; }
-        public String getManufacturer() { return manufacturer; }
-        public void setManufacturer(String manufacturer) { this.manufacturer = manufacturer; }
-    }
-
-    // 2. TẦNG SERVICE / DATABASE GIẢ LẬP: Dùng Map tĩnh
-    private static Map<Integer, Product> products = new LinkedHashMap<>();
-
-    static {
-        products.put(1, new Product(1, "iPhone 15 Pro", 999.0, "Titanium design, A17 Pro chip", "Apple"));
-        products.put(2, new Product(2, "Galaxy S24 Ultra", 1199.0, "Galaxy AI, 200MP camera", "Samsung"));
-        products.put(3, new Product(3, "MacBook Air M3", 1099.0, "Thin and light, Liquid Retina display", "Apple"));
-        products.put(4, new Product(4, "Dell XPS 13", 899.0, "InfinityEdge screen, Intel Core Ultra", "Dell"));
-        products.put(5, new Product(5, "Sony WH-1000XM5", 399.0, "Noise cancelling headphones", "Sony"));
+        public String getEmail() { return email; }
+        public String getCountry() { return country; }
     }
 %>
 
@@ -76,34 +72,52 @@
     if (action == null) action = "list";
     String method = request.getMethod();
     String message = "";
+    String errorMessage = "";
 
-    // 3. TẦNG CONTROLLER: Xử lý thao tác POST
+    // Xử lý POST (Thêm, Sửa, Xóa vào MySQL)
     if ("POST".equalsIgnoreCase(method)) {
         if ("create".equals(action)) {
             String name = request.getParameter("name");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String description = request.getParameter("description");
-            String manufacturer = request.getParameter("manufacturer");
-            int id = (int)(System.currentTimeMillis() % 100000);
-
-            products.put(id, new Product(id, name, price, description, manufacturer));
-            message = "Tạo mới sản phẩm thành công!";
+            String email = request.getParameter("email");
+            String country = request.getParameter("country");
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement("INSERT INTO users (name, email, country) VALUES (?, ?, ?);")) {
+                ps.setString(1, name);
+                ps.setString(2, email);
+                ps.setString(3, country);
+                ps.executeUpdate();
+                message = "Thêm người dùng mới thành công!";
+            } catch (Exception e) {
+                errorMessage = "Lỗi thêm người dùng: " + e.getMessage();
+            }
             action = "list";
         } else if ("edit".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
-            Product p = products.get(id);
-            if (p != null) {
-                p.setName(request.getParameter("name"));
-                p.setPrice(Double.parseDouble(request.getParameter("price")));
-                p.setDescription(request.getParameter("description"));
-                p.setManufacturer(request.getParameter("manufacturer"));
-                message = "Cập nhật sản phẩm thành công!";
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String country = request.getParameter("country");
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement("UPDATE users SET name = ?, email = ?, country = ? WHERE id = ?;")) {
+                ps.setString(1, name);
+                ps.setString(2, email);
+                ps.setString(3, country);
+                ps.setInt(4, id);
+                ps.executeUpdate();
+                message = "Cập nhật thông tin thành công!";
+            } catch (Exception e) {
+                errorMessage = "Lỗi cập nhật: " + e.getMessage();
             }
             action = "list";
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
-            products.remove(id);
-            message = "Đã xóa sản phẩm khỏi hệ thống!";
+            try (Connection conn = getConnection();
+                 PreparedStatement ps = conn.prepareStatement("DELETE FROM users WHERE id = ?;")) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+                message = "Đã xóa người dùng khỏi cơ sở dữ liệu!";
+            } catch (Exception e) {
+                errorMessage = "Lỗi khi xóa: " + e.getMessage();
+            }
             action = "list";
         }
     }
@@ -113,143 +127,123 @@
     <% if (!message.isEmpty()) { %>
         <div class="alert"><%= message %></div>
     <% } %>
+    <% if (!errorMessage.isEmpty()) { %>
+        <div class="error-alert"><%= errorMessage %></div>
+    <% } %>
 
-    <%-- VIEW: Tạo sản phẩm mới --%>
+    <%-- Form Thêm mới User --%>
     <% if ("create".equals(action)) { %>
-        <h2>Tạo Sản Phẩm Mới</h2>
+        <h2>Thêm Mới Người Dùng</h2>
         <form action="index.jsp?action=create" method="POST">
             <div class="form-group">
-                <label>Tên sản phẩm:</label>
-                <input type="text" name="name" required placeholder="Nhập tên sản phẩm" />
+                <label>Tên đầy đủ:</label>
+                <input type="text" name="name" required placeholder="Nhập họ và tên" />
             </div>
             <div class="form-group">
-                <label>Giá sản phẩm ($):</label>
-                <input type="number" step="0.01" name="price" required placeholder="Nhập giá" />
+                <label>Email:</label>
+                <input type="email" name="email" required placeholder="Nhập địa chỉ email" />
             </div>
             <div class="form-group">
-                <label>Mô tả:</label>
-                <textarea name="description" rows="3" placeholder="Nhập mô tả sản phẩm"></textarea>
+                <label>Quốc gia:</label>
+                <input type="text" name="country" required placeholder="Nhập quốc gia" />
             </div>
-            <div class="form-group">
-                <label>Nhà sản xuất:</label>
-                <input type="text" name="manufacturer" required placeholder="Nhập nhà sản xuất" />
-            </div>
-            <button type="submit" class="btn btn-create">Lưu sản phẩm</button>
+            <button type="submit" class="btn btn-add">Lưu thông tin</button>
         </form>
         <a href="index.jsp" class="back-link">← Quay lại danh sách</a>
 
-    <%-- VIEW: Cập nhật thông tin sản phẩm --%>
+    <%-- Form Chỉnh sửa User --%>
     <% } else if ("edit".equals(action)) { 
         int id = Integer.parseInt(request.getParameter("id"));
-        Product p = products.get(id);
-    %>
-        <h2>Cập Nhật Sản Phẩm</h2>
-        <form action="index.jsp?action=edit" method="POST">
-            <input type="hidden" name="id" value="<%= p.getId() %>" />
-            <div class="form-group">
-                <label>Tên sản phẩm:</label>
-                <input type="text" name="name" value="<%= p.getName() %>" required />
-            </div>
-            <div class="form-group">
-                <label>Giá sản phẩm ($):</label>
-                <input type="number" step="0.01" name="price" value="<%= p.getPrice() %>" required />
-            </div>
-            <div class="form-group">
-                <label>Mô tả:</label>
-                <textarea name="description" rows="3"><%= p.getDescription() %></textarea>
-            </div>
-            <div class="form-group">
-                <label>Nhà sản xuất:</label>
-                <input type="text" name="manufacturer" value="<%= p.getManufacturer() %>" required />
-            </div>
-            <button type="submit" class="btn btn-edit">Cập nhật</button>
-        </form>
-        <a href="index.jsp" class="back-link">← Quay lại danh sách</a>
-
-    <%-- VIEW: Xem chi tiết sản phẩm --%>
-    <% } else if ("view".equals(action)) { 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Product p = products.get(id);
-    %>
-        <h2>Chi Tiết Sản Phẩm</h2>
-        <p><strong>Mã sản phẩm:</strong> <%= p.getId() %></p>
-        <p><strong>Tên sản phẩm:</strong> <%= p.getName() %></p>
-        <p><strong>Giá:</strong> $<%= p.getPrice() %></p>
-        <p><strong>Mô tả:</strong> <%= p.getDescription() %></p>
-        <p><strong>Nhà sản xuất:</strong> <%= p.getManufacturer() %></p>
-        <a href="index.jsp" class="back-link">← Quay lại danh sách</a>
-
-    <%-- VIEW: Xác nhận xóa sản phẩm --%>
-    <% } else if ("confirm_delete".equals(action)) { 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Product p = products.get(id);
-    %>
-        <h2 style="color: #dc2626;">Xác Nhận Xóa</h2>
-        <p>Bạn có chắc chắn muốn xóa sản phẩm <b><%= p.getName() %></b> (Mã: <%= p.getId() %>) không?</p>
-        <form action="index.jsp?action=delete" method="POST">
-            <input type="hidden" name="id" value="<%= p.getId() %>" />
-            <button type="submit" class="btn btn-delete">Đồng ý xóa</button>
-            <a href="index.jsp" class="btn" style="background:#cbd5e1; color:#333;">Hủy bỏ</a>
-        </form>
-
-    <%-- VIEW: Hiển thị danh sách sản phẩm + Tìm kiếm theo tên --%>
-    <% } else { 
-        String searchKeyword = request.getParameter("search");
-        List<Product> displayList = new ArrayList<>();
-        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-            for (Product p : products.values()) {
-                if (p.getName().toLowerCase().contains(searchKeyword.trim().toLowerCase())) {
-                    displayList.add(p);
-                }
+        String name = "", email = "", country = "";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT name, email, country FROM users WHERE id = ?;")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("name");
+                email = rs.getString("email");
+                country = rs.getString("country");
             }
-        } else {
-            displayList.addAll(products.values());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     %>
-        <h1>Danh Sách Sản Phẩm</h1>
+        <h2>Cập Nhật Thông Tin User</h2>
+        <form action="index.jsp?action=edit" method="POST">
+            <input type="hidden" name="id" value="<%= id %>" />
+            <div class="form-group">
+                <label>Tên đầy đủ:</label>
+                <input type="text" name="name" value="<%= name %>" required />
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" value="<%= email %>" required />
+            </div>
+            <div class="form-group">
+                <label>Quốc gia:</label>
+                <input type="text" name="country" value="<%= country %>" required />
+            </div>
+            <button type="submit" class="btn btn-edit">Cập nhật ngay</button>
+        </form>
+        <a href="index.jsp" class="back-link">← Quay lại danh sách</a>
 
-        <!-- Form tìm kiếm sản phẩm theo tên -->
-        <form action="index.jsp" method="GET" class="search-box">
-            <input type="text" name="search" placeholder="Nhập tên sản phẩm để tìm kiếm..." 
-                   value="<%= searchKeyword != null ? searchKeyword : "" %>" />
-            <button type="submit" class="btn btn-search">Tìm kiếm</button>
-            <% if (searchKeyword != null && !searchKeyword.trim().isEmpty()) { %>
-                <a href="index.jsp" class="btn" style="background:#e2e8f0; color:#334155; line-height:22px;">Bỏ lọc</a>
-            <% } %>
+    <%-- Form Xác nhận Xóa User --%>
+    <% } else if ("confirm_delete".equals(action)) { 
+        int id = Integer.parseInt(request.getParameter("id"));
+    %>
+        <h2 style="color: #c0392b;">Xác Nhận Xóa User</h2>
+        <p>Bạn có chắc chắn muốn xóa vĩnh viễn User có mã <b>#<%= id %></b> khỏi hệ thống?</p>
+        <form action="index.jsp?action=delete" method="POST">
+            <input type="hidden" name="id" value="<%= id %>" />
+            <button type="submit" class="btn btn-delete">Đồng ý Xóa</button>
+            <a href="index.jsp" class="btn" style="background:#95a5a6;">Hủy bỏ</a>
         </form>
 
-        <a href="index.jsp?action=create" class="btn btn-create">+ Thêm sản phẩm mới</a>
-
+    <%-- Mặc định: Hiển thị danh sách User từ MySQL --%>
+    <% } else { 
+        List<UserItem> userList = new ArrayList<>();
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT id, name, email, country FROM users ORDER BY id DESC;")) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                userList.add(new UserItem(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("country")
+                ));
+            }
+        } catch (Exception e) {
+            out.println("<p style='color:red;'>Không thể kết nối CSDL MySQL. Vui lòng kiểm tra lại dịch vụ MySQL và cấu hình kết nối.</p>");
+        }
+    %>
+        <h2>Danh Sách Người Dùng (Users)</h2>
+        <a href="index.jsp?action=create" class="btn btn-add">+ Thêm mới User</a>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Giá ($)</th>
-                    <th>Nhà Sản Xuất</th>
-                    <th>Mô Tả</th>
-                    <th>Hành Động</th>
+                    <th>Tên User</th>
+                    <th>Email</th>
+                    <th>Quốc gia</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
-                <% if (displayList.isEmpty()) { %>
+                <% if (userList.isEmpty()) { %>
                     <tr>
-                        <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">
-                            Không tìm thấy sản phẩm nào phù hợp.
-                        </td>
+                        <td colspan="5" style="text-align: center; color: #888;">Chưa có dữ liệu người dùng.</td>
                     </tr>
                 <% } else {
-                    for (Product p : displayList) { %>
+                    for (UserItem u : userList) { %>
                     <tr>
-                        <td><%= p.getId() %></td>
-                        <td><strong><%= p.getName() %></strong></td>
-                        <td>$<%= p.getPrice() %></td>
-                        <td><%= p.getManufacturer() %></td>
-                        <td><%= p.getDescription() %></td>
+                        <td><%= u.getId() %></td>
+                        <td><strong><%= u.getName() %></strong></td>
+                        <td><%= u.getEmail() %></td>
+                        <td><%= u.getCountry() %></td>
                         <td>
-                            <a href="index.jsp?action=view&id=<%= p.getId() %>" class="btn btn-view">Xem</a>
-                            <a href="index.jsp?action=edit&id=<%= p.getId() %>" class="btn btn-edit">Sửa</a>
-                            <a href="index.jsp?action=confirm_delete&id=<%= p.getId() %>" class="btn btn-delete">Xóa</a>
+                            <a href="index.jsp?action=edit&id=<%= u.getId() %>" class="btn btn-edit">Sửa</a>
+                            <a href="index.jsp?action=confirm_delete&id=<%= u.getId() %>" class="btn btn-delete">Xóa</a>
                         </td>
                     </tr>
                 <%  } 
