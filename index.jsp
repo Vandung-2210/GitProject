@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f6f9;
-            margin: 50px auto;
+            margin: 60px auto;
             display: flex;
             justify-content: center;
         }
@@ -59,35 +59,24 @@
             background-color: #1d4ed8;
         }
         .result-box {
-            margin-top: 24px;
+            margin-top: 20px;
             padding: 15px;
             background-color: #ecfdf5;
             border-left: 5px solid #10b981;
             border-radius: 4px;
         }
-        .result-box h3 {
-            margin: 0;
-            color: #065f46;
-            font-size: 18px;
-        }
         .error-box {
-            margin-top: 24px;
+            margin-top: 20px;
             padding: 15px;
             background-color: #fef2f2;
             border-left: 5px solid #ef4444;
             border-radius: 4px;
-        }
-        .error-box h3 {
-            margin: 0;
-            color: #991b1b;
-            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
 <%!
-    // Lớp Calculator hỗ trợ tính toán và ném Exception khi chia cho 0
     public static class Calculator {
         public static float calculate(float firstOperand, float secondOperand, char operator) {
             switch (operator) {
@@ -153,8 +142,8 @@
                 float result = Calculator.calculate(firstOperand, secondOperand, operator);
     %>
         <div class="result-box">
-            <h3>Result:</h3>
-            <p style="margin: 8px 0 0 0; font-size: 16px;">
+            <h3 style="margin: 0; color: #065f46;">Result:</h3>
+            <p style="margin: 6px 0 0 0; font-size: 16px;">
                 <%= firstOperand %> <%= operator %> <%= secondOperand %> = <b><%= result %></b>
             </p>
         </div>
@@ -162,8 +151,8 @@
             } catch (Exception ex) {
     %>
         <div class="error-box">
-            <h3>Error:</h3>
-            <p style="margin: 8px 0 0 0; font-size: 15px;"><%= ex.getMessage() %></p>
+            <h3 style="margin: 0; color: #991b1b;">Error:</h3>
+            <p style="margin: 6px 0 0 0; font-size: 15px; color: #b91c1c;"><%= ex.getMessage() %></p>
         </div>
     <%
             }
