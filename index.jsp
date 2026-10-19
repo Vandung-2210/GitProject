@@ -1,9 +1,11 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Chuyển đổi tiền tệ USD sang VNĐ</title>
+    <title>Từ điển Anh - Việt</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -18,28 +20,20 @@
             border-radius: 8px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
             width: 380px; 
+            text-align: center;
         }
         h2 { 
             color: #1b2a7a; 
-            text-align: center; 
             margin-top: 0;
         }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label { 
-            display: block; 
-            margin-bottom: 5px; 
-            font-weight: bold; 
-            color: #333; 
-        }
-        input[type="number"] { 
+        input[type="text"] { 
             width: 100%; 
-            padding: 10px; 
+            padding: 12px; 
+            margin: 15px 0; 
             border: 1px solid #ccc; 
             border-radius: 4px; 
             box-sizing: border-box; 
+            font-size: 15px;
         }
         button { 
             background-color: #1b2a7a; 
@@ -50,8 +44,7 @@
             cursor: pointer; 
             width: 100%; 
             font-weight: bold; 
-            font-size: 15px; 
-            margin-top: 10px;
+            font-size: 16px; 
         }
         button:hover { 
             background-color: #121c54; 
@@ -62,63 +55,62 @@
             border-radius: 6px; 
             margin-top: 20px; 
             border-left: 5px solid #27ae60;
+            text-align: left;
         }
-        .error-box { 
+        .notfound-box { 
             background-color: #ffebee; 
             padding: 15px; 
             border-radius: 6px; 
             margin-top: 20px; 
             border-left: 5px solid #c0392b;
-            color: #c0392b;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>USD to VND Converter</h2>
+    <h2>Từ Điển Anh - Việt</h2>
 
     <!-- Form gửi dữ liệu về chính trang index.jsp -->
     <form action="index.jsp" method="POST">
-        <div class="form-group">
-            <label for="rate">Tỉ giá (VND/USD):</label>
-            <input type="number" id="rate" name="rate" placeholder="Ví dụ: 25000" 
-                   value="<%= request.getParameter("rate") != null ? request.getParameter("rate") : "25000" %>" 
-                   required step="any"/>
-        </div>
-
-        <div class="form-group">
-            <label for="usd">Lượng USD cần đổi:</label>
-            <input type="number" id="usd" name="usd" placeholder="Nhập số USD" 
-                   value="<%= request.getParameter("usd") != null ? request.getParameter("usd") : "" %>" 
-                   required step="any"/>
-        </div>
-
-        <button type="submit">Tính toán</button>
+        <input type="text" name="search" placeholder="Nhập từ tiếng Anh (hello, book, computer...)" 
+               value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>" 
+               required autofocus />
+        <button type="submit">Tìm kiếm</button>
     </form>
 
-    <%-- Đoạn mã Java xử lý và in kết quả khi người dùng gửi form --%>
+    <%-- Mã Java xử lý tra cứu khi có dữ liệu gửi lên --%>
     <%
-        String rateStr = request.getParameter("rate");
-        String usdStr = request.getParameter("usd");
+        request.setCharacterEncoding("UTF-8");
+        String searchWord = request.getParameter("search");
 
-        // Chỉ tính toán và hiển thị khi đã có dữ liệu gửi lên
-        if (rateStr != null && usdStr != null) {
-            try {
-                float rate = Float.parseFloat(rateStr);
-                float usd = Float.parseFloat(usdStr);
-                float vnd = rate * usd;
+        if (searchWord != null && !searchWord.trim().isEmpty()) {
+            // Khởi tạo danh sách từ vựng mẫu
+            Map<String, String> dic = new HashMap<>();
+            dic.put("hello", "Xin chào");
+            dic.put("how", "Thế nào");
+            dic.put("book", "Quyển sách");
+            dic.put("computer", "Máy tính");
+            dic.put("student", "Sinh viên");
+            dic.put("teacher", "Giáo viên");
+            dic.put("school", "Trường học");
+
+            // Tra cứu từ không phân biệt hoa thường
+            String result = dic.get(searchWord.trim().toLowerCase());
+
+            if (result != null) {
     %>
         <div class="result-box">
-            <p style="margin: 5px 0;">Tỉ giá: <b><%= rate %></b> VND/USD</p>
-            <p style="margin: 5px 0;">Số lượng: <b>$<%= usd %></b></p>
-            <h3 style="color: #27ae60; margin: 10px 0 0 0;">Thành tiền: <%= vnd %> VNĐ</h3>
+            <p style="margin: 0 0 5px 0; color: #555;">Từ tra cứu: <b style="color: #1b2a7a;"><%= searchWord %></b></p>
+            <h3 style="color: #27ae60; margin: 0; font-size: 20px;">Nghĩa là: <%= result %></h3>
         </div>
     <%
-            } catch (Exception e) {
+            } else {
     %>
-        <div class="error-box">
-            <b>Lỗi:</b> Dữ liệu nhập vào không hợp lệ. Vui lòng nhập số!
+        <div class="notfound-box">
+            <h4 style="color: #c0392b; margin: 0 0 5px 0;">Không tìm thấy!</h4>
+            <p style="margin: 0; color: #555;">Từ khóa <b style="color: #c0392b;"><%= searchWord %></b> không có trong từ điển.</p>
         </div>
     <%
             }
