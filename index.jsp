@@ -1,119 +1,126 @@
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%!
+    // Định nghĩa class Customer bên trong thẻ Declaration của JSP
+    public static class Customer {
+        private String name;
+        private String dob;
+        private String address;
+        private String image;
+
+        public Customer(String name, String dob, String address, String image) {
+            this.name = name;
+            this.dob = dob;
+            this.address = address;
+            this.image = image;
+        }
+
+        public String getName() { return name; }
+        public String getDob() { return dob; }
+        public String getAddress() { return address; }
+        public String getImage() { return image; }
+    }
+%>
+
+<%
+    // Khởi tạo danh sách khách hàng mẫu
+    List<Customer> customerList = new ArrayList<>();
+    customerList.add(new Customer("Mai Văn Hoàn", "1983-08-20", "Hà Nội", "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=faces"));
+    customerList.add(new Customer("Nguyễn Văn Nam", "1983-08-21", "Bắc Giang", "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop&crop=faces"));
+    customerList.add(new Customer("Nguyễn Thái Hòa", "1983-08-22", "Nam Định", "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&crop=faces"));
+    customerList.add(new Customer("Trần Đăng Khoa", "1983-08-17", "Hà Tây", "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=faces"));
+    customerList.add(new Customer("Nguyễn Đình Thi", "1983-08-19", "Hà Nội", "https://images.unsplash.com/photo-1628157582853-a796fa650a6a?w=100&h=100&fit=crop&crop=faces"));
+
+    // Đưa danh sách vào scope request để JSTL và EL truy xuất
+    request.setAttribute("customerList", customerList);
+%>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Từ điển Anh - Việt</title>
+    <title>Danh Sách Khách Hàng</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            margin-top: 80px;
             background-color: #f8fafc;
-        }
-        .dictionary-container {
-            background: white;
-            padding: 35px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 380px;
+            margin: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h2 {
             color: #1b2a7a;
-            margin-top: 0;
+            margin-bottom: 20px;
         }
-        input[type="text"] {
-            padding: 12px;
-            margin: 15px 0;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 15px;
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+            overflow: hidden;
         }
-        button {
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        th {
             background-color: #1b2a7a;
             color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
         }
-        button:hover {
-            background-color: #121c54;
+        tr:nth-child(even) {
+            background-color: #f8fafc;
         }
-        .result-box {
-            background-color: #e8f5e9;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 20px;
-            border-left: 5px solid #27ae60;
-            text-align: left;
+        tr:hover {
+            background-color: #edf2f7;
         }
-        .notfound-box {
-            background-color: #ffebee;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 20px;
-            border-left: 5px solid #c0392b;
-            text-align: left;
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #ccc;
+        }
+        .center-col {
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="dictionary-container">
-        <h2>Từ Điển Anh - Việt</h2>
-        
-        <!-- Form gửi dữ liệu trực tiếp về trang index.jsp bằng phương thức POST -->
-        <form action="index.jsp" method="POST">
-            <input type="text" name="search" placeholder="Nhập từ tiếng Anh (hello, book, computer...)" 
-                   value="<%= request.getParameter("search") != null ? request.getParameter("search") : "" %>" 
-                   required autofocus />
-            <button type="submit">Tìm kiếm</button>
-        </form>
 
-        <%-- Xử lý tra cứu trực tiếp bằng Scriptlet --%>
-        <%
-            request.setCharacterEncoding("UTF-8");
-            String searchWord = request.getParameter("search");
-            
-            if (searchWord != null && !searchWord.trim().isEmpty()) {
-                // Khởi tạo Map dữ liệu từ điển
-                Map<String, String> dic = new HashMap<>();
-                dic.put("hello", "Xin chào");
-                dic.put("how", "Thế nào");
-                dic.put("book", "Quyển sách");
-                dic.put("computer", "Máy tính");
-                dic.put("student", "Sinh viên");
-                dic.put("teacher", "Giáo viên");
-                dic.put("school", "Trường học");
-                
-                String result = dic.get(searchWord.trim().toLowerCase());
-                
-                if (result != null) {
-        %>
-            <div class="result-box">
-                <p style="font-size: 15px; color: #555; margin: 0 0 5px 0;">Từ cần tra: <b style="color: #1b2a7a;"><%= searchWord %></b></p>
-                <h3 style="color: #27ae60; font-size: 20px; margin: 0;">Nghĩa là: <%= result %></h3>
-            </div>
-        <%
-                } else {
-        %>
-            <div class="notfound-box">
-                <h4 style="color: #c0392b; margin: 0 0 5px 0;">Không tìm thấy!</h4>
-                <p style="color: #555; margin: 0;">Từ khóa <b style="color: #c0392b;"><%= searchWord %></b> không có trong từ điển.</p>
-            </div>
-        <%
-                }
-            }
-        %>
-    </div>
+    <h2>DANH SÁCH KHÁCH HÀNG</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="center-col">STT</th>
+                <th>Tên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th class="center-col">Ảnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%-- Sử dụng thẻ JSTL c:forEach để duyệt danh sách và in ra các dòng --%>
+            <c:forEach var="customer" items="${customerList}" varStatus="status">
+                <tr>
+                    <td class="center-col">${status.count}</td>
+                    <td><strong>${customer.name}</strong></td>
+                    <td>${customer.dob}</td>
+                    <td>${customer.address}</td>
+                    <td class="center-col">
+                        <img class="avatar" src="${customer.image}" alt="${customer.name}" />
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
 </body>
 </html>
